@@ -17,7 +17,7 @@ function Profile() {
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrénomC: '', localisation: '', numeroMobile: '', nnumeroWhatsapp: '',
+    nomC: '', PrénomC: '', localisationC: '', numeroMobile: '', nnumeroWhatsapp: '',
     demande: '', genre: '', metier: ''
   })
 
@@ -52,7 +52,7 @@ function Profile() {
         setConsommateurCommercantForm({
           nomC: p.nomC || '',
           PrénomC: p.PrénomC || '',
-          localisation: p.localisation?.join(', ') || '',
+          localisationC: p.localisationC?.join(', ') || '',
           numeroMobile: p.numeroMobile?.join(', ') || '',
           nnumeroWhatsapp: p.nnumeroWhatsapp?.join(', ') || '',
           demande: p.demande?.join(', ') || '',
@@ -61,7 +61,7 @@ function Profile() {
         })
       }
     } catch {
-      // Pas encore de profil existant : on garde le formulaire vide
+      
     } finally {
       setLoading(false)
     }
@@ -79,7 +79,7 @@ function Profile() {
         data = {
           ...agriculteurForm,
           localisation: agriculteurForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
-          available: agriculteurForm.available, // déjà un booléen, on ne le split pas
+          available: agriculteurForm.available,
           numeroAgriculmobile: agriculteurForm.numeroAgriculmobile.split(',').map(s => s.trim()).filter(Boolean),
           numeroAgriculwhatsapp: agriculteurForm.numeroAgriculwhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           produit: agriculteurForm.produit.split(',').map(s => s.trim()).filter(Boolean),
@@ -89,7 +89,7 @@ function Profile() {
         data = {
           ...consommateurCommercantForm,
           demande: consommateurCommercantForm.demande.split(',').map(s => s.trim()).filter(Boolean),
-          localisation: consommateurCommercantForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
+          localisationC: consommateurCommercantForm.localisationC.split(',').map(d => d.trim()).filter(Boolean),
           numeroMobile: consommateurCommercantForm.numeroMobile.split(',').map(s => s.trim()).filter(Boolean),
           nnumeroWhatsapp: consommateurCommercantForm.nnumeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           genre: consommateurCommercantForm.genre.split(',').map(s => s.trim()).filter(Boolean),
@@ -216,8 +216,8 @@ function Profile() {
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Localisation</label>
-                <input style={styles.input} value={consommateurCommercantForm.localisation}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisation: e.target.value})}
+                <input style={styles.input} value={consommateurCommercantForm.localisationC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}
                   placeholder="Casablanca, Maroc" required />
               </div>
             </div>
