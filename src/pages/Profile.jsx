@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile } from '../services/api'
+import './Profile.css'
 
 function Profile() {
   const navigate = useNavigate()
@@ -309,29 +310,6 @@ function Profile() {
   )
 }
 
-const styles = {
-  container: { minHeight: '100vh', backgroundColor: '#f8fafc', padding: '2rem' },
-  card: {
-    backgroundColor: 'white', padding: '2.5rem', borderRadius: '12px',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)', maxWidth: '700px', margin: '0 auto'
-  },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' },
-  headerButtons: { display: 'flex', gap: '0.75rem', flexWrap: 'wrap' },
-  title: { fontSize: '1.8rem', fontWeight: '700', color: '#1e293b' },
-  subtitle: { color: '#64748b', marginTop: '0.25rem' },
-  success: { backgroundColor: '#f0fdf4', color: '#16a34a', padding: '0.75rem', borderRadius: '8px', marginBottom: '1rem' },
-  error: { backgroundColor: '#fef2f2', color: '#ef4444', padding: '0.75rem', borderRadius: '8px', marginBottom: '1rem' },
-  form: { display: 'flex', flexDirection: 'column', gap: '1.2rem' },
-  grid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' },
-  field: { display: 'flex', flexDirection: 'column', gap: '0.4rem' },
-  label: { fontSize: '0.9rem', fontWeight: '600', color: '#374151' },
-  checkboxLabel: { fontSize: '0.9rem', color: '#374151', cursor: 'pointer' },
-  input: { padding: '0.75rem 1rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontSize: '1rem' },
-  button: { padding: '0.85rem', backgroundColor: '#6366f1', color: 'white', border: 'none', borderRadius: '8px', fontSize: '1rem', fontWeight: '600', cursor: 'pointer' },
-  buttonDisabled: { padding: '0.85rem', backgroundColor: '#a5b4fc', color: 'white', border: 'none', borderRadius: '8px', fontSize: '1rem', fontWeight: '600', cursor: 'not-allowed' },
-  matchButton: { padding: '0.6rem 1.2rem', backgroundColor: '#10b981', color: 'white', border: 'none', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer' },
-  logoutButton: { padding: '0.6rem 1.2rem', backgroundColor: '#f1f5f9', color: '#64748b', border: 'none', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '600', cursor: 'pointer' },
-  loading: { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', color: '#64748b' }
-}
+
 
 export default Profile
