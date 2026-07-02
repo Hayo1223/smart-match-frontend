@@ -17,7 +17,7 @@ function Profile() {
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrénomC: '', localisation: '', numeroMobile: '', nnumeroWhatsapp: '',
+    nomC: '', PrénomC: '', localisation: '', numeroMobile: '', numeroWhatsapp: '',
     demande: '', genre: '', metier: ''
   })
 
@@ -37,7 +37,7 @@ function Profile() {
   const fetchProfile = async (currentUser) => {
     try {
       const response = await getProfile()
-      const p = response.data.profile
+      const p = response.data?.profile?? {}
       setProfile(p)
 
       if (currentUser.role === 'Agriculteur') {
@@ -57,14 +57,15 @@ function Profile() {
           PrénomC: p.PrénomC || '',
           localisation: p.localisation?.join(', ') || '',
           numeroMobile: p.numeroMobile?.join(', ') || '',
-          nnumeroWhatsapp: p.nnumeroWhatsapp?.join(', ') || '',
+          numeroWhatsapp: p.numeroWhatsapp?.join(', ') || '',
           demande: p.demande?.join(', ') || '',
           genre: p.genre?.join(', ') || '',
           metier: p.metier?.join(', ') || ''
         })
       }
     } catch {
-  
+        setError(err.response?.data?.error || 'Profil pas encore créé, formulaire vide')
+
     } finally {
       setLoading(false)
     }
@@ -123,7 +124,7 @@ function Profile() {
           demande: consommateurCommercantForm.demande.split(',').map(s => s.trim()).filter(Boolean),
           localisation: consommateurCommercantForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
           numeroMobile: consommateurCommercantForm.numeroMobile.split(',').map(s => s.trim()).filter(Boolean),
-          nnumeroWhatsapp: consommateurCommercantForm.nnumeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
+          numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           genre: consommateurCommercantForm.genre.split(',').map(s => s.trim()).filter(Boolean),
           metier: consommateurCommercantForm.metier.split(',').map(s => s.trim()).filter(Boolean)
         }
@@ -273,8 +274,8 @@ function Profile() {
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Numéro WhatsApp</label>
-                <input type="tel" style={styles.input} value={consommateurCommercantForm.nnumeroWhatsapp}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nnumeroWhatsapp: e.target.value})}
+                <input type="tel" style={styles.input} value={consommateurCommercantForm.numeroWhatsapp}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWhatsapp: e.target.value})}
                   placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
             </div>
