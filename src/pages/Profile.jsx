@@ -17,9 +17,12 @@ function Profile() {
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrénomC: '', localisationC: '', numeroMobile: '', nnumeroWhatsapp: '',
+    nomC: '', PrénomC: '', localisation: '', numeroMobile: '', nnumeroWhatsapp: '',
     demande: '', genre: '', metier: ''
   })
+
+  // Clé de brouillon unique par utilisateur et par rôle
+  const draftKey = user ? `profileDraft_${user.id}_${user.role}` : null
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user') || 'null')
@@ -52,7 +55,7 @@ function Profile() {
         setConsommateurCommercantForm({
           nomC: p.nomC || '',
           PrénomC: p.PrénomC || '',
-          localisationC: p.localisationC?.join(', ') || '',
+          localisation: p.localisation?.join(', ') || '',
           numeroMobile: p.numeroMobile?.join(', ') || '',
           nnumeroWhatsapp: p.nnumeroWhatsapp?.join(', ') || '',
           demande: p.demande?.join(', ') || '',
@@ -61,11 +64,41 @@ function Profile() {
         })
       }
     } catch {
-      
+      // Pas encore de profil existant : on garde le formulaire vide,
+      // le brouillon local (ci-dessous) prendra le relais si disponible
     } finally {
       setLoading(false)
     }
   }
+
+  // Restauration du brouillon local, une fois le profil serveur chargé
+  useEffect(() => {
+    if (!draftKey || loading) return
+    const draft = localStorage.getItem(draftKey)
+    if (!draft) return
+
+    try {
+      const parsed = JSON.parse(draft)
+      if (user.role === 'Agriculteur') {
+        setAgriculteurForm(prev => ({ ...prev, ...parsed }))
+      } else {
+        setConsommateurCommercantForm(prev => ({ ...prev, ...parsed }))
+      }
+    } catch {
+      // Brouillon corrompu : on l'ignore silencieusement
+      localStorage.removeItem(draftKey)
+    }
+  }, [draftKey, loading])
+
+  // Sauvegarde automatique du brouillon à chaque modification (avec debounce)
+  useEffect(() => {
+    if (!draftKey || loading || !user) return
+    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurCommercantForm
+    const timeout = setTimeout(() => {
+      localStorage.setItem(draftKey, JSON.stringify(formToSave))
+    }, 500)
+    return () => clearTimeout(timeout)
+  }, [agriculteurForm, consommateurCommercantForm, draftKey, loading, user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -89,7 +122,7 @@ function Profile() {
         data = {
           ...consommateurCommercantForm,
           demande: consommateurCommercantForm.demande.split(',').map(s => s.trim()).filter(Boolean),
-          localisationC: consommateurCommercantForm.localisationC.split(',').map(d => d.trim()).filter(Boolean),
+          localisation: consommateurCommercantForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
           numeroMobile: consommateurCommercantForm.numeroMobile.split(',').map(s => s.trim()).filter(Boolean),
           nnumeroWhatsapp: consommateurCommercantForm.nnumeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           genre: consommateurCommercantForm.genre.split(',').map(s => s.trim()).filter(Boolean),
@@ -99,7 +132,7 @@ function Profile() {
 
       await upsertProfile(data)
       setSuccess('Profil sauvegardé avec succès !')
-
+      if (draftKey) localStorage.removeItem(draftKey) // le brouillon n'a plus de raison d'exister
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors de la sauvegarde')
     } finally {
@@ -170,11 +203,24 @@ function Profile() {
                   onChange={e => setAgriculteurForm({...agriculteurForm, produit: e.target.value})}
                   placeholder="Tomates, Oranges, Blé" required />
               </div>
+              <div style={styles.field}>
+                <label style={styles.label}>Numéro mobile</label>
+                <input type="tel" style={styles.input} value={agriculteurForm.numeroAgriculmobile}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculmobile: e.target.value})}
+                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+              </div>
+              <div style={styles.field}>
+                <label style={styles.label}>Numéro WhatsApp</label>
+                <input type="tel" style={styles.input} value={agriculteurForm.numeroAgriculwhatsapp}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculwhatsapp: e.target.value})}
+                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+              </div>
             </div>
             <div style={styles.field}>
               <label style={styles.label}>Genre</label>
               <select style={styles.input} value={agriculteurForm.genre}
                 onChange={e => setAgriculteurForm({...agriculteurForm, genre: e.target.value})}>
+                <option value="">-- Sélectionner --</option>
                 <option value="Feminin">Féminin</option>
                 <option value="Masculin">Masculin</option>
               </select>
@@ -216,9 +262,21 @@ function Profile() {
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Localisation</label>
-                <input style={styles.input} value={consommateurCommercantForm.localisationC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}
+                <input style={styles.input} value={consommateurCommercantForm.localisation}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisation: e.target.value})}
                   placeholder="Casablanca, Maroc" required />
+              </div>
+              <div style={styles.field}>
+                <label style={styles.label}>Numéro mobile</label>
+                <input type="tel" style={styles.input} value={consommateurCommercantForm.numeroMobile}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroMobile: e.target.value})}
+                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+              </div>
+              <div style={styles.field}>
+                <label style={styles.label}>Numéro WhatsApp</label>
+                <input type="tel" style={styles.input} value={consommateurCommercantForm.nnumeroWhatsapp}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nnumeroWhatsapp: e.target.value})}
+                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
               </div>
             </div>
             <div style={styles.field}>
@@ -231,6 +289,7 @@ function Profile() {
               <label style={styles.label}>Genre</label>
               <select style={styles.input} value={consommateurCommercantForm.genre}
                 onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
+                <option value="">-- Sélectionner --</option>
                 <option value="Feminin">Féminin</option>
                 <option value="Masculin">Masculin</option>
               </select>
