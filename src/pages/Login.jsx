@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../services/api'
-import '../services/Login.css'
+import '../src/Login.css'
 
 function Login() {
   const navigate = useNavigate()
@@ -22,11 +22,11 @@ function Login() {
       const response = await login(formData)
       const { token, user } = response.data
 
-      // Sauvegarder le token et les infos utilisateur
+
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
 
-      // Rediriger vers le profil
+
       navigate('/profile')
 
     } catch (err) {

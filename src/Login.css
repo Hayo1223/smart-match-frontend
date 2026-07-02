@@ -1,4 +1,3 @@
-/* Conteneur principal */
 .container {
   min-height: 100vh;
   display: flex;
@@ -7,7 +6,7 @@
   background-color: #f8fafc;
 }
 
-/* Carte */
+
 .card {
   background-color: white;
   padding: 2.5rem;
@@ -17,7 +16,7 @@
   max-width: 420px;
 }
 
-/* Titre */
+
 .title {
   font-size: 1.8rem;
   font-weight: 700;
@@ -26,14 +25,14 @@
   margin-bottom: 0.5rem;
 }
 
-/* Sous-titre */
+
 .subtitle {
   text-align: center;
   color: #64748b;
   margin-bottom: 2rem;
 }
 
-/* Message d'erreur */
+
 .error {
   background-color: #fef2f2;
   color: #ef4444;
@@ -43,28 +42,28 @@
   font-size: 0.9rem;
 }
 
-/* Formulaire */
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-/* Groupe d'un champ */
+
 .field {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-/* Libellé */
+
 .label {
   font-size: 0.9rem;
   font-weight: 600;
   color: #374151;
 }
 
-/* Champ de saisie */
+
 .input {
   padding: 0.75rem 1rem;
   border-radius: 8px;
@@ -74,12 +73,12 @@
   transition: border-color 0.2s;
 }
 
-/* Effet au focus */
+
 .input:focus {
   border-color: #6366f1;
 }
 
-/* Bouton */
+
 .button {
   padding: 0.85rem;
   background-color: #6366f1;
@@ -93,12 +92,12 @@
   transition: background-color 0.2s;
 }
 
-/* Survol */
+
 .button:hover {
   background-color: #4f46e5;
 }
 
-/* Bouton désactivé */
+
 .button:disabled,
 .button-disabled {
   padding: 0.85rem;
@@ -112,14 +111,14 @@
   margin-top: 0.5rem;
 }
 
-/* Zone du lien */
+
 .link {
   text-align: center;
   margin-top: 1.5rem;
   color: #64748b;
 }
 
-/* Lien */
+
 .link-text {
   color: #6366f1;
   font-weight: 600;
