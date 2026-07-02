@@ -21,7 +21,7 @@ function Profile() {
     demande: '', genre: '', metier: ''
   })
 
-  // Clé de brouillon unique par utilisateur et par rôle
+  
   const draftKey = user ? `profileDraft_${user.id}_${user.role}` : null
 
   useEffect(() => {
@@ -60,18 +60,17 @@ function Profile() {
           nnumeroWhatsapp: p.nnumeroWhatsapp?.join(', ') || '',
           demande: p.demande?.join(', ') || '',
           genre: p.genre?.join(', ') || '',
-          metier: p.metier || ''
+          metier: p.metier?.join(', ') || ''
         })
       }
     } catch {
-      // Pas encore de profil existant : on garde le formulaire vide,
-      // le brouillon local (ci-dessous) prendra le relais si disponible
+  
     } finally {
       setLoading(false)
     }
   }
 
-  // Restauration du brouillon local, une fois le profil serveur chargé
+
   useEffect(() => {
     if (!draftKey || loading) return
     const draft = localStorage.getItem(draftKey)
@@ -85,12 +84,12 @@ function Profile() {
         setConsommateurCommercantForm(prev => ({ ...prev, ...parsed }))
       }
     } catch {
-      // Brouillon corrompu : on l'ignore silencieusement
+
       localStorage.removeItem(draftKey)
     }
   }, [draftKey, loading])
 
-  // Sauvegarde automatique du brouillon à chaque modification (avec debounce)
+
   useEffect(() => {
     if (!draftKey || loading || !user) return
     const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurCommercantForm
@@ -132,7 +131,7 @@ function Profile() {
 
       await upsertProfile(data)
       setSuccess('Profil sauvegardé avec succès !')
-      if (draftKey) localStorage.removeItem(draftKey) // le brouillon n'a plus de raison d'exister
+      if (draftKey) localStorage.removeItem(draftKey) 
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors de la sauvegarde')
     } finally {
