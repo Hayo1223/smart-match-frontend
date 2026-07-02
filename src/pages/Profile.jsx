@@ -4,41 +4,44 @@ import { getProfile, upsertProfile } from '../services/api'
 
 function Profile() {
   const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem('user'))
+  const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState('')
   const [error, setError] = useState('')
 
-  
   const [agriculteurForm, setAgriculteurForm] = useState({
     nom: '', prénom: '', localisation: '',
     available: true, numeroAgriculmobile: '', numeroAgriculwhatsapp: '', produit: '', genre: ''
   })
 
- 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrénomC: '', localisationC: '', numeroMobile: '', nnumeroWhatsapp: '',
+    nomC: '', PrénomC: '', localisation: '', numeroMobile: '', nnumeroWhatsapp: '',
     demande: '', genre: '', metier: ''
   })
 
   useEffect(() => {
-    if (!user) { navigate('/'); return }
-    fetchProfile()
+    const storedUser = JSON.parse(localStorage.getItem('user') || 'null')
+    if (!storedUser) {
+      navigate('/')
+      return
+    }
+    setUser(storedUser)
+    fetchProfile(storedUser)
   }, [])
 
-  const fetchProfile = async () => {
+  const fetchProfile = async (currentUser) => {
     try {
       const response = await getProfile()
       const p = response.data.profile
       setProfile(p)
 
-      if (user.role === 'Agriculteur') {
+      if (currentUser.role === 'Agriculteur') {
         setAgriculteurForm({
           nom: p.nom || '',
           prénom: p.prénom || '',
-          location: p.localisation || '',
+          localisation: p.localisation?.join(', ') || '',
           available: p.available ?? true,
           numeroAgriculmobile: p.numeroAgriculmobile?.join(', ') || '',
           numeroAgriculwhatsapp: p.numeroAgriculwhatsapp?.join(', ') || '',
@@ -49,16 +52,16 @@ function Profile() {
         setConsommateurCommercantForm({
           nomC: p.nomC || '',
           PrénomC: p.PrénomC || '',
-          localisation: p.localisation || '',
-          numeroMobile: p.numeroMobile || '',
-          nnumeroWhatsapp: p.nnumeroWhatsapp || '',
+          localisation: p.localisation?.join(', ') || '',
+          numeroMobile: p.numeroMobile?.join(', ') || '',
+          nnumeroWhatsapp: p.nnumeroWhatsapp?.join(', ') || '',
           demande: p.demande?.join(', ') || '',
-          genre: p.genre || '',
+          genre: p.genre?.join(', ') || '',
           metier: p.metier || ''
         })
       }
     } catch {
-      
+      // Pas encore de profil existant : on garde le formulaire vide
     } finally {
       setLoading(false)
     }
@@ -76,7 +79,7 @@ function Profile() {
         data = {
           ...agriculteurForm,
           localisation: agriculteurForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
-          available: agriculteurForm.available.split(',').map(s => s.trim()).filter(Boolean),
+          available: agriculteurForm.available, // déjà un booléen, on ne le split pas
           numeroAgriculmobile: agriculteurForm.numeroAgriculmobile.split(',').map(s => s.trim()).filter(Boolean),
           numeroAgriculwhatsapp: agriculteurForm.numeroAgriculwhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           produit: agriculteurForm.produit.split(',').map(s => s.trim()).filter(Boolean),
@@ -86,7 +89,7 @@ function Profile() {
         data = {
           ...consommateurCommercantForm,
           demande: consommateurCommercantForm.demande.split(',').map(s => s.trim()).filter(Boolean),
-          localisationC: consommateurCommercantForm.localisationC.split(',').map(d => d.trim()).filter(Boolean),
+          localisation: consommateurCommercantForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
           numeroMobile: consommateurCommercantForm.numeroMobile.split(',').map(s => s.trim()).filter(Boolean),
           nnumeroWhatsapp: consommateurCommercantForm.nnumeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           genre: consommateurCommercantForm.genre.split(',').map(s => s.trim()).filter(Boolean),
@@ -110,7 +113,7 @@ function Profile() {
     navigate('/')
   }
 
-  if (loading) return <div style={styles.loading}>Chargement...</div>
+  if (loading || !user) return <div style={styles.loading}>Chargement...</div>
 
   return (
     <div style={styles.container}>
@@ -127,7 +130,7 @@ function Profile() {
           <div style={styles.headerButtons}>
             {user.role === 'Agriculteur' && (
               <button onClick={() => navigate('/matching')} style={styles.matchButton}>
-                Voir mes matchs ⚡
+                Voir mes matchs
               </button>
             )}
             <button onClick={handleLogout} style={styles.logoutButton}>
@@ -156,23 +159,23 @@ function Profile() {
                   placeholder="prénom" required />
               </div>
               <div style={styles.field}>
-              <label style={styles.label}>localisation </label>
-              <input style={styles.input} value={agriculteurForm.localisation}
-                onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}
-                placeholder="Casablanca, Maroc" required />
+                <label style={styles.label}>Localisation</label>
+                <input style={styles.input} value={agriculteurForm.localisation}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}
+                  placeholder="Casablanca, Maroc" required />
+              </div>
+              <div style={styles.field}>
+                <label style={styles.label}>Produit (séparées par des virgules)</label>
+                <input style={styles.input} value={agriculteurForm.produit}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, produit: e.target.value})}
+                  placeholder="Tomates, Oranges, Blé" required />
+              </div>
             </div>
             <div style={styles.field}>
-              <label style={styles.label}>Produit (séparées par des virgules)</label>
-              <input style={styles.input} value={agriculteurForm.produit}
-                onChange={e => setAgriculteurForm({...agriculteurForm, produit: e.target.value})}
-                placeholder="JavaScript, React, Node.js" required />
-            </div>
-            </div>
-            <div style={styles.field}>
-              <label style={styles.label}>genre</label>
-                <select> style={styles.input} value={agriculteurForm.genre}
-                onChange={e => setConsommateurCommercantForm({...agriculteurForm, genre: e.target.value})}
-                <option value="Feminin">Feminin</option>
+              <label style={styles.label}>Genre</label>
+              <select style={styles.input} value={agriculteurForm.genre}
+                onChange={e => setAgriculteurForm({...agriculteurForm, genre: e.target.value})}>
+                <option value="Feminin">Féminin</option>
                 <option value="Masculin">Masculin</option>
               </select>
             </div>
@@ -180,7 +183,7 @@ function Profile() {
               <label style={styles.checkboxLabel}>
                 <input type="checkbox" checked={agriculteurForm.available}
                   onChange={e => setAgriculteurForm({...agriculteurForm, available: e.target.checked})} />
-                {' '}Disponible ou verifié
+                {' '}Disponible ou vérifié
               </label>
             </div>
             <button type="submit" style={saving ? styles.buttonDisabled : styles.button} disabled={saving}>
@@ -190,7 +193,7 @@ function Profile() {
         )}
 
         {/* Formulaire consommateur/Commerçant */}
-        {user.role === 'Consommateur' || user.role === 'Commercant' && (
+        {(user.role === 'Consommateur' || user.role === 'Commercant') && (
           <form onSubmit={handleSubmit} style={styles.form}>
             <div style={styles.field}>
               <label style={styles.label}>Nom</label>
@@ -206,29 +209,29 @@ function Profile() {
             </div>
             <div style={styles.grid}>
               <div style={styles.field}>
-                <label style={styles.label}>Metier</label>
+                <label style={styles.label}>Métier</label>
                 <input style={styles.input} value={consommateurCommercantForm.metier}
                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, metier: e.target.value})}
                   placeholder="Développement web" required />
               </div>
               <div style={styles.field}>
-              <label style={styles.label}>localisation </label>
-              <input style={styles.input} value={consommateurCommercantForm.localisation}
-                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisation: e.target.value})}
-                placeholder="Casablanca, Maroc" required />
-            </div>
+                <label style={styles.label}>Localisation</label>
+                <input style={styles.input} value={consommateurCommercantForm.localisation}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisation: e.target.value})}
+                  placeholder="Casablanca, Maroc" required />
+              </div>
             </div>
             <div style={styles.field}>
-              <label style={styles.label}>produits recherchés (séparées par des virgules)</label>
+              <label style={styles.label}>Produits recherchés (séparées par des virgules)</label>
               <input style={styles.input} value={consommateurCommercantForm.demande}
                 onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, demande: e.target.value})}
-                placeholder="JavaScript, React, Node.js" required />
+                placeholder="Tomates, Oranges, Blé" required />
             </div>
             <div style={styles.field}>
-              <label style={styles.label}>genre</label>
+              <label style={styles.label}>Genre</label>
               <select style={styles.input} value={consommateurCommercantForm.genre}
                 onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
-                <option value="Feminin">Feminin</option>
+                <option value="Feminin">Féminin</option>
                 <option value="Masculin">Masculin</option>
               </select>
             </div>
