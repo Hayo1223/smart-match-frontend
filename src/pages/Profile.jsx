@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile } from '../services/api'
-import { getProfile, upsertProfile } from '../services/Profile.css'
+import '../services/Profile.css'
 
 function Profile() {
   const navigate = useNavigate()
@@ -152,93 +152,93 @@ function Profile() {
     navigate('/')
   }
 
-  if (loading || !user) return <div style={styles.loading}>Chargement...</div>
+  if (loading || !user) return <div className="styles.loading">Chargement...</div>
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
+    <div className="container">
+      <div className="styles.card">
 
         {/* Header */}
-        <div style={styles.header}>
+        <div className="styles.header">
           <div>
-            <h1 style={styles.title}>Mon Profil</h1>
-            <p style={styles.subtitle}>
+            <h1 className="styles.title">Mon Profil</h1>
+            <p className="styles.subtitle">
               {user.role === 'Agriculteur' ? 'Agriculteur' : 'Consommateur/Commerçant'} — {user.email}
             </p>
           </div>
-          <div style={styles.headerButtons}>
+          <div className="styles.headerButtons">
             {user.role === 'Agriculteur' && (
-              <button onClick={() => navigate('/matching')} style={styles.matchButton}>
+              <button onClick={() => navigate('/matching')} className="styles.matchButton">
                 Voir mes matchs
               </button>
             )}
-            <button onClick={handleLogout} style={styles.logoutButton}>
+            <button onClick={handleLogout} className="styles.logoutButton">
               Déconnexion
             </button>
           </div>
         </div>
 
-        {success && <div style={styles.success}>{success}</div>}
-        {error && <div style={styles.error}>{error}</div>}
+        {success && <div className="styles.success">{success}</div>}
+        {error && <div className="styles.error">{error}</div>}
 
         {/* Formulaire agriculteur */}
         {user.role === 'Agriculteur' && (
-          <form onSubmit={handleSubmit} style={styles.form}>
-            <div style={styles.grid}>
-              <div style={styles.field}>
-                <label style={styles.label}>Nom</label>
-                <input style={styles.input} value={agriculteurForm.nom}
+          <form onSubmit={handleSubmit} className="styles.form">
+            <div className="styles.grid">
+              <div className="styles.field">
+                <label className="styles.label">Nom</label>
+                <input className="styles.input" value={agriculteurForm.nom}
                   onChange={e => setAgriculteurForm({...agriculteurForm, nom: e.target.value})}
                   placeholder="nom" required />
               </div>
-              <div style={styles.field}>
-                <label style={styles.label}>Prénom</label>
-                <input style={styles.input} value={agriculteurForm.prénom}
+              <div className="styles.field">
+                <label className="styles.label">Prénom</label>
+                <input className="styles.input" value={agriculteurForm.prénom}
                   onChange={e => setAgriculteurForm({...agriculteurForm, prénom: e.target.value})}
                   placeholder="prénom" required />
               </div>
-              <div style={styles.field}>
-                <label style={styles.label}>Localisation</label>
-                <input style={styles.input} value={agriculteurForm.localisation}
+              <div className="styles.field">
+                <label className="styles.label">Localisation</label>
+                <input className="styles.input" value={agriculteurForm.localisation}
                   onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}
                   placeholder="Casablanca, Maroc" required />
               </div>
-              <div style={styles.field}>
-                <label style={styles.label}>Produit (séparées par des virgules)</label>
-                <input style={styles.input} value={agriculteurForm.produit}
+              <div className="styles.field">
+                <label className="styles.label">Produit (séparées par des virgules)</label>
+                <input className="styles.input" value={agriculteurForm.produit}
                   onChange={e => setAgriculteurForm({...agriculteurForm, produit: e.target.value})}
                   placeholder="Tomates, Oranges, Blé" required />
               </div>
-              <div style={styles.field}>
-                <label style={styles.label}>Numéro mobile</label>
-                <input type="tel" style={styles.input} value={agriculteurForm.numeroAgriculmobile}
+              <div className="styles.field">
+                <label className="styles.label">Numéro mobile</label>
+                <input type="tel" className="styles.input" value={agriculteurForm.numeroAgriculmobile}
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculmobile: e.target.value})}
                   placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
-              <div style={styles.field}>
-                <label style={styles.label}>Numéro WhatsApp</label>
-                <input type="tel" style={styles.input} value={agriculteurForm.numeroAgriculwhatsapp}
+              <div className="styles.field">
+                <label className="styles.label">Numéro WhatsApp</label>
+                <input type="tel" className="styles.input" value={agriculteurForm.numeroAgriculwhatsapp}
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculwhatsapp: e.target.value})}
                   placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
             </div>
-            <div style={styles.field}>
-              <label style={styles.label}>Genre</label>
-              <select style={styles.input} value={agriculteurForm.genre}
+            <div className="styles.field">
+              <label className="styles.label">Genre</label>
+              <select className="styles.input" value={agriculteurForm.genre}
                 onChange={e => setAgriculteurForm({...agriculteurForm, genre: e.target.value})}>
                 <option value="">-- Sélectionner --</option>
                 <option value="Feminin">Féminin</option>
                 <option value="Masculin">Masculin</option>
               </select>
             </div>
-            <div style={styles.field}>
-              <label style={styles.checkboxLabel}>
+            <div className="styles.field">
+              <label className="styles.checkboxLabel">
                 <input type="checkbox" checked={agriculteurForm.available}
                   onChange={e => setAgriculteurForm({...agriculteurForm, available: e.target.checked})} />
                 {' '}Disponible ou vérifié
               </label>
             </div>
-            <button type="submit" style={saving ? styles.buttonDisabled : styles.button} disabled={saving}>
+            <button type="submit" className={saving ? styles.buttonDisabled : styles.button} disabled={saving}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
           </form>

@@ -1,0 +1,131 @@
+/* Conteneur principal */
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+}
+
+/* Carte */
+.card {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Titre */
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #6366f1;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Sous-titre */
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+/* Message d'erreur */
+.error {
+  background-color: #fef2f2;
+  color: #ef4444;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Formulaire */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Groupe d'un champ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Libellé */
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Champ de saisie */
+.input {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+/* Effet au focus */
+.input:focus {
+  border-color: #6366f1;
+}
+
+/* Bouton */
+.button {
+  padding: 0.85rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+/* Survol */
+.button:hover {
+  background-color: #4f46e5;
+}
+
+/* Bouton désactivé */
+.button:disabled,
+.button-disabled {
+  padding: 0.85rem;
+  background-color: #a5b4fc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  margin-top: 0.5rem;
+}
+
+/* Zone du lien */
+.link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #64748b;
+}
+
+/* Lien */
+.link-text {
+  color: #6366f1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-text:hover {
+  text-decoration: underline;
+}

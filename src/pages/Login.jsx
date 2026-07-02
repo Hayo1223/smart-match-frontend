@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { login } from '../services/api'
+import '../services/Login.css'
 
 function Login() {
   const navigate = useNavigate()
@@ -88,77 +89,6 @@ function Login() {
   )
 }
 
-const styles = {
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f8fafc',
-  },
-  card: {
-    backgroundColor: 'white',
-    padding: '2.5rem',
-    borderRadius: '12px',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-    width: '100%',
-    maxWidth: '420px',
-  },
-  title: {
-    fontSize: '1.8rem',
-    fontWeight: '700',
-    color: '#6366f1',
-    textAlign: 'center',
-    marginBottom: '0.5rem',
-  },
-  subtitle: {
-    textAlign: 'center',
-    color: '#64748b',
-    marginBottom: '2rem',
-  },
-  error: {
-    backgroundColor: '#fef2f2',
-    color: '#ef4444',
-    padding: '0.75rem',
-    borderRadius: '8px',
-    marginBottom: '1rem',
-    fontSize: '0.9rem',
-  },
-  form: { display: 'flex', flexDirection: 'column', gap: '1.2rem' },
-  field: { display: 'flex', flexDirection: 'column', gap: '0.4rem' },
-  label: { fontSize: '0.9rem', fontWeight: '600', color: '#374151' },
-  input: {
-    padding: '0.75rem 1rem',
-    borderRadius: '8px',
-    border: '1.5px solid #e2e8f0',
-    fontSize: '1rem',
-    outline: 'none',
-    transition: 'border-color 0.2s',
-  },
-  button: {
-    padding: '0.85rem',
-    backgroundColor: '#6366f1',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    fontSize: '1rem',
-    fontWeight: '600',
-    cursor: 'pointer',
-    marginTop: '0.5rem',
-  },
-  buttonDisabled: {
-    padding: '0.85rem',
-    backgroundColor: '#a5b4fc',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    fontSize: '1rem',
-    fontWeight: '600',
-    cursor: 'not-allowed',
-    marginTop: '0.5rem',
-  },
-  link: { textAlign: 'center', marginTop: '1.5rem', color: '#64748b' },
-  linkText: { color: '#6366f1', fontWeight: '600', textDecoration: 'none' },
-}
+
 
 export default Login
