@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile } from '../services/api'
-import '../src/services/Profile.css'
+import '.../src/services/Profile.css'
 
 function Profile() {
   const navigate = useNavigate()
