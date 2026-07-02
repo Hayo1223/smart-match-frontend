@@ -207,13 +207,13 @@ function Profile() {
                 <label style={styles.label}>Numéro mobile</label>
                 <input type="tel" style={styles.input} value={agriculteurForm.numeroAgriculmobile}
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculmobile: e.target.value})}
-                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Numéro WhatsApp</label>
                 <input type="tel" style={styles.input} value={agriculteurForm.numeroAgriculwhatsapp}
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculwhatsapp: e.target.value})}
-                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
             </div>
             <div style={styles.field}>
@@ -270,13 +270,13 @@ function Profile() {
                 <label style={styles.label}>Numéro mobile</label>
                 <input type="tel" style={styles.input} value={consommateurCommercantForm.numeroMobile}
                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroMobile: e.target.value})}
-                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
               <div style={styles.field}>
                 <label style={styles.label}>Numéro WhatsApp</label>
                 <input type="tel" style={styles.input} value={consommateurCommercantForm.nnumeroWhatsapp}
                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nnumeroWhatsapp: e.target.value})}
-                  placeholder="0612345678" pattern="[0-9+ ]{9,15}" required />
+                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
             </div>
             <div style={styles.field}>
