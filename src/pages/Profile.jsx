@@ -64,7 +64,12 @@ function Profile() {
         })
       }
     } catch (err) {
-        setError(err.response?.data?.error || 'Profil pas encore créé, formulaire vide')
+  if (err.response?.status === 404) {
+    // Le profil n'existe pas encore : formulaire vide
+    return
+  }
+
+  setError(err.response?.data?.error || 'Erreur lors du chargement du profil')
 
     } finally {
       setLoading(false)
