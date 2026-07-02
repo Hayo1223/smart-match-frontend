@@ -63,7 +63,7 @@ function Profile() {
           metier: p.metier?.join(', ') || ''
         })
       }
-    } catch {
+    } catch (err) {
         setError(err.response?.data?.error || 'Profil pas encore créé, formulaire vide')
 
     } finally {
