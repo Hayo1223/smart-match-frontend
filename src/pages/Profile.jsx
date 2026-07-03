@@ -13,12 +13,12 @@ function Profile() {
   const [error, setError] = useState('')
 
   const [agriculteurForm, setAgriculteurForm] = useState({
-    nom: '', prénom: '', localisation: '',
+    nom: '', prenom: '', localisation: '',
     available: true, numeroAgriculmobile: '', numeroAgriculwhatsapp: '', produit: '', genre: ''
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrénomC: '', localisation: '', numeroMobile: '', numeroWhatsapp: '',
+    nomC: '', PrenomC: '', localisation: '', numeroMobile: '', numeroWhatsapp: '',
     demande: '', genre: '', metier: ''
   })
 
@@ -36,41 +36,38 @@ function Profile() {
   }, [])
 
   const fetchProfile = async (currentUser) => {
-    try {
-      const response = await getProfile()
-      const p = response.data?.profile?? {}
-      setProfile(p)
+  try {
+    const response = await getProfile()
+    const p = response.data?.profile ?? {}
+    setProfile(p)
 
-      if (currentUser.role === 'Agriculteur') {
-        setAgriculteurForm({
-          nom: p.nom || '',
-          prénom: p.prénom || '',
-          localisation: p.localisation?.join(', ') || '',
-          available: p.available ?? true,
-          numeroAgriculmobile: p.numeroAgriculmobile?.join(', ') || '',
-          numeroAgriculwhatsapp: p.numeroAgriculwhatsapp?.join(', ') || '',
-          produit: p.produit?.join(', ') || '',
-          genre: p.genre?.join(', ') || ''
-        })
-      } else {
-        setConsommateurCommercantForm({
-          nomC: p.nomC || '',
-          PrénomC: p.PrénomC || '',
-          localisation: p.localisation?.join(', ') || '',
-          numeroMobile: p.numeroMobile?.join(', ') || '',
-          numeroWhatsapp: p.numeroWhatsapp?.join(', ') || '',
-          demande: p.demande?.join(', ') || '',
-          genre: p.genre?.join(', ') || '',
-          metier: p.metier?.join(', ') || ''
-        })
-      }
-    } catch (err) {
-  if (err.response?.status === 404) {
-    // Le profil n'existe pas encore : formulaire vide
-    return
-  }
+    if (currentUser.role === 'Agriculteur') {
+      setAgriculteurForm({
+        nom: p.nom || '',
+        prenom: p.prenom || '',                        
+        localisation: p.localisation || '',            
+        available: p.available ?? true,
+        numeroAgriculmobile: p.numeroAgriculmobile || '',   
+        numeroAgriculwhatsapp: p.numeroAgriculwhatsapp || '', 
+        produit: Array.isArray(p.produit) ? p.produit.join(', ') : p.produit || '',  
+        genre: p.genre || ''                          
+      })
+    } else {
+      setConsommateurCommercantForm({
+        nomC: p.nomC || '',
+        PrenomC: p.prenom || '',                      
+        localisation: p.localisation || '',            
+        numeroMobile: p.numeroMobile || '',            
+        numeroWhatsapp: p.numeroWhatsapp || '',        
+        demande: Array.isArray(p.demande) ? p.demande.join(', ') : p.demande || '',
+        genre: p.genre || '',                          
+        metier: p.metier || ''                         
+      })
+    }
 
-  setError(err.response?.data?.error || 'Erreur lors du chargement du profil')
+  } catch (err) {
+    if (err.response?.status === 404) return
+    setError(err.response?.data?.error || 'Erreur lors du chargement du profil')
 
     } finally {
       setLoading(false)
@@ -193,8 +190,8 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
-                <input className="input" value={agriculteurForm.prénom}
-                  onChange={e => setAgriculteurForm({...agriculteurForm, prénom: e.target.value})}
+                <input className="input" value={agriculteurForm.prenom}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, prenom: e.target.value})}
                   placeholder="prénom" required />
               </div>
               <div className="field">
@@ -255,8 +252,8 @@ function Profile() {
             </div>
             <div className="field">
               <label className="label">Prénom</label>
-              <input className="input" value={consommateurCommercantForm.PrénomC}
-                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, PrénomC: e.target.value})}
+              <input className="input" value={consommateurCommercantForm.PrenomC}
+                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, PrenomC: e.target.value})}
                 placeholder="prénom" required />
             </div>
             <div className="grid">

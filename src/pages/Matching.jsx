@@ -8,6 +8,7 @@ function Matching() {
   const user = JSON.parse(localStorage.getItem('user'))
   const [matches, setMatches] = useState([])
   const [nom, setAgriculteurnom] = useState('')
+  const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -22,6 +23,7 @@ function Matching() {
       const response = await getMatches()
       setMatches(response.data.matches)
       setAgriculteurnom(response.data.nom)
+      setAgriculteurprenom(response.data.prenom)
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors du chargement des matchs')
     } finally {
@@ -88,7 +90,7 @@ function Matching() {
               {/* Infos Consommateur/Commerçant*/}
               <h2 className="nomC">{match.nomC}</h2>
               <div className="info-row">
-                <span className="info-tag"> {match.prénomC}</span>
+                <span className="info-tag"> {match.prenomC}</span>
                 <span className="info-tag"> {match.localisation}</span>
                 <span className="info-tag"> {match.metier}</span>
               </div>
