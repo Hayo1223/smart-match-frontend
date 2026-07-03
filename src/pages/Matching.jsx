@@ -144,7 +144,7 @@ function Matching() {
                  <div className="contact-message">
                    <p className="contact-message">Vous avez contacté {match.nomC} {match.prenomC}.</p>
                    <p>Localisation : {match.localisationC}</p>
-                   <p>Demande du client : {match.demande}.join(", )</p>
+                   <p>Demande du client : {match.demande.join(", ")}</p>
                   </div>
                   )}
                 </div>
