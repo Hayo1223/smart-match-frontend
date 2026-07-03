@@ -11,6 +11,7 @@ function Matching() {
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [Contacté, setContacté] = useState(numeroMobile, numeroWhatsapp)
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
@@ -40,7 +41,7 @@ function Matching() {
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <div className="form">
     <div className="container">
       <div className="wrapper">
 
@@ -76,7 +77,7 @@ function Matching() {
         {/* Liste des matchs */}
         <div className="match-list">
           {matches.map((match, index) => (
-            <div key={match.companyId} className="match-card">
+            <div key={match.consommateurCommercantId} className="match-card">
 
               {/* Rang et score */}
               <div className="card-header">
@@ -92,7 +93,7 @@ function Matching() {
               <h2 className="nomC">{match.nomC}</h2>
               <div className="info-row">
                 <span className="info-tag"> {match.prenomC}</span>
-                <span className="info-tag"> {match.localisation}</span>
+                <span className="info-tag"> {match.localisationC}</span>
                 <span className="info-tag"> {match.metier}</span>
               </div>
 
@@ -109,6 +110,9 @@ function Matching() {
                     <li key={i} className="detail-item"> {detail}</li>
                   ))}
                 </ul>
+                <button type="submit" className={Contacté ? "button-disabled" : "button"}>
+              {Contacté ? 'contacté...' : 'contacter le profil'}
+                </button>
               </div>
 
             </div>
@@ -117,10 +121,7 @@ function Matching() {
 
       </div>
     </div>
-    <button type="submit" className={saving ? "button-disabled" : "button"}>
-              {Contacté ? 'contacté...' : 'contacter le profil'}
-            </button>
-    </form>
+  </div>
   )
 }
 
