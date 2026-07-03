@@ -15,7 +15,7 @@ function Matching() {
   const saved = localStorage.getItem(`contactes_${user?.id}`)
   return saved ? JSON.parse(saved) : []
 })
-const [message, setMessage] = useState('')
+
 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const [message, setMessage] = useState('')
     setContactes(nouveauxContactes)
     localStorage.setItem(`contactes_${user?.id}`, JSON.stringify(nouveauxContactes))
   }
-  setMessage(`${match.nomC} ${match.prenomC} est contacté`)
+  console.log(`${match.nomC} ${match.prenomC} est contacté`)
 }
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
@@ -125,19 +125,25 @@ const [message, setMessage] = useState('')
                   ))}
                 </ul>
               <div>
-               <button
-                 className={
-                  contactes.includes(match.consommateurCommercantId)
-                  ? "button-disabled"
-                  : "button"
-                    }
-                     disabled={contactes.includes(match.consommateurCommercantId)}
-                     onClick={() => contacter(match)}
+                <button
+                  className={
+                     contactes.includes(match.consommateurCommercantId)
+                      ? "button-disabled"
+                      : "button"
+                     }
+                       disabled={contactes.includes(match.consommateurCommercantId)}
+                       onClick={() => contacter(match)}
                   >
-                     {contactes.includes(match.consommateurCommercantId)
-                     ? "Contacté"
-                     : "Contacter le profil"}
-                  </button>
+                      {contactes.includes(match.consommateurCommercantId)
+                      ? "Contacté"
+                      : "Contacter le profil"}
+                 </button>
+
+                 {contactes.includes(match.consommateurCommercantId) && (
+                 <p className="contact-message">
+                  Vous avez contacté {match.nomC} {match.prenomC}.
+                 </p>
+                 )}
                 </div>
               </div>
 
