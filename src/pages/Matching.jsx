@@ -11,7 +11,7 @@ function Matching() {
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  
+  const [contactes, setContactes] = useState([]);
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
@@ -37,6 +37,19 @@ function Matching() {
     if (score >= 25) return '#f59e0b'
     return '#ef4444'
   }
+
+  const contacter = (match) => {
+  if (!contactes.includes(match.consommateurCommercantId)) {
+    setContactes((prev) => [...prev, match.consommateurCommercantId]);
+  }
+  if(match.numeroMobile){
+    console.log(match.nomC + match.prenomC + "est contacté")
+  }
+
+  if (match.numeroWhatsapp) {
+    window.open(`https://wa.me/${match.numeroWhatsapp}`, "_blank");
+  }
+};
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
 
@@ -110,24 +123,31 @@ function Matching() {
                     <li key={i} className="detail-item"> {detail}</li>
                   ))}
                 </ul>
-              </div>
-               <span>
-                 <button type="submit" className={match.numeroMobile ? "button-disabled" : "button"}>
-                  {match.numeroMobile ? 'contacté...' : 'contacter le profil'}
-                 </button> 
-                </span>
-                <span>
-                 <button type="submit" className={match.numeroWhatsapp ? "button-disabled" : "button"}>
-                  {match.numeroWhatsapp ? 'contacté...' : 'contacter le profil'}
-                 </button>
-                </span>
+              <div>
+               <button
+                 className={
+                  contactes.includes(match.consommateurCommercantId)
+                  ? "button-disabled"
+                  : "button"
+                    }
+                     disabled={contactes.includes(match.consommateurCommercantId)}
+                     onClick={() => contacter(match.consommateurCommercantId)}
+                  >
+                     {contactes.includes(match.consommateurCommercantId)
+                     ? "Contacté"
+                     : "Contacter le profil"}
+                  </button>
+                </div>
+              
 
             </div>
+            
+          </div>
           ))}
-        </div>
-
+         </div>
       </div>
     </div>
+    
   </div>
   )
 }
