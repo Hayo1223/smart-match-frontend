@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile } from '../services/api'
-import '../services/Profile.css'
+import './Profile.css'
 
 function Profile() {
   const navigate = useNavigate()
@@ -166,13 +166,13 @@ function Profile() {
               {user.role === 'Agriculteur' ? 'Agriculteur' : 'Consommateur/Commerçant'} — {user.email}
             </p>
           </div>
-          <div className="headerButtons">
+          <div className="header-buttons">
             {user.role === 'Agriculteur' && (
-              <button onClick={() => navigate('/matching')} className="matchButton">
+              <button onClick={() => navigate('/matching')} className="match-button">
                 Voir mes matchs
               </button>
             )}
-            <button onClick={handleLogout} className="logoutButton">
+            <button onClick={handleLogout} className="logout-button">
               Déconnexion
             </button>
           </div>
@@ -232,13 +232,13 @@ function Profile() {
               </select>
             </div>
             <div className="field">
-              <label className="checkboxLabel">
+              <label className="checkbox-label">
                 <input type="checkbox" checked={agriculteurForm.available}
                   onChange={e => setAgriculteurForm({...agriculteurForm, available: e.target.checked})} />
                 {' '}Disponible ou vérifié
               </label>
             </div>
-            <button type="submit" className={saving ? buttonDisabled : button} disabled={saving}>
+            <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
           </form>
@@ -300,7 +300,7 @@ function Profile() {
                 <option value="Masculin">Masculin</option>
               </select>
             </div>
-            <button type="submit" className={saving ? buttonDisabled : button} disabled={saving}>
+            <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
           </form>

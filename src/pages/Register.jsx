@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { register } from '../services/api'
-import '../src/services/Register.css'
+import './Register.css'
 
 function Register() {
   const navigate = useNavigate()
@@ -35,47 +35,47 @@ function Register() {
   }
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>SOUK</h1>
-        <p style={styles.subtitle}>Créer votre compte</p>
+    <div className="container">
+      <div className="card">
+        <h1 className="title">SOUK</h1>
+        <p className="subtitle">Créer votre compte</p>
 
-        {error && <div style={styles.error}>{error}</div>}
+        {error && <div className="error">{error}</div>}
 
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.field}>
-            <label style={styles.label}>Email</label>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="field">
+            <label className="label">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="votre@email.com"
-              style={styles.input}
+              className="input"
               required
             />
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Mot de passe</label>
+          <div className="field">
+            <label className="label">Mot de passe</label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               placeholder="••••••••"
-              style={styles.input}
+              className="input"
               required
             />
           </div>
 
-          <div style={styles.field}>
-            <label style={styles.label}>Je suis</label>
+          <div className="field">
+            <label className="label">Je suis</label>
             <select
               name="role"
               value={formData.role}
               onChange={handleChange}
-              style={styles.input}
+              className="input"
             >
               <option value="Agriculteur">Agriculteur</option>
               <option value="ConsommateurCommercant">Consommateur/Commerçant</option>
@@ -84,16 +84,16 @@ function Register() {
 
           <button
             type="submit"
-            style={loading ? styles.buttonDisabled : styles.button}
+            className={loading ? "button-disabled" : "button"}
             disabled={loading}
           >
             {loading ? 'Inscription...' : 'S\'inscrire'}
           </button>
         </form>
 
-        <p style={styles.link}>
+        <p className="link">
           Déjà un compte ?{' '}
-          <Link to="/" style={styles.linkText}>Se connecter</Link>
+          <Link to="/" className="linkText">Se connecter</Link>
         </p>
       </div>
     </div>
