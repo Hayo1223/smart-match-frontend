@@ -11,7 +11,10 @@ function Matching() {
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [contactes, setContactes] = useState([]);
+  const [contactes, setContactes] = useState(() => {
+  const saved = localStorage.getItem(`contactes_${user?.id}`)
+  return saved ? JSON.parse(saved) : []
+})
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
@@ -40,17 +43,17 @@ function Matching() {
 
   const contacter = (match) => {
   if (!contactes.includes(match.consommateurCommercantId)) {
-    setContactes((prev) => [...prev, match.consommateurCommercantId]);
+    const nouveauxContactes = [...contactes, match.consommateurCommercantId]
+    setContactes(nouveauxContactes)
+    localStorage.setItem(`contactes_${user?.id}`, JSON.stringify(nouveauxContactes))
   }
-  
-  console.log(`${match.nomC} ${match.prenomC} est contacté`);
-  console.log(match);
-};
+  console.log(`${match.nomC} ${match.prenomC} est contacté`)
+}
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
 
   return (
-    <div className="form">
+    
     <div className="container">
       <div className="wrapper">
 
@@ -134,17 +137,13 @@ function Matching() {
                      : "Contacter le profil"}
                   </button>
                 </div>
-              
+              </div>
 
             </div>
-            
-          </div>
           ))}
          </div>
       </div>
     </div>
-    
-  </div>
   )
 }
 

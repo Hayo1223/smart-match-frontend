@@ -193,3 +193,9 @@
   font-size: 1.2rem;
   color: #64748b;
 }
+
+.contact-action {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
