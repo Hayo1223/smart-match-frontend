@@ -143,7 +143,7 @@ function Matching() {
                  {contactes.includes(match.consommateurCommercantId) && (
                  <div className="contact-message">
                    <p className="contact-message">Vous avez contacté {match.nomC} {match.prenomC}.</p>
-                   <p>Email : {match.email}</p>
+                   <p>Localisation : {match.localisationC}</p>
                   </div>
                   )}
                 </div>
