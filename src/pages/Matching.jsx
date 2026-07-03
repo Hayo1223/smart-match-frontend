@@ -111,16 +111,16 @@ function Matching() {
                   ))}
                 </ul>
               </div>
-               <p>
+               <span>
                  <button type="submit" className={match.numeroMobile ? "button-disabled" : "button"}>
                   {match.numeroMobile ? 'contacté...' : 'contacter le profil'}
                  </button> 
-                </p>
-                <p>
+                </span>
+                <span>
                  <button type="submit" className={match.numeroWhatsapp ? "button-disabled" : "button"}>
                   {match.numeroWhatsapp ? 'contacté...' : 'contacter le profil'}
                  </button>
-                </p>
+                </span>
 
             </div>
           ))}
