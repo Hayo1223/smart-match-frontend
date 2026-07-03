@@ -40,6 +40,7 @@ function Matching() {
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
 
   return (
+    <form onSubmit={handleSubmit} className="form">
     <div className="container">
       <div className="wrapper">
 
@@ -116,6 +117,10 @@ function Matching() {
 
       </div>
     </div>
+    <button type="submit" className={saving ? "button-disabled" : "button"}>
+              {Contacté ? 'contacté...' : 'contacter le profil'}
+            </button>
+    </form>
   )
 }
 

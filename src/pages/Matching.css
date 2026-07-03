@@ -46,6 +46,12 @@
   margin-bottom: 1rem;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 .empty-state {
   background-color: white;
   padding: 3rem;
@@ -75,6 +81,17 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.button-disabled {
+  padding: 0.85rem;
+  background-color: #a5b4fc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: not-allowed;
 }
 
 .match-list {
