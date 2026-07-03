@@ -11,7 +11,7 @@ function Matching() {
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [Contacté, setContacté] = useState(numeroMobile, numeroWhatsapp)
+  const [Contacté, setMatches] = useState([])
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
@@ -110,11 +110,14 @@ function Matching() {
                     <li key={i} className="detail-item"> {detail}</li>
                   ))}
                 </ul>
-                <button type="submit" className={Contacté ? "button-disabled" : "button"}>
-              {Contacté ? 'contacté...' : 'contacter le profil'}
-                </button>
               </div>
-
+              <button type="submit" className={match.numeroMobile ? "button-disabled" : "button"}>
+                  {match.numeroMobile ? 'contacté...' : 'contacter le profil'}
+                </button> 
+                <button type="submit" className={match.numeroWhatsapp ? "button-disabled" : "button"}>
+                  {match.numeroWhatsapp ? 'contacté...' : 'contacter le profil'}
+                </button>
+                 
             </div>
           ))}
         </div>
