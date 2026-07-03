@@ -47,9 +47,10 @@ function Matching() {
   if (!contactes.includes(match.consommateurCommercantId)) {
     const nouveauxContactes = [...contactes, match.consommateurCommercantId]
     setContactes(nouveauxContactes)
-    localStorage.setItem(`contactes_${user?.id}`, JSON.stringify(nouveauxContactes))
+    localStorage.setItem(`contactes_${user?.id}`, JSON.stringify(nouveauxContactes)
+    )
   }
-  console.log(`${match.nomC} ${match.prenomC} est contacté`)
+
 }
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
@@ -140,10 +141,11 @@ function Matching() {
                  </button>
 
                  {contactes.includes(match.consommateurCommercantId) && (
-                 <p className="contact-message">
-                  Vous avez contacté {match.nomC} {match.prenomC}.
-                 </p>
-                 )}
+                 <div className="contact-message">
+                   <p className="contact-message">Vous avez contacté {match.nomC} {match.prenomC}.</p>
+                   <p>Email : {match.email}</p>
+                  </div>
+                  )}
                 </div>
               </div>
 
