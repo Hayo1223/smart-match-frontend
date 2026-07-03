@@ -15,6 +15,8 @@ function Matching() {
   const saved = localStorage.getItem(`contactes_${user?.id}`)
   return saved ? JSON.parse(saved) : []
 })
+const [message, setMessage] = useState('')
+
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
@@ -47,7 +49,7 @@ function Matching() {
     setContactes(nouveauxContactes)
     localStorage.setItem(`contactes_${user?.id}`, JSON.stringify(nouveauxContactes))
   }
-  console.log(`${match.nomC} ${match.prenomC} est contacté`)
+  setMessage(`${match.nomC} ${match.prenomC} est contacté`)
 }
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
