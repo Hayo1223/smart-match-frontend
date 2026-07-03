@@ -42,13 +42,9 @@ function Matching() {
   if (!contactes.includes(match.consommateurCommercantId)) {
     setContactes((prev) => [...prev, match.consommateurCommercantId]);
   }
-  if(match.numeroMobile){
-    console.log(match.nomC + match.prenomC + "est contacté")
-  }
-
-  else if (match.numeroWhatsapp) {
-    console.log(match.nomC + match.prenomC + "est contacté")
-  }
+  
+  console.log(`${match.nomC} ${match.prenomC} est contacté`);
+  console.log(match);
 };
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
