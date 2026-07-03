@@ -46,8 +46,8 @@ function Matching() {
     console.log(match.nomC + match.prenomC + "est contacté")
   }
 
-  if (match.numeroWhatsapp) {
-    window.open(`https://wa.me/${match.numeroWhatsapp}`, "_blank");
+  else if (match.numeroWhatsapp) {
+    console.log(match.nomC + match.prenomC + "est contacté")
   }
 };
 
@@ -131,7 +131,7 @@ function Matching() {
                   : "button"
                     }
                      disabled={contactes.includes(match.consommateurCommercantId)}
-                     onClick={() => contacter(match.consommateurCommercantId)}
+                     onClick={() => contacter(match)}
                   >
                      {contactes.includes(match.consommateurCommercantId)
                      ? "Contacté"
