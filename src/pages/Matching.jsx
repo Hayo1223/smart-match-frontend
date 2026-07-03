@@ -11,7 +11,7 @@ function Matching() {
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [Contacté, setMatches] = useState([])
+  
 
   useEffect(() => {
     if (!user) { navigate('/'); return }
@@ -117,7 +117,7 @@ function Matching() {
                 <button type="submit" className={match.numeroWhatsapp ? "button-disabled" : "button"}>
                   {match.numeroWhatsapp ? 'contacté...' : 'contacter le profil'}
                 </button>
-                 
+
             </div>
           ))}
         </div>
