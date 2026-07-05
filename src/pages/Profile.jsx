@@ -242,7 +242,7 @@ function Profile() {
         )}
 
         {/* Formulaire consommateur/Commerçant */}
-        {(user.role === 'Consommateur' || user.role === 'Commercant') && (
+        {(user.role === 'ConsommateurCommercant') && (
           <form onSubmit={handleSubmit} className="form">
             <div className="field">
               <label className="label">Nom</label>
