@@ -19,7 +19,7 @@ function Profile() {
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrenomC: '', localisation: '', numeroMobile: '', numeroWhatsapp: '',
+    nomC: '', PrenomC: '', localisationC: '', numeroMobile: '', numeroWhatsapp: '',
     demande: '', genre: '', metier: '', age: ''
   })
 
@@ -58,7 +58,7 @@ function Profile() {
       setConsommateurCommercantForm({
         nomC: p.nomC || '',
         PrenomC: p.prenom || '',                      
-        localisation: p.localisation || '',            
+        localisationC: p.localisation || '',            
         numeroMobile: p.numeroMobile || '',            
         numeroWhatsapp: p.numeroWhatsapp || '',        
         demande: Array.isArray(p.demande) ? p.demande.join(', ') : p.demande || '',
@@ -117,24 +117,28 @@ function Profile() {
       if (user.role === 'Agriculteur') {
         data = {
           ...agriculteurForm,
-          localisation: agriculteurForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
+          nom: agriculteurForm.nom,
+          prenom: agriculteurForm.prenom,
+          localisation: agriculteurForm.localisation,
           available: agriculteurForm.available,
-          numeroAgriculmobile: agriculteurForm.numeroAgriculmobile.split(',').map(s => s.trim()).filter(Boolean),
-          numeroAgriculwhatsapp: agriculteurForm.numeroAgriculwhatsapp.split(',').map(s => s.trim()).filter(Boolean),
+          numeroAgriculmobile: agriculteurForm.numeroAgriculmobile,
+          numeroAgriculwhatsapp: agriculteurForm.numeroAgriculwhatsapp,
           produit: agriculteurForm.produit.split(',').map(s => s.trim()).filter(Boolean),
-          genre: agriculteurForm.genre.split(',').map(s => s.trim()).filter(Boolean),
-          age: agriculteurForm.age || ''
+          genre: agriculteurForm.genre,
+          age: agriculteurForm.age
         }
       } else {
         data = {
           ...consommateurCommercantForm,
+           nomC: consommateurCommercantForm.nomC,
+           prenomC: consommateurCommercantForm.PrenomC,
           demande: consommateurCommercantForm.demande.split(',').map(s => s.trim()).filter(Boolean),
-          localisation: consommateurCommercantForm.localisation.split(',').map(d => d.trim()).filter(Boolean),
-          numeroMobile: consommateurCommercantForm.numeroMobile.split(',').map(s => s.trim()).filter(Boolean),
-          numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
-          genre: consommateurCommercantForm.genre.split(',').map(s => s.trim()).filter(Boolean),
-          metier: consommateurCommercantForm.metier.split(',').map(s => s.trim()).filter(Boolean),
-          age: consommateurCommercantForm.age || ''
+          localisationC: consommateurCommercantForm.localisation,
+          numeroMobile: consommateurCommercantForm.numeroMobile,
+          numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp,
+          genre: consommateurCommercantForm.genre,
+          metier: consommateurCommercantForm.metier,
+          age: consommateurCommercantForm.age
         }
       }
 
