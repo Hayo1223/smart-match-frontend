@@ -1,145 +1,145 @@
 .container {
-  min-height: 100%;
+  min-height: auto;
   background-color: #f8fafc;
-  padding: 200%;
+  padding: auto;
 }
 
 .card {
   background-color: white;
-  padding: 250%;
-  border-radius: 75%;
-  box-shadow: 0 25% 125% rgba(0, 0, 0, 0.08);
-  max-width: 2625%;
-  margin: 0 auto;
+  padding: auto;
+  border-radius: auto;
+  box-shadow: auto auto auto rgba(0, 0, 0, 0.08);
+  max-width: auto;
+  margin: auto auto;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 200%;
+  margin-bottom: auto;
 }
 
 .header-buttons {
   display: flex;
-  gap: 75%;
+  gap: auto;
   flex-wrap: wrap;
 }
 
 .title {
-  font-size: 180%;
-  font-weight: 700%;
+  font-size: auto;
+  font-weight: auto;
   color: #1e293b;
 }
 
 .subtitle {
   color: #64748b;
-  margin-top: 25%;
+  margin-top: auto;
 }
 
 .success {
   background-color: #f0fdf4;
   color: #16a34a;
-  padding: 75%;
-  border-radius: 50%;
-  margin-bottom: 100%;
+  padding: auto;
+  border-radius: auto;
+  margin-bottom: auto;
 }
 
 .error {
   background-color: #fef2f2;
   color: #ef4444;
-  padding: 75%;
-  border-radius: 50%;
-  margin-bottom: 100%;
+  padding: auto;
+  border-radius: auto;
+  margin-bottom: auto;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 120%;
+  gap: auto;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 50% 50%;
-  gap: 100%;
+  grid-template-columns: auto auto;
+  gap: auto;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 40%;
+  gap: auto;
 }
 
 .label {
-  font-size: 90%;
-  font-weight: 600%;
+  font-size: auto;
+  font-weight: auto;
   color: #374151;
 }
 
 .checkbox-label {
-  font-size: 90%;
+  font-size: auto;
   color: #374151;
   cursor: pointer;
 }
 
 .input {
-  padding: 75%;
-  border-radius: 50%;
-  border: 150% solid #e2e8f0;
-  font-size: 100%;
+  padding: auto;
+  border-radius: auto;
+  border: auto solid #e2e8f0;
+  font-size: auto;
 }
 
 .button {
-  padding: 85%;
+  padding: auto;
   background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 50%;
-  font-size: 100%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: pointer;
 }
 
 .button-disabled {
-  padding: 85%;
+  padding: auto;
   background-color: #a5b4fc;
   color: white;
   border: none;
-  border-radius: 50%;
-  font-size: 100%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: not-allowed;
 }
 
 .match-button {
-  padding: 75%;
+  padding: auto;
   background-color: #10b981;
   color: white;
   border: none;
-  border-radius: 50%;
-  font-size: 90%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: pointer;
 }
 
 .logout-button {
-  padding: 75%;
+  padding: auto;
   background-color: #f1f5f9;
   color: #64748b;
   border: none;
-  border-radius: 50%;
-  font-size: 90%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: pointer;
 }
 
 .loading {
-  min-height: 100%;
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 120%;
+  font-size: auto;
   color: #64748b;
 }
 

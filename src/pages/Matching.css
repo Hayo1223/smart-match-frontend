@@ -1,208 +1,208 @@
 .container {
-  min-height: 100%;
+  min-height: auto;
   background-color: #f8fafc;
-  padding: 200%;
+  padding: auto;
 }
 
 .wrapper {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: auto;
+  margin: auto auto;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 200%;
+  margin-bottom: auto;
 }
 
 .title {
-  font-size: 180%;
-  font-weight: 700%;
+  font-size: auto;
+  font-weight: auto;
   color: #1e293b;
 }
 
 .subtitle {
   color: #64748b;
-  margin-top: 25%;
+  margin-top: auto;
 }
 
 .back-button {
-  padding: 60% 120%;
+  padding: auto;
   background-color: #f1f5f9;
   color: #64748b;
   border: none;
-  border-radius: 80%;
-  font-size: 90%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: pointer;
 }
 
 .error {
   background-color: #fef2f2;
   color: #ef4444;
-  padding: 75%;
-  border-radius: 80%;
-  margin-bottom: 100%;
+  padding: auto;
+  border-radius: auto;
+  margin-bottom: auto;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 120%;
+  gap: auto;
 }
 
 .empty-state {
   background-color: white;
-  padding: 300%;
-  border-radius: 120%;
+  padding: auto;
+  border-radius: auto;
   text-align: center;
-  box-shadow: 0 40% 200% rgba(0,0,0,0.08);
+  box-shadow: auto auto auto rgba(0,0,0,0.08);
 }
 
 .empty-title {
-  font-size: 120%;
-  font-weight: 600%;
+  font-size: auto;
+  font-weight: auto;
   color: #1e293b;
-  margin-bottom: 50%;
+  margin-bottom: auto;
 }
 
 .empty-text {
   color: #64748b;
-  margin-bottom: 150%;
+  margin-bottom: auto;
 }
 
 .button {
-  padding: 85% 200%;
+  padding: auto auto;
   background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 80%;
-  font-size: 100%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: pointer;
 }
 
 .button-disabled {
-  padding: 85% 200%;
+  padding: auto auto;
   background-color: #a5b4fc;
   color: white;
   border: none;
-  border-radius: 80%;
-  font-size: 100%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: not-allowed;
 }
 
 .match-list {
   display: flex;
   flex-direction: column;
-  gap: 150%;
+  gap: auto;
 }
 
 .match-card {
   background-color: white;
-  padding: 150% 200%;
-  border-radius: 120%;
-  box-shadow: 0 40% 200% rgba(0,0,0,0.08);
+  padding: auto;
+  border-radius: auto;
+  box-shadow: auto auto auto rgba(0,0,0,0.08);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 75%;
+  margin-bottom: auto;
 }
 
 .rank {
-  font-size: 90%;
-  font-weight: 700%;
+  font-size: auto;
+  font-weight: auto;
   color: #94a3b8;
 }
 
 .score-badge {
   color: white;
-  padding: 75% 150%;
-  border-radius: 20%;
-  font-size: 90%;
-  font-weight: 700%;
+  padding: auto auto;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
 }
 
 .company-name {
-  font-size: 130%;
-  font-weight: 700%;
+  font-size: auto;
+  font-weight: auto;
   color: #1e293b;
-  margin-bottom: 75%;
+  margin-bottom: auto;
 }
 
 .info-row {
   display: flex;
-  gap: 75%;
+  gap: auto;
   flex-wrap: wrap;
-  margin-bottom: 75%;
+  margin-bottom: auto;
 }
 
 .info-tag {
   background-color: #f1f5f9;
-  padding: 75% 150%;
-  border-radius: 20%;
-  font-size: 85%;
+  padding: auto auto;
+  border-radius: auto;
+  font-size: auto;
   color: #475569;
   display: inline-block;
-  margin-bottom: 30%;
+  margin-bottom: auto;
 }
 
 .email {
   color: #6366f1;
-  font-size: 90%;
-  margin-bottom: 50%;
+  font-size: auto;
+  margin-bottom: auto;
 }
 
 .details-box {
   background-color: #f8fafc;
-  padding: 100%;
-  border-radius: 80%;
-  margin-top: 100%;
+  padding: auto;
+  border-radius: auto;
+  margin-top: auto;
 }
 
 .details-title {
-  font-weight: 700%;
+  font-weight: auto;
   color: #374151;
-  margin-bottom: 50%;
-  font-size: 90%;
+  margin-bottom: auto;
+  font-size: auto;
 }
 
 .details-list {
   list-style: none;
-  padding: 0;
+  padding: auto;
   display: flex;
   flex-direction: column;
-  gap: 40%;
+  gap: auto;
 }
 
 .detail-item {
-  font-size: 88%;
+  font-size: auto;
   color: #475569;
 }
 
 .loading {
-  min-height: 100%;
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 120%;
+  font-size: auto;
   color: #64748b;
 }
 
 .contact-action {
-  margin-top: 100%;
+  margin-top: auto;
   display: flex;
   justify-content: flex-end;
 }
 
 .contact-message {
-  margin-top: 100%;
+  margin-top: auto;
   color: #16a34a;
-  font-size: 140%;
-  font-weight: 500%;
+  font-size: auto;
+  font-weight: auto;
 }

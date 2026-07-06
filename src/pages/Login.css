@@ -1,5 +1,5 @@
 .container {
-  min-height: 100%;
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,66 +9,66 @@
 
 .card {
   background-color: white;
-  padding: 250%;
-  border-radius: 120%;
-  box-shadow: 0 25% 125% rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 2625%;
+  padding: auto;
+  border-radius: auto;
+  box-shadow: auto auto auto rgba(0, 0, 0, 0.08);
+  width: auto;
+  max-width: auto;
 }
 
 
 .title {
-  font-size: 180%;
-  font-weight: 700%;
+  font-size: auto;
+  font-weight: auto;
   color: #6366f1;
   text-align: center;
-  margin-bottom: 50%;
+  margin-bottom: auto;
 }
 
 
 .subtitle {
   text-align: center;
   color: #64748b;
-  margin-bottom: 200%;
+  margin-bottom: auto;
 }
 
 
 .error {
   background-color: #fef2f2;
   color: #ef4444;
-  padding: 75%;
-  border-radius: 80%;
-  margin-bottom: 100%;
-  font-size: 90%;
+  padding: auto;
+  border-radius: auto;
+  margin-bottom: auto;
+  font-size: auto;
 }
 
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 120%;
+  gap: auto;
 }
 
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 40%;
+  gap: auto;
 }
 
 
 .label {
-  font-size: 90%;
-  font-weight: 600%;
+  font-size: auto;
+  font-weight: auto;
   color: #374151;
 }
 
 
 .input {
-  padding: 75% 100%;
-  border-radius: 80%;
-  border: 9.5% solid #e2e8f0;
-  font-size: 100%;
+  padding: auto auto;
+  border-radius: auto;
+  border: auto solid #e2e8f0;
+  font-size: auto;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -80,15 +80,15 @@
 
 
 .button {
-  padding: 85%;
+  padding: auto;
   background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 80%;
-  font-size: 100%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: pointer;
-  margin-top: 50%;
+  margin-top: auto;
   transition: background-color 0.2s;
 }
 
@@ -100,28 +100,28 @@
 
 .button:disabled,
 .button-disabled {
-  padding: 85%;
+  padding: auto;
   background-color: #a5b4fc;
   color: white;
   border: none;
-  border-radius: 80%;
-  font-size: 100%;
-  font-weight: 600%;
+  border-radius: auto;
+  font-size: auto;
+  font-weight: auto;
   cursor: not-allowed;
-  margin-top: 50%;
+  margin-top: auto;
 }
 
 
 .link {
   text-align: center;
-  margin-top: 150%;
+  margin-top: auto;
   color: #64748b;
 }
 
 
 .link-text {
   color: #6366f1;
-  font-weight: 600%;
+  font-weight: auto;
   text-decoration: none;
 }
 
