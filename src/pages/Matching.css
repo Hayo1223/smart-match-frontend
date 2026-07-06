@@ -1,208 +1,41 @@
-.container {
-  min-height: auto;
-  background-color: #f8fafc;
-  padding: auto;
-}
-
 .wrapper {
-  max-width: auto;
-  margin: auto auto;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: auto;
-}
-
-.title {
-  font-size: auto;
-  font-weight: auto;
-  color: #1e293b;
-}
-
-.subtitle {
-  color: #64748b;
-  margin-top: auto;
-}
-
-.back-button {
-  padding: auto;
-  background-color: #f1f5f9;
-  color: #64748b;
-  border: none;
-  border-radius: auto;
-  font-size: auto;
-  font-weight: auto;
-  cursor: pointer;
-}
-
-.error {
-  background-color: #fef2f2;
-  color: #ef4444;
-  padding: auto;
-  border-radius: auto;
-  margin-bottom: auto;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: auto;
-}
-
-.empty-state {
-  background-color: white;
-  padding: auto;
-  border-radius: auto;
-  text-align: center;
-  box-shadow: auto auto auto rgba(0,0,0,0.08);
-}
-
-.empty-title {
-  font-size: auto;
-  font-weight: auto;
-  color: #1e293b;
-  margin-bottom: auto;
-}
-
-.empty-text {
-  color: #64748b;
-  margin-bottom: auto;
-}
-
-.button {
-  padding: auto auto;
-  background-color: #6366f1;
-  color: white;
-  border: none;
-  border-radius: auto;
-  font-size: auto;
-  font-weight: auto;
-  cursor: pointer;
-}
-
-.button-disabled {
-  padding: auto auto;
-  background-color: #a5b4fc;
-  color: white;
-  border: none;
-  border-radius: auto;
-  font-size: auto;
-  font-weight: auto;
-  cursor: not-allowed;
-}
-
-.match-list {
-  display: flex;
-  flex-direction: column;
-  gap: auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .match-card {
-  background-color: white;
-  padding: auto;
-  border-radius: auto;
-  box-shadow: auto auto auto rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: auto;
+.title {
+    font-size: 2rem;
+    font-weight: 700;
 }
 
-.rank {
-  font-size: auto;
-  font-weight: auto;
-  color: #94a3b8;
+.container {
+    padding: 1rem;
 }
 
-.score-badge {
-  color: white;
-  padding: auto auto;
-  border-radius: auto;
-  font-size: auto;
-  font-weight: auto;
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.company-name {
-  font-size: auto;
-  font-weight: auto;
-  color: #1e293b;
-  margin-bottom: auto;
-}
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-.info-row {
-  display: flex;
-  gap: auto;
-  flex-wrap: wrap;
-  margin-bottom: auto;
-}
+    .title {
+        font-size: 1.5rem;
+    }
 
-.info-tag {
-  background-color: #f1f5f9;
-  padding: auto auto;
-  border-radius: auto;
-  font-size: auto;
-  color: #475569;
-  display: inline-block;
-  margin-bottom: auto;
-}
-
-.email {
-  color: #6366f1;
-  font-size: auto;
-  margin-bottom: auto;
-}
-
-.details-box {
-  background-color: #f8fafc;
-  padding: auto;
-  border-radius: auto;
-  margin-top: auto;
-}
-
-.details-title {
-  font-weight: auto;
-  color: #374151;
-  margin-bottom: auto;
-  font-size: auto;
-}
-
-.details-list {
-  list-style: none;
-  padding: auto;
-  display: flex;
-  flex-direction: column;
-  gap: auto;
-}
-
-.detail-item {
-  font-size: auto;
-  color: #475569;
-}
-
-.loading {
-  min-height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: auto;
-  color: #64748b;
-}
-
-.contact-action {
-  margin-top: auto;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.contact-message {
-  margin-top: auto;
-  color: #16a34a;
-  font-size: auto;
-  font-weight: auto;
+    .info-row {
+        flex-direction: column;
+    }
 }
