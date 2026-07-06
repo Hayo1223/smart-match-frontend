@@ -1,11 +1,11 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box, auto;
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif, auto;
   background-color: #f8fafc;
   color: #1e293b;
 }
