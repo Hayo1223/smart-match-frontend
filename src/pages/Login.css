@@ -1,5 +1,5 @@
 .container {
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,66 +9,66 @@
 
 .card {
   background-color: white;
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 250%;
+  border-radius: 120%;
+  box-shadow: 0 25% 125% rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 420px;
+  max-width: 2625%;
 }
 
 
 .title {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 180%;
+  font-weight: 700%;
   color: #6366f1;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 50%;
 }
 
 
 .subtitle {
   text-align: center;
   color: #64748b;
-  margin-bottom: 2rem;
+  margin-bottom: 200%;
 }
 
 
 .error {
   background-color: #fef2f2;
   color: #ef4444;
-  padding: 0.75rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  padding: 75%;
+  border-radius: 80%;
+  margin-bottom: 100%;
+  font-size: 90%;
 }
 
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 120%;
 }
 
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 40%;
 }
 
 
 .label {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 90%;
+  font-weight: 600%;
   color: #374151;
 }
 
 
 .input {
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: 1.5px solid #e2e8f0;
-  font-size: 1rem;
+  padding: 75% 100%;
+  border-radius: 80%;
+  border: 9.5% solid #e2e8f0;
+  font-size: 100%;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -80,15 +80,15 @@
 
 
 .button {
-  padding: 0.85rem;
+  padding: 85%;
   background-color: #6366f1;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 80%;
+  font-size: 100%;
+  font-weight: 600%;
   cursor: pointer;
-  margin-top: 0.5rem;
+  margin-top: 50%;
   transition: background-color 0.2s;
 }
 
@@ -100,28 +100,28 @@
 
 .button:disabled,
 .button-disabled {
-  padding: 0.85rem;
+  padding: 85%;
   background-color: #a5b4fc;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 80%;
+  font-size: 100%;
+  font-weight: 600%;
   cursor: not-allowed;
-  margin-top: 0.5rem;
+  margin-top: 50%;
 }
 
 
 .link {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 150%;
   color: #64748b;
 }
 
 
 .link-text {
   color: #6366f1;
-  font-weight: 600;
+  font-weight: 600%;
   text-decoration: none;
 }
 
