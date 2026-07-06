@@ -14,12 +14,13 @@ function Profile() {
 
   const [agriculteurForm, setAgriculteurForm] = useState({
     nom: '', prenom: '', localisation: '',
-    available: true, numeroAgriculmobile: '', numeroAgriculwhatsapp: '', produit: '', genre: ''
+    available: true, numeroAgriculmobile: '', numeroAgriculwhatsapp: '', produit: '', genre: '',
+    age: ''
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
     nomC: '', PrenomC: '', localisation: '', numeroMobile: '', numeroWhatsapp: '',
-    demande: '', genre: '', metier: ''
+    demande: '', genre: '', metier: '', age: ''
   })
 
   
@@ -50,7 +51,8 @@ function Profile() {
         numeroAgriculmobile: p.numeroAgriculmobile || '',   
         numeroAgriculwhatsapp: p.numeroAgriculwhatsapp || '', 
         produit: Array.isArray(p.produit) ? p.produit.join(', ') : p.produit || '',  
-        genre: p.genre || ''                          
+        genre: p.genre || '',                          
+        age: p.age || ''
       })
     } else {
       setConsommateurCommercantForm({
@@ -61,7 +63,8 @@ function Profile() {
         numeroWhatsapp: p.numeroWhatsapp || '',        
         demande: Array.isArray(p.demande) ? p.demande.join(', ') : p.demande || '',
         genre: p.genre || '',                          
-        metier: p.metier || ''                         
+        metier: p.metier || '',
+        age: p.age || ''
       })
     }
 
@@ -119,7 +122,8 @@ function Profile() {
           numeroAgriculmobile: agriculteurForm.numeroAgriculmobile.split(',').map(s => s.trim()).filter(Boolean),
           numeroAgriculwhatsapp: agriculteurForm.numeroAgriculwhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           produit: agriculteurForm.produit.split(',').map(s => s.trim()).filter(Boolean),
-          genre: agriculteurForm.genre.split(',').map(s => s.trim()).filter(Boolean)
+          genre: agriculteurForm.genre.split(',').map(s => s.trim()).filter(Boolean),
+          age: agriculteurForm.age || ''
         }
       } else {
         data = {
@@ -129,7 +133,8 @@ function Profile() {
           numeroMobile: consommateurCommercantForm.numeroMobile.split(',').map(s => s.trim()).filter(Boolean),
           numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp.split(',').map(s => s.trim()).filter(Boolean),
           genre: consommateurCommercantForm.genre.split(',').map(s => s.trim()).filter(Boolean),
-          metier: consommateurCommercantForm.metier.split(',').map(s => s.trim()).filter(Boolean)
+          metier: consommateurCommercantForm.metier.split(',').map(s => s.trim()).filter(Boolean),
+          age: consommateurCommercantForm.age || ''
         }
       }
 
@@ -229,6 +234,12 @@ function Profile() {
               </select>
             </div>
             <div className="field">
+              <label className="label">Âge</label>
+              <input className="input" value={agriculteurForm.age}
+                onChange={e => setAgriculteurForm({...agriculteurForm, age: e.target.value})}
+                placeholder="25" type="number" min="0" required />
+            </div>
+            <div className="field">
               <label className="checkbox-label">
                 <input type="checkbox" checked={agriculteurForm.available}
                   onChange={e => setAgriculteurForm({...agriculteurForm, available: e.target.checked})} />
@@ -296,6 +307,12 @@ function Profile() {
                 <option value="Feminin">Féminin</option>
                 <option value="Masculin">Masculin</option>
               </select>
+            </div>
+            <div className="field">
+              <label className="label">Âge</label>
+              <input className="input" value={consommateurCommercantForm.age}
+                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
+                placeholder="25" type="number" min="0" required />
             </div>
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
