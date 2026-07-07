@@ -9,6 +9,7 @@ function Profile() {
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [suppressionSuccess, setSuppressionSuccess] = useState(false)
   const [success, setSuccess] = useState('')
   const [error, setError] = useState('')
 
@@ -186,6 +187,7 @@ function Profile() {
 
         {success && <div className="success">{success}</div>}
         {error && <div className="error">{error}</div>}
+        {suppressionSuccess && <div className="success">{suppressionSuccess}</div>}
 
         {/* Formulaire agriculteur */}
         {user.role === 'Agriculteur' && (
@@ -252,6 +254,9 @@ function Profile() {
             </div>
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
+            </button>
+            <button type="submit" className={suppressionSuccess ? "button-disabled" : "button"} onClick={handleDeleteProfile}>
+              {suppressionSuccess ? 'Suppression...' : 'Supprimer le profil'}
             </button>
           </form>
         )}
@@ -320,6 +325,9 @@ function Profile() {
             </div>
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
+            </button>
+            <button type="submit" className={suppressionSuccess ? "button-disabled" : "button"} onClick={handleDeleteProfile}>
+              {suppressionSuccess ? 'Suppression...' : 'Supprimer le profil'}
             </button>
           </form>
         )}
