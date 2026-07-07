@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile } from '../services/api'
+import { deleteprofile } from '../services/api'
 import './Profile.css'
 
 function Profile() {
@@ -59,7 +60,7 @@ function Profile() {
       setConsommateurCommercantForm({
         nomC: p.nomC || '',
         PrenomC: p.prenom || '',                      
-        localisationC: p.localisation || '',            
+        localisationC: p.localisationC || '',            
         numeroMobile: p.numeroMobile || '',            
         numeroWhatsapp: p.numeroWhatsapp || '',        
         demande: Array.isArray(p.demande) ? p.demande.join(', ') : p.demande || '',
@@ -134,7 +135,7 @@ function Profile() {
            nomC: consommateurCommercantForm.nomC,
            prenomC: consommateurCommercantForm.PrenomC,
           demande: consommateurCommercantForm.demande.split(',').map(s => s.trim()).filter(Boolean),
-          localisationC: consommateurCommercantForm.localisation,
+          localisationC: consommateurCommercantForm.localisationC,
           numeroMobile: consommateurCommercantForm.numeroMobile,
           numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp,
           genre: consommateurCommercantForm.genre,
@@ -157,6 +158,25 @@ function Profile() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     navigate('/')
+  }
+
+  const handleDeleteProfile = async (e) => {
+    e.preventDefault()
+    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')
+    if (!confirmed) return
+    setSaving(true)
+    setError('')
+    setSuppressionSuccess('Suppression en cours...')
+    try {
+      await deleteProfile()
+      setSuppressionSuccess('Profil supprimé avec succès !')
+      if (draftKey) localStorage.removeItem(draftKey)
+    } catch (err) {
+      setError(err.response?.data?.error || 'Erreur lors de la suppression')
+    } finally {
+      setSuppressionSuccess(false)
+      setSaving(false)
+    }
   }
 
   if (loading || !user) return <div className="loading">Chargement...</div>
@@ -255,7 +275,7 @@ function Profile() {
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
-            <button type="submit" className={suppressionSuccess ? "button-disabled" : "button"} onClick={handleDeleteProfile}>
+            <button type="button" className={suppressionSuccess ? "delete-button" : "button"} onClick={handleDeleteProfile}>
               {suppressionSuccess ? 'Suppression...' : 'Supprimer le profil'}
             </button>
           </form>
@@ -285,8 +305,8 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
-                <input className="input" value={consommateurCommercantForm.localisation}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisation: e.target.value})}
+                <input className="input" value={consommateurCommercantForm.localisationC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}
                   placeholder="Casablanca, Maroc" required />
               </div>
               <div className="field">
@@ -326,7 +346,7 @@ function Profile() {
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
-            <button type="submit" className={suppressionSuccess ? "button-disabled" : "button"} onClick={handleDeleteProfile}>
+            <button type="button" className={suppressionSuccess ? "delete-button" : "button"} onClick={handleDeleteProfile}>
               {suppressionSuccess ? 'Suppression...' : 'Supprimer le profil'}
             </button>
           </form>

@@ -17,5 +17,6 @@ export const login = (data) => api.post('/auth/login', data)
 export const getProfile = () => api.get('/profile')
 export const upsertProfile = (data) => api.post('/profile', data)
 export const getMatches = () => api.get('/matching')
+export const deleteProfile = () => api.delete('/profile')
 
 export default api
