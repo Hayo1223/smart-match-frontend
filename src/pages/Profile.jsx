@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getProfile, upsertProfile } from '../services/api'
-import { deleteProfile } from '../services/api'
+import { getProfile, upsertProfile, deleteProfile } from '../services/api'
 import './Profile.css'
 
 function Profile() {
@@ -10,7 +9,7 @@ function Profile() {
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [suppressionSuccess, setSuppressionSuccess] = useState(false)
+  const [suppressionSuccess, setSuppressionSuccess] = useState('')
   const [success, setSuccess] = useState('')
   const [error, setError] = useState('')
 
@@ -160,24 +159,27 @@ function Profile() {
     navigate('/')
   }
 
-  const handleDeleteProfile = async (e) => {
-    e.preventDefault()
-    const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')
-    if (!confirmed) return
-    setSaving(true)
-    setError('')
-    setSuppressionSuccess('Suppression en cours...')
-    try {
-      await deleteProfile()
-      setSuppressionSuccess('Profil supprimé avec succès !')
-      if (draftKey) localStorage.removeItem(draftKey)
-    } catch (err) {
-      setError(err.response?.data?.error || 'Erreur lors de la suppression')
-    } finally {
-      setSuppressionSuccess(false)
-      setSaving(false)
-    }
+ const handleDeleteProfile = async (e) => {
+  e.preventDefault()
+  const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')
+  if (!confirmed) return
+
+  setSaving(true)
+  setError('')
+  setSuppressionSuccess('Suppression en cours...')
+
+  try {
+    await deleteProfile()
+    setSuppressionSuccess('Profil supprimé avec succès !')
+    if (draftKey) localStorage.removeItem(draftKey)
+    setTimeout(() => navigate('/'), 2000) 
+  } catch (err) {
+    setError(err.response?.data?.error || 'Erreur lors de la suppression')
+    setSuppressionSuccess('')
+  } finally {
+    setSaving(false)
   }
+}
 
   if (loading || !user) return <div className="loading">Chargement...</div>
 
@@ -227,9 +229,22 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
-                <input className="input" value={agriculteurForm.localisation}
-                  onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}
-                  placeholder="Casablanca, Maroc" required />
+                <select className="input" value={agriculteurForm.localisation}
+                   onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}>
+                   <option value="">-- Sélectionner --</option>
+                   <option value="Casablanca">Casablanca</option>
+                   <option value="Rabat">Rabat</option>
+                   <option value="Marrakech">Marrakech</option>
+                   <option value="Fès">Fès</option>
+                   <option value="Tanger">Tanger</option>
+                   <option value="Agadir">Agadir</option>
+                   <option value="Meknès">Meknès</option>
+                   <option value="Oujda">Oujda</option>
+                   <option value="Kénitra">Kénitra</option>
+                   <option value="Tétouan">Tétouan</option>
+                   <option value="Béni Mellal">Béni Mellal</option>
+                   <option value="El Jadida">El Jadida</option>
+                 </select>
               </div>
               <div className="field">
                 <label className="label">Produit (séparées par des virgules)</label>
@@ -275,8 +290,8 @@ function Profile() {
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
-            <button type="button" className={suppressionSuccess ? "delete-button" : "button"} onClick={handleDeleteProfile}>
-              {suppressionSuccess ? 'Suppression...' : 'Supprimer le profil'}
+            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile}>
+              {saving ? 'Suppression...' : 'Supprimer le profil'}
             </button>
           </form>
         )}
@@ -305,9 +320,22 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
-                <input className="input" value={consommateurCommercantForm.localisationC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}
-                  placeholder="Casablanca, Maroc" required />
+                 <select className="input" value={consommateurCommercantForm.localisationC}
+                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}>
+                   <option value="">-- Sélectionner --</option>
+                   <option value="Casablanca">Casablanca</option>
+                   <option value="Rabat">Rabat</option>
+                   <option value="Marrakech">Marrakech</option>
+                   <option value="Fès">Fès</option>
+                   <option value="Tanger">Tanger</option>
+                   <option value="Agadir">Agadir</option>
+                   <option value="Meknès">Meknès</option>
+                   <option value="Oujda">Oujda</option>
+                   <option value="Kénitra">Kénitra</option>
+                   <option value="Tétouan">Tétouan</option>
+                   <option value="Béni Mellal">Béni Mellal</option>
+                   <option value="El Jadida">El Jadida</option>
+                 </select>
               </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
@@ -346,8 +374,8 @@ function Profile() {
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
-            <button type="button" className={suppressionSuccess ? "delete-button" : "button"} onClick={handleDeleteProfile}>
-              {suppressionSuccess ? 'Suppression...' : 'Supprimer le profil'}
+            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile}>
+              {saving ? 'Suppression...' : 'Supprimer le profil'}
             </button>
           </form>
         )}
