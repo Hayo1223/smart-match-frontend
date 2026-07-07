@@ -367,9 +367,9 @@ function Profile() {
                            checked={consommateurCommercantForm.demande.includes(produit)}
                            onChange={e => {
                            if (e.target.checked) {
-                           setConsommateurCommercantForm({...consommateurCommercantForm, demande: [...demandes, produit]})
+                           setConsommateurCommercantForm({...consommateurCommercantForm, demande: [...consommateurCommercantForm.demande, produit]})
                            } else {
-                             setConsommateurCommercantForm({...consommateurCommercantForm, demande: demandes.filter(p => p !== produit)})
+                             setConsommateurCommercantForm({...consommateurCommercantForm, demande: consommateurCommercantForm.demande.filter(p => p !== produit)})
                            }
                             }}
                          />
@@ -422,4 +422,4 @@ function Profile() {
   )
 }
 
-export default profile
+export default Profile
