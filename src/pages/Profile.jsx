@@ -260,9 +260,8 @@ function Profile() {
                            value={produit}
                            checked={agriculteurForm.produit.includes(produit)}
                            onChange={e => {
-                           const produits = agriculteurForm.produit
                            if (e.target.checked) {
-                           setAgriculteurForm({...agriculteurForm, produit: [...produits, produit]})
+                           setAgriculteurForm({...agriculteurForm, produit: [...agriculteurForm.produit, produit]})
                            } else {
                              setAgriculteurForm({...agriculteurForm, produit: produits.filter(p => p !== produit)})
                            }
@@ -320,120 +319,106 @@ function Profile() {
         {/* Formulaire consommateur/Commerçant */}
 
         {user.role === 'ConsommateurCommercant' && (
-      <form onSubmit={handleSubmit} className="form">
-
-         <div className="field">
-           <label className="label">Nom</label>
-           <input className="input" value={consommateurCommercantForm.nomC}
-            onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nomC: e.target.value})}
-            placeholder="nom" required />
-         </div>
-         <div className="field">
-           <label className="label">Prénom</label>
-           <input className="input" value={consommateurCommercantForm.PrenomC}
-            onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, PrenomC: e.target.value})}
-           placeholder="prénom" required />
-         </div>
-
-         <div className="grid">
-           <div className="field">
-             <label className="label">Métier</label>
-               <input className="input" value={consommateurCommercantForm.metier}
-                 onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, metier: e.target.value})}
-                 placeholder="Restaurateur, Épicier..." required />
+          <form onSubmit={handleSubmit} className="form">
+            <div className = 'grid'>
+              <div className="field">
+                <label className="label">Nom</label>
+                <input className="input" value={consommateurCommercantForm.nomC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nomC: e.target.value})}
+                  placeholder="nom" required />
+              </div>
+              <div className="field">
+                <label className="label">Prénom</label>
+                <input className="input" value={consommateurCommercantForm.prenomC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, prenomC: e.target.value})}
+                  placeholder="prénom" required />
+              </div>
+              <div className="field">
+                <label className="label">Localisation</label>
+                <select className="input" value={consommateurCommercantForm.localisationC}
+                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}>
+                   <option value="">-- Sélectionner --</option>
+                   <option value="Casablanca">Casablanca</option>
+                   <option value="Rabat">Rabat</option>
+                   <option value="Marrakech">Marrakech</option>
+                   <option value="Fès">Fès</option>
+                   <option value="Tanger">Tanger</option>
+                   <option value="Agadir">Agadir</option>
+                   <option value="Meknès">Meknès</option>
+                   <option value="Oujda">Oujda</option>
+                   <option value="Kénitra">Kénitra</option>
+                   <option value="Tétouan">Tétouan</option>
+                   <option value="Béni Mellal">Béni Mellal</option>
+                   <option value="El Jadida">El Jadida</option>
+                 </select>
+              </div>
+              <div className="field">
+                 <label className="label">Produits recherchés</label>
+                   <div className="checkbox-group">
+                     {['Tomates', 'Oranges', 'Blé', 'Pommes de terre', 'Oignons',
+                      'Carottes', 'Courgettes', 'Aubergines', 'Poivrons', 'Concombres',
+                       'Pastèques', 'Melons', 'Raisins', 'Figues', 'Olives',
+                       'Dattes', 'Amandes', 'Grenades', 'Citrons', 'Mandarines'
+                      ].map(produit => (
+                       <label key={produit} className="checkbox-item">
+                        <input
+                           type="checkbox"
+                           value={produit}
+                           checked={consommateurCommercantForm.demande.includes(produit)}
+                           onChange={e => {
+                           if (e.target.checked) {
+                           setConsommateurCommercantForm({...consommateurCommercantForm, demande: [...demandes, produit]})
+                           } else {
+                             setConsommateurCommercantForm({...consommateurCommercantForm, demande: demandes.filter(p => p !== produit)})
+                           }
+                            }}
+                         />
+                           {produit}
+                       </label>
+                      ))}
+                    </div>
+                </div>
+              <div className="field">
+                <label className="label">Numéro mobile</label>
+                <input type="tel" className="input" value={consommateurCommercantForm.numeroMobile}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroMobile: e.target.value})}
+                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
+              </div>
+              <div className="field">
+                <label className="label">Numéro WhatsApp</label>
+                <input type="tel" className="input" value={consommateurCommercantForm.numeroWatsapp}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWatsapp: e.target.value})}
+                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
+              </div>
             </div>
-          <div className="field">
-        <label className="label">Localisation</label>
-        <select className="input" value={consommateurCommercantForm.localisationC}
-          onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}>
-          <option value="">-- Sélectionner --</option>
-          <option value="Casablanca">Casablanca</option>
-          <option value="Rabat">Rabat</option>
-          <option value="Marrakech">Marrakech</option>
-          <option value="Fès">Fès</option>
-          <option value="Tanger">Tanger</option>
-          <option value="Agadir">Agadir</option>
-          <option value="Meknès">Meknès</option>
-          <option value="Oujda">Oujda</option>
-          <option value="Kénitra">Kénitra</option>
-          <option value="Tétouan">Tétouan</option>
-          <option value="Béni Mellal">Béni Mellal</option>
-          <option value="El Jadida">El Jadida</option>
-        </select>
-      </div>
-      <div className="field">
-        <label className="label">Numéro mobile</label>
-        <input type="tel" className="input" value={consommateurCommercantForm.numeroMobile}
-          onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroMobile: e.target.value})}
-          placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
-      </div>
-      <div className="field">
-        <label className="label">Numéro WhatsApp</label>
-        <input type="tel" className="input" value={consommateurCommercantForm.numeroWhatsapp}
-          onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWhatsapp: e.target.value})}
-          placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
-      </div>
-    </div>
-
-    <div className="field">
-      <label className="label">Produits recherchés</label>
-      <div className="checkbox-group">
-        {['Tomates', 'Oranges', 'Blé', 'Pommes de terre', 'Oignons',
-          'Carottes', 'Courgettes', 'Aubergines', 'Poivrons', 'Concombres',
-          'Pastèques', 'Melons', 'Raisins', 'Figues', 'Olives',
-          'Dattes', 'Amandes', 'Grenades', 'Citrons', 'Mandarines'
-        ].map(produit => (
-          <label key={produit} className="checkbox-item">
-            <input
-              type="checkbox"
-              value={produit}
-              checked={consommateurCommercantForm.demande.includes(produit)}
-              onChange={e => {
-                const demandes = consommateurCommercantForm.demande
-                if (e.target.checked) {
-                  setConsommateurCommercantForm({...consommateurCommercantForm, demande: [...demandes, produit]})
-                } else {
-                  setConsommateurCommercantForm({...consommateurCommercantForm, demande: demandes.filter(p => p !== produit)})
-                }
-              }}
-            />
-            {produit}
-          </label>
-        ))}
-      </div>
-    </div>
-
-    <div className="field">
-      <label className="label">Genre</label>
-      <select className="input" value={consommateurCommercantForm.genre}
-        onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
-        <option value="">-- Sélectionner --</option>
-        <option value="Feminin">Féminin</option>
-        <option value="Masculin">Masculin</option>
-      </select>
-    </div>
-
-    <div className="field">
-      <label className="label">Âge</label>
-      <input className="input" value={consommateurCommercantForm.age}
-        onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
-        placeholder="25" type="number" min="0" required />
-    </div>
-
-    <button type="submit" className={saving ? "button-disabled" : "button"} disabled={saving}>
-      {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
-    </button>
-
-    <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile} disabled={saving}>
-      {saving ? 'Suppression...' : 'Supprimer le profil'}
-    </button>
-
-  </form>
-)}
+            <div className="field">
+              <label className="label">Genre</label>
+              <select className="input" value={consommateurCommercantForm.genre}
+                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
+                <option value="">-- Sélectionner --</option>
+                <option value="Feminin">Féminin</option>
+                <option value="Masculin">Masculin</option>
+              </select>
+            </div>
+            <div className="field">
+              <label className="label">Âge</label>
+              <input className="input" value={consommateurCommercantForm.age}
+                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
+                placeholder="25" type="number" min="0" required />
+            </div>
+            <button type="submit" className={saving ? "button-disabled" : "button"}>
+              {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
+            </button>
+            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile}>
+              {saving ? 'Suppression...' : 'Supprimer le profil'}
+            </button>
+          </form>
+        )}
 
 
-</div>
-</div>
+   </div>
+   </div>
+
   )
 }
 
