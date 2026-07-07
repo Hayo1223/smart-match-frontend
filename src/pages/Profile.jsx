@@ -298,7 +298,7 @@ function Profile() {
               <label className="label">Âge</label>
               <input className="input" value={agriculteurForm.age}
                 onChange={e => setAgriculteurForm({...agriculteurForm, age: e.target.value})}
-                placeholder="25" type="number" min="0" required />
+                placeholder="25" type="number" min="5" max="200" required />
             </div>
             <div className="field">
               <label className="checkbox-label">
@@ -404,7 +404,7 @@ function Profile() {
               <label className="label">Âge</label>
               <input className="input" value={consommateurCommercantForm.age}
                 onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
-                placeholder="25" type="number" min="0" required />
+                placeholder="25" type="number" min="5" max="200" required />
             </div>
             <button type="submit" className={saving ? "button-disabled" : "button"}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
