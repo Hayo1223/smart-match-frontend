@@ -263,9 +263,9 @@ function Profile() {
                            if (e.target.checked) {
                            setAgriculteurForm({...agriculteurForm, produit: [...agriculteurForm.produit, produit]})
                            } else {
-                             setAgriculteurForm({...agriculteurForm, produit: produits.filter(p => p !== produit)})
+                             setAgriculteurForm({...agriculteurForm, produit: agriculteurForm.produit.filter(p => p !== produit)})
                            }
-                            }}
+                            }}                           
                          />
                            {produit}
                        </label>
