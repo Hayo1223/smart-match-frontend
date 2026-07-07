@@ -160,6 +160,27 @@
   background-color: #dc2626;
 }
 
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #222;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.checkbox-item input {
+  width: 18px;
+  height: 18px;
+}
+
 @media (max-width: 768px) {
   .card {
     padding: 1.5rem;
