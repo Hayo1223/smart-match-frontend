@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile } from '../services/api'
-import { deleteprofile } from '../services/api'
+import { deleteProfile } from '../services/api'
 import './Profile.css'
 
 function Profile() {
