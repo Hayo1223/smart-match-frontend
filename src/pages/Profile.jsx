@@ -70,7 +70,7 @@ function Profile() {
     produit: [], genre: '', age: ''
   })
 
-  const [consommateurForm, setConsommateurForm] = useState({
+  const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
     nomC: '', PrenomC: '', localisationC: '', numeroMobile: '',
     numeroWhatsapp: '', demande: [], genre: '', metier: '', age: ''
   })
@@ -103,7 +103,7 @@ function Profile() {
         })
         setPhotoPreview(p.photoUrl || null)
       } else {
-        setConsommateurForm({
+        setConsommateurCommercantForm({
           nomC: p.nomC || '',
           PrenomC: p.prenomC || '',
           localisationC: p.localisationC || '',
@@ -135,7 +135,7 @@ function Profile() {
       if (user.role === 'Agriculteur') {
         setAgriculteurForm(prev => ({ ...prev, ...parsed }))
       } else {
-        setConsommateurForm(prev => ({ ...prev, ...parsed }))
+        setConsommateurCommercantForm(prev => ({ ...prev, ...parsed }))
       }
     } catch {
       setError('Erreur lors du chargement de l\'ébauche')
@@ -146,12 +146,12 @@ function Profile() {
 
   useEffect(() => {
     if (!draftKey || loading || !user) return
-    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurForm
+    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurCommercantForm
     const timeout = setTimeout(() => {
       localStorage.setItem(draftKey, JSON.stringify(formToSave))
     }, 500)
     return () => clearTimeout(timeout)
-  }, [agriculteurForm, consommateurForm, draftKey, loading, user])
+  }, [agriculteurForm, consommateurCommercantForm, draftKey, loading, user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -165,15 +165,15 @@ function Profile() {
         data = { ...agriculteurForm }
       } else {
         data = {
-          nomC: consommateurForm.nomC,
-          prenomC: consommateurForm.PrenomC,
-          localisationC: consommateurForm.localisationC,
-          numeroMobile: consommateurForm.numeroMobile,
-          numeroWhatsapp: consommateurForm.numeroWhatsapp,
-          demande: consommateurForm.demande,
-          genre: consommateurForm.genre,
-          metier: consommateurForm.metier,
-          age: consommateurForm.age
+          nomC: consommateurCommercantForm.nomC,
+          prenomC: consommateurCommercantForm.PrenomC,
+          localisationC: consommateurCommercantForm.localisationC,
+          numeroMobile: consommateurCommercantForm.numeroMobile,
+          numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp,
+          demande: consommateurCommercantForm.demande,
+          genre: consommateurCommercantForm.genre,
+          metier: consommateurCommercantForm.metier,
+          age: consommateurCommercantForm.age
         }
       }
 
@@ -195,8 +195,7 @@ function Profile() {
     reader.readAsDataURL(file)
     setUploadingPhoto(true)
     setError('')
-    const tailleMax = 5 * 1024 * 1024; // 5 Mo
-
+    const tailleMax = 5 * 1024 * 1024; 
     if (file.size > tailleMax) {
     alert("L'image ne doit pas dépasser 5 Mo.");
     return;
@@ -264,7 +263,6 @@ function Profile() {
           />
         ) : (
           <div className="photo-placeholder">
-            <span>Ajouter</span>
             <p>Aucune photo sélectionnée</p>
           </div>
         )}
@@ -374,15 +372,34 @@ function Profile() {
                 />
               </div>
               <div className="field">
-                <label className="label">Numéro mobile</label>
-                <input type="tel" className="input" value={agriculteurForm.numeroAgriculmobile}
-                  onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculmobile: e.target.value})}
-                  placeholder="+212-600000000" pattern="\+?[0-9\s-]{9,17}$" required />
-              </div>
+                  <label className="label">Numéro mobile</label>
+                    <input  type="tel"    className="input"
+                        value={agriculteurForm.numeroAgriculmobile}
+                            onChange={(e) => { const digits = e.target.value
+                                      .replace("+212-", "")
+                                      .replace(/\D/g, "")
+                                      .slice(0, 9);
+                                      setAgriculteurForm({
+                                      ...agriculteurForm,
+                                      numeroAgriculmobile: `+212-${digits}`,
+                                     });
+                                        }}
+                                          placeholder="+212-600000000"
+                                          pattern="^\+212-[5-7][0-9]{8}$"
+                                          required/>
+                </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={agriculteurForm.numeroAgriculwhatsapp}
-                  onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculwhatsapp: e.target.value})}
+                  onChange={e => {const digits = e.target.value
+                                      .replace("+212-", "")
+                                      .replace(/\D/g, "")
+                                      .slice(0, 9);
+                                      setAgriculteurForm({
+                                      ...agriculteurForm,
+                                      numeroAgriculwhatsapp: `+212-${digits}`,
+                                     });
+                                        }}
                   placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
@@ -439,45 +456,53 @@ function Profile() {
             <div className="grid">
               <div className="field">
                 <label className="label">Nom</label>
-                <input className="input" value={consommateurForm.nomC}
-                  onChange={e => setConsommateurForm({...consommateurForm, nomC: e.target.value})}
+                <input className="input" value={consommateurCommercantForm.nomC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nomC: e.target.value})}
                   placeholder="Nom" required />
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
-                <input className="input" value={consommateurForm.PrenomC}
-                  onChange={e => setConsommateurForm({...consommateurForm, PrenomC: e.target.value})}
+                <input className="input" value={consommateurCommercantForm.PrenomC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, PrenomC: e.target.value})}
                   placeholder="Prénom" required />
               </div>
               <div className="field">
                 <label className="label">Métier</label>
-                <input className="input" value={consommateurForm.metier}
-                  onChange={e => setConsommateurForm({...consommateurForm, metier: e.target.value})}
+                <input className="input" value={consommateurCommercantForm.metier}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, metier: e.target.value})}
                   placeholder="Restaurateur, Épicier..." required />
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
                 <SelectVilles
-                  value={consommateurForm.localisationC}
-                  onChange={e => setConsommateurForm({...consommateurForm, localisationC: e.target.value})}
+                  value={consommateurCommercantForm.localisationC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}
                 />
               </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
-                <input type="tel" className="input" value={consommateurForm.numeroMobile}
-                  onChange={e => setConsommateurForm({...consommateurForm, numeroMobile: e.target.value})}
+                <input type="tel" className="input" value={consommateurCommercantForm.numeroMobile}
+                  onChange={e => {const digits = e.target.value
+                                      .replace("+212-", "")
+                                      .replace(/\D/g, "")
+                                      .slice(0, 9);
+                                      setConsommateurCommercantForm({
+                                        ...consommateurCommercantForm,
+                                        numeroMobile: `+212-${digits}`,
+                                      });
+                                    }}
                   placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
-                <input type="tel" className="input" value={consommateurForm.numeroWhatsapp}
-                  onChange={e => setConsommateurForm({...consommateurForm, numeroWhatsapp: e.target.value})}
+                <input type="tel" className="input" value={consommateurCommercantForm.numeroWhatsapp}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWhatsapp: e.target.value})}
                   placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
                 <label className="label">Genre</label>
-                <select className="input" value={consommateurForm.genre}
-                  onChange={e => setConsommateurForm({...consommateurForm, genre: e.target.value})}>
+                <select className="input" value={consommateurCommercantForm.genre}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
                   <option value="">-- Sélectionner --</option>
                   <option value="Feminin">Féminin</option>
                   <option value="Masculin">Masculin</option>
@@ -486,8 +511,8 @@ function Profile() {
               <div className="field">
                 <label className="label">Âge</label>
                 <input className="input" type="number" min="5" max="200"
-                  value={consommateurForm.age}
-                  onChange={e => setConsommateurForm({...consommateurForm, age: e.target.value})}
+                  value={consommateurCommercantForm.age}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
                   placeholder="25" required />
               </div>
             </div>
@@ -495,8 +520,8 @@ function Profile() {
             <div className="field">
               <label className="label">Produits recherchés</label>        
               <CheckboxProduits
-                selected={consommateurForm.demande}                
-                onToggle={(p) => toggleProduit(p, consommateurForm, setConsommateurForm, 'demande')}
+                selected={consommateurCommercantForm.demande}                
+                onToggle={(p) => toggleProduit(p, consommateurCommercantForm, setConsommateurCommercantForm, 'demande')}
               />
             </div>
 
