@@ -110,7 +110,10 @@ function Profile() {
           localisationC: p.localisationC || '',
           numeroMobile: p.numeroMobile || '+212-',
           numeroWhatsapp: p.numeroWhatsapp || '+212-',
-          demande: Array.isArray(p.demande) ? p.demande : [],
+          demande: Array.isArray(p.demande)
+            ? p.demande.map(item =>
+                    typeof item === "string" ? item : item.value
+                      ) : [],
           genre: p.genre || '',
           metier: p.metier || '',
           age: p.age || ''
