@@ -66,13 +66,13 @@ function Profile() {
 
   const [agriculteurForm, setAgriculteurForm] = useState({
     nom: '', prenom: '', localisation: '', available: true,
-    numeroAgriculmobile: '', numeroAgriculwhatsapp: '',
+    numeroAgriculmobile: '+212-', numeroAgriculwhatsapp: '+212-',
     produit: [], genre: '', age: ''
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrenomC: '', localisationC: '', numeroMobile: '',
-    numeroWhatsapp: '', demande: [], genre: '', metier: '', age: ''
+    nomC: '', PrenomC: '', localisationC: '', numeroMobile: '+212-',
+    numeroWhatsapp: '+212-', demande: [], genre: '', metier: '', age: ''
   })
 
   const draftKey = user ? `profileDraft_${user.id}_${user.role}` : null
@@ -95,8 +95,8 @@ function Profile() {
           prenom: p.prenom || '',
           localisation: p.localisation || '',
           available: p.available ?? true,
-          numeroAgriculmobile: p.numeroAgriculmobile || '',
-          numeroAgriculwhatsapp: p.numeroAgriculwhatsapp || '',
+          numeroAgriculmobile: p.numeroAgriculmobile || '+212-',
+          numeroAgriculwhatsapp: p.numeroAgriculwhatsapp || '+212-',
           produit: Array.isArray(p.produit) ? p.produit : [],
           genre: p.genre || '',
           age: p.age || ''
@@ -107,8 +107,8 @@ function Profile() {
           nomC: p.nomC || '',
           PrenomC: p.prenomC || '',
           localisationC: p.localisationC || '',
-          numeroMobile: p.numeroMobile || '',
-          numeroWhatsapp: p.numeroWhatsapp || '',
+          numeroMobile: p.numeroMobile || '+212-',
+          numeroWhatsapp: p.numeroWhatsapp || '+212-',
           demande: Array.isArray(p.demande) ? p.demande : [],
           genre: p.genre || '',
           metier: p.metier || '',
@@ -400,7 +400,9 @@ function Profile() {
                                       numeroAgriculwhatsapp: `+212-${digits}`,
                                      });
                                         }}
-                  placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
+                                          placeholder="+212-600000000"
+                                          pattern="^\+212-[5-7][0-9]{8}$"
+                                          required />
               </div>
               <div className="field">
                 <label className="label">Genre</label>
@@ -491,13 +493,15 @@ function Profile() {
                                         numeroMobile: `+212-${digits}`,
                                       });
                                     }}
-                  placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
+                                    placeholder="+212-600000000" 
+                                    pattern="^\+212-[5-7][0-9]{8}$" 
+                                    required />
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={consommateurCommercantForm.numeroWhatsapp}
                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWhatsapp: e.target.value})}
-                  placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
+                  placeholder="+212-600000000" pattern="^\+212-[5-7][0-9]{8}$" required />
               </div>
               <div className="field">
                 <label className="label">Genre</label>
