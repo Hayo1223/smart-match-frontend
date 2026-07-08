@@ -275,21 +275,30 @@ function Profile() {
     </select>
   )
 
-  const CheckboxProduits = ({ selected, onToggle }) => (
-    <div className="checkbox-group">
-      {PRODUITS.map(produit => (
-        <label key={produit} className="checkbox-item">
-          <input
-            type="checkbox"
-            value={produit}
-            checked={selected.includes(produit)}
-            onChange={() => onToggle(produit)}
-          />
-          {produit}
-        </label>
-      ))}
-    </div>
-  )
+ const CheckboxProduits = ({ selected, onToggle }) => (
+  <div className="checkbox-group">
+    {PRODUITS.map((produit) => (
+      <label key={produit.value} className="checkbox-item">
+
+        <input
+          type="checkbox"
+          checked={selected.includes(produit)}
+          onChange={() => onToggle(produit)}
+        />
+
+        <img
+          src={produit.Image}
+          alt={produit.label}
+          width="40"
+          height="40"
+        />
+
+        <span>{produit.label}</span>
+
+      </label>
+    ))}
+  </div>
+)
 
   if (loading || !user) return <div className="loading">Chargement...</div>
 

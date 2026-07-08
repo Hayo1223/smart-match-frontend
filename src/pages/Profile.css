@@ -167,13 +167,17 @@
   margin-top: 10px;
 }
 
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #222;
-  font-size: 15px;
-  cursor: pointer;
+.checkbox-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:8px 0;
+}
+
+.checkbox-item img{
+    width:40px;
+    height:40px;
+    object-fit:cover;
 }
 
 .checkbox-item input {
