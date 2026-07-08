@@ -271,8 +271,8 @@ function Profile() {
           <div className="header-buttons">
             {user.role === 'Agriculteur' && (
               <button onClick={() => navigate('/matching')} className="match-button">
-                Voir mes matchs ⚡
-              </button>
+                Voir mes matchs
+                              </button>
             )}
             <button onClick={handleLogout} className="logout-button">
               Déconnexion
@@ -340,6 +340,7 @@ function Profile() {
 
             <div className="field">
               <label className="label">Produits vendus</label>
+              <img src={agriculteurForm.photoUrl} alt="Photo de profil" className="photo-preview" />
               <CheckboxProduits
                 selected={agriculteurForm.produit}
                 onToggle={(p) => toggleProduit(p, agriculteurForm, setAgriculteurForm, 'produit')}
@@ -428,6 +429,7 @@ function Profile() {
 
             <div className="field">
               <label className="label">Produits recherchés</label>
+              <img src={consommateurForm.photoUrl} alt="Photo de profil" className="photo-preview" />
               <CheckboxProduits
                 selected={consommateurForm.demande}
                 onToggle={(p) => toggleProduit(p, consommateurForm, setConsommateurForm, 'demande')}
