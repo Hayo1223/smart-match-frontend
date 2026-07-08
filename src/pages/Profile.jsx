@@ -482,8 +482,8 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
-                <input className="input" value={consommateurCommercantForm.PrenomC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, PrenomC: e.target.value})}
+                <input className="input" value={consommateurCommercantForm.prenomC}
+                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, prenomC: e.target.value})}
                   placeholder="Prénom" required />
               </div>
               <div className="field">
@@ -518,8 +518,18 @@ function Profile() {
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={consommateurCommercantForm.numeroWhatsapp}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWhatsapp: e.target.value})}
-                  placeholder="+212-600000000" pattern="^\+212-[5-7][0-9]{8}$" required />
+                 onChange={e => {const digits = e.target.value
+                                      .replace("+212-", "")
+                                      .replace(/\D/g, "")
+                                      .slice(0, 9);
+                                      setConsommateurCommercantForm({
+                                        ...consommateurCommercantForm,
+                                        numeroWhatsapp: `+212-${digits}`,
+                                      });
+                                    }}
+                                    placeholder="+212-600000000" 
+                                    pattern="^\+212-[5-7][0-9]{8}$" 
+                                    required />
               </div>
               <div className="field">
                 <label className="label">Genre</label>
