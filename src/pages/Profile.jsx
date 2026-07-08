@@ -311,7 +311,7 @@ function Profile() {
           <div>
             <h1 className="title">Mon Profil</h1>
             <p className="subtitle">
-              {user.role === 'Agriculteur' ? '🌾 Agriculteur' : '🛒 Consommateur/Commerçant'} — {user.email}
+              {user.role === 'Agriculteur' ? 'Agriculteur' : 'Consommateur/Commerçant'} — {user.email}
             </p>
           </div>
           <div className="header-buttons">
