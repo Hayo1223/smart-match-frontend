@@ -194,7 +194,6 @@ function Profile() {
     const reader = new FileReader()
     reader.onloadend = () => setPhotoPreview(reader.result)
     reader.readAsDataURL(file)
-    setUploadingPhoto(true)
     setError('')
     const tailleMax = 5 * 1024 * 1024; 
     if (file.size > tailleMax) {
@@ -240,6 +239,8 @@ function Profile() {
 
   try {
     await deleteProfile();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
     if (draftKey) {
       localStorage.removeItem(draftKey);
