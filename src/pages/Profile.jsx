@@ -263,12 +263,12 @@ function Profile() {
 }
 
   const toggleProduit = (produit, form, setForm, field) => {
-    const current = form[field]
+    const value = produit.value;
     setForm({
       ...form,
-      [field]: current.includes(produit)
-        ? current.filter(p => p !== produit)
-        : [...current, produit]
+      [field]: form[field]?.includes(value)
+        ? form[field].filter(p => p !== value)
+        : [...(form[field] || []), value]
     })
   }
 
@@ -323,8 +323,8 @@ function Profile() {
 
         <input
           type="checkbox"
-          checked={selected.includes(produit)}
-          onChange={() => onToggle(produit)}
+          checked={selected.includes(produit.value)}
+          onChange={() => onToggle(produit, agriculteurForm, setAgriculteurForm, 'produits')}
         />
 
         <img
