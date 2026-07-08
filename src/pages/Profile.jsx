@@ -377,13 +377,13 @@ function Profile() {
                 <label className="label">Numéro mobile</label>
                 <input type="tel" className="input" value={agriculteurForm.numeroAgriculmobile}
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculmobile: e.target.value})}
-                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
+                  placeholder="+212-600000000" pattern="\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={agriculteurForm.numeroAgriculwhatsapp}
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculwhatsapp: e.target.value})}
-                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
+                  placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
                 <label className="label">Genre</label>
@@ -466,13 +466,13 @@ function Profile() {
                 <label className="label">Numéro mobile</label>
                 <input type="tel" className="input" value={consommateurForm.numeroMobile}
                   onChange={e => setConsommateurForm({...consommateurForm, numeroMobile: e.target.value})}
-                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
+                  placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={consommateurForm.numeroWhatsapp}
                   onChange={e => setConsommateurForm({...consommateurForm, numeroWhatsapp: e.target.value})}
-                  placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
+                  placeholder="+212-600000000" pattern="^\+?[0-9\s-]{9,17}$" required />
               </div>
               <div className="field">
                 <label className="label">Genre</label>
