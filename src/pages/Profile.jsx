@@ -191,6 +191,7 @@ function Profile() {
   const handlePhotoUpload = async (e) => {
     const file = e.target.files[0]
     if (!file) return
+    setUploadingPhoto(true)
     const reader = new FileReader()
     reader.onloadend = () => setPhotoPreview(reader.result)
     reader.readAsDataURL(file)
