@@ -319,23 +319,14 @@ function Profile() {
  const CheckboxProduits = ({ selected, onToggle }) => (
   <div className="checkbox-group">
     {PRODUITS.map((produit) => (
-      <label key={produit.value} className="checkbox-item">
-
+      <label key={produit.value} className={`checkbox-item ${selected.includes(produit.value) ? 'checkbox-item-selected' : ''}`}>
         <input
           type="checkbox"
           checked={selected.includes(produit.value)}
-          onChange={() => onToggle(produit, agriculteurForm, setAgriculteurForm, 'produits')}
+          onChange={() => onToggle(produit)}
         />
-
-        <img
-          src={produit.Image}
-          alt={produit.label}
-          width="40"
-          height="40"
-        />
-
+        <img src={produit.Image} alt={produit.label} width="40" height="40" />
         <span>{produit.label}</span>
-
       </label>
     ))}
   </div>
@@ -455,12 +446,13 @@ function Profile() {
             </div>
 
             <div className="field">
-              <label className="checkbox-label">
-                <input type="checkbox" checked={agriculteurForm.available}
-                  onChange={e => setAgriculteurForm({...agriculteurForm, available: e.target.checked})} />
-                {' '}Disponible ou vérifié
-              </label>
-            </div>
+                <label className="checkbox-label">
+                      <input    type="checkbox"
+                           checked={agriculteurForm.available}
+                            onChange={e => setAgriculteurForm({...agriculteurForm, available: e.target.checked})} />
+                                {' '}Disponible ou vérifié
+                  </label>
+             </div>
 
             <PhotoUpload />
             <small>Formats acceptés : JPG, PNG, WEBP (5 Mo maximum)</small>
@@ -552,7 +544,7 @@ function Profile() {
                 onToggle={(p) => toggleProduit(p, consommateurCommercantForm, setConsommateurCommercantForm, 'demande')}
               />
             </div>
-
+            
             <PhotoUpload />
             <small>Formats acceptés : JPG, PNG, WEBP (5 Mo maximum)</small>
 

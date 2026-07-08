@@ -185,6 +185,13 @@
   height: 18px;
 }
 
+.checkbox-item-selected {
+  background-color: #ede9fe;
+  border-color: #6366f1;
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
 .photo-upload-container {
   display: flex;
   align-items: center;
