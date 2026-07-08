@@ -180,6 +180,8 @@ function Profile() {
           age: consommateurCommercantForm.age
         }
       }
+      console.log("STATE =", consommateurCommercantForm.demande);
+      console.log("DATA =", data.demande);
 
       await upsertProfile(data)
       console.log("AVANT API :", JSON.stringify(data, null, 2));
