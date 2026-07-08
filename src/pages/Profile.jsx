@@ -264,7 +264,7 @@ function Profile() {
           />
         ) : (
           <div className="photo-placeholder">
-            <span>Ajouter une photo</span>
+            <span>Ajouter</span>
             <p>Aucune photo sélectionnée</p>
           </div>
         )}
