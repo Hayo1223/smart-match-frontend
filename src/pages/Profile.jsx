@@ -139,7 +139,7 @@ function Profile() {
           age: consommateurForm.age
         }
       }
-      
+
       await upsertProfile(data)
       setSuccess('Profil sauvegardé avec succès !')
       if (draftKey) localStorage.removeItem(draftKey)
@@ -214,7 +214,7 @@ function Profile() {
           <img src={photoPreview} alt="Photo de profil" className="photo-preview" />
         ) : (
           <div className="photo-placeholder">
-            <span>📷</span>
+            <span>Ajouter une photo</span>
             <p>Aucune photo</p>
           </div>
         )}
