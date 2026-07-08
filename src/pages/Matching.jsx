@@ -63,7 +63,7 @@ function Matching() {
         {/* Header */}
         <div className="header">
           <div>
-            <h1 className="title">Mes Matchs ⚡</h1>
+            <h1 className="title">Mes Matchs</h1>
             <p className="subtitle">
               {nom} — {matches.length} Consommateur(s) ou Commerçant(s) compatible(s) trouvée(s)
             </p>
