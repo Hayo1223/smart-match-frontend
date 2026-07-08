@@ -61,7 +61,7 @@ function Profile() {
   const [success, setSuccess] = useState('')
   const [suppressionSuccess, setSuppressionSuccess] = useState('')
   const [error, setError] = useState('')
-  const [photoPreview, setPhotoPreview] = useState(null)
+  const [photoPreview, setPhotoPreview] = useState('')
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
   const [agriculteurForm, setAgriculteurForm] = useState({
