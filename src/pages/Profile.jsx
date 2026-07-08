@@ -544,7 +544,7 @@ function Profile() {
                 selected={consommateurCommercantForm.demande}                
                 onToggle={(p) => toggleProduit(p, consommateurCommercantForm, setConsommateurCommercantForm, 'demande')}/>
             </div>
-
+ 
             <PhotoUpload />
             <small>Formats acceptés : JPG, PNG, WEBP (5 Mo maximum)</small>
 
