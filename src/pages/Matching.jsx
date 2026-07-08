@@ -101,7 +101,12 @@ function Matching() {
                  style={{backgroundColor: getScoreColor(match.score)
                 }}>
                   {match.score} pts
-                </div>
+                </div>                                  
+                                      {match.photoUrl ? (
+                                            <img src={match.photoUrl} alt={match.nomC} className="match-photo" />
+                                            ) : (
+                                                  <div className="match-photo-placeholder">Photo</div>
+                                                    )}
               </div>
 
               {/* Infos Consommateur/Commerçant*/}

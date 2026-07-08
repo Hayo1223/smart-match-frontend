@@ -1,78 +1,87 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getProfile, upsertProfile, deleteProfile } from '../services/api'
+import { getProfile, upsertProfile, deleteProfile, uploadPhoto } from '../services/api'
 import './Profile.css'
+
+const PRODUITS = [
+  'Tomates', 'Oranges', 'Blé', 'Pommes de terre', 'Oignons',
+  'Carottes', 'Courgettes', 'Aubergines', 'Poivrons', 'Concombres',
+  'Pastèques', 'Melons', 'Raisins', 'Figues', 'Olives',
+  'Dattes', 'Amandes', 'Grenades', 'Citrons', 'Mandarines'
+]
+
+const VILLES = [
+  'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger',
+  'Agadir', 'Meknès', 'Oujda', 'Kénitra', 'Tétouan',
+  'Béni Mellal', 'El Jadida'
+]
 
 function Profile() {
   const navigate = useNavigate()
   const [user, setUser] = useState(null)
-  const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [suppressionSuccess, setSuppressionSuccess] = useState('')
   const [success, setSuccess] = useState('')
+  const [suppressionSuccess, setSuppressionSuccess] = useState('')
   const [error, setError] = useState('')
+  const [photoPreview, setPhotoPreview] = useState(null)
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
   const [agriculteurForm, setAgriculteurForm] = useState({
-    nom: '', prenom: '', localisation: '',
-    available: true, numeroAgriculmobile: '', numeroAgriculwhatsapp: '', produit: [], genre: '',
-    age: ''
+    nom: '', prenom: '', localisation: '', available: true,
+    numeroAgriculmobile: '', numeroAgriculwhatsapp: '',
+    produit: [], genre: '', age: ''
   })
 
-  const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrenomC: '', localisationC: '', numeroMobile: '', numeroWhatsapp: '',
-    demande: [], genre: '', metier: '', age: ''
+  const [consommateurForm, setConsommateurForm] = useState({
+    nomC: '', PrenomC: '', localisationC: '', numeroMobile: '',
+    numeroWhatsapp: '', demande: [], genre: '', metier: '', age: ''
   })
 
-  
   const draftKey = user ? `profileDraft_${user.id}_${user.role}` : null
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user') || 'null')
-    if (!storedUser) {
-      navigate('/')
-      return
-    }
+    if (!storedUser) { navigate('/'); return }
     setUser(storedUser)
     fetchProfile(storedUser)
   }, [])
 
   const fetchProfile = async (currentUser) => {
-  try {
-    const response = await getProfile()
-    const p = response.data?.profile ?? {}
-    setProfile(p)
+    try {
+      const response = await getProfile()
+      const p = response.data?.profile ?? {}
 
-    if (currentUser.role === 'Agriculteur') {
-      setAgriculteurForm({
-        nom: p.nom || '',
-        prenom: p.prenom || '',                        
-        localisation: p.localisation || '',            
-        available: p.available ?? true,
-        numeroAgriculmobile: p.numeroAgriculmobile || '',   
-        numeroAgriculwhatsapp: p.numeroAgriculwhatsapp || '', 
-        produit: Array.isArray(p.produit) ? p.produit : [],  
-        genre: p.genre || '',                          
-        age: p.age || ''
-      })
-    } else {
-      setConsommateurCommercantForm({
-        nomC: p.nomC || '',
-        PrenomC: p.prenomC || '',                     
-        localisationC: p.localisationC || '',            
-        numeroMobile: p.numeroMobile || '',            
-        numeroWhatsapp: p.numeroWhatsapp || '',        
-        demande: Array.isArray(p.demande) ? p.demande : [],
-        genre: p.genre || '',                          
-        metier: p.metier || '',
-        age: p.age || ''
-      })
-    }
-
-  } catch (err) {
-    if (err.response?.status === 404) return
-    setError(err.response?.data?.error || 'Erreur lors du chargement du profil')
-
+      if (currentUser.role === 'Agriculteur') {
+        setAgriculteurForm({
+          nom: p.nom || '',
+          prenom: p.prenom || '',
+          localisation: p.localisation || '',
+          available: p.available ?? true,
+          numeroAgriculmobile: p.numeroAgriculmobile || '',
+          numeroAgriculwhatsapp: p.numeroAgriculwhatsapp || '',
+          produit: Array.isArray(p.produit) ? p.produit : [],
+          genre: p.genre || '',
+          age: p.age || ''
+        })
+        setPhotoPreview(p.photoUrl || null)
+      } else {
+        setConsommateurForm({
+          nomC: p.nomC || '',
+          PrenomC: p.prenomC || '',
+          localisationC: p.localisationC || '',
+          numeroMobile: p.numeroMobile || '',
+          numeroWhatsapp: p.numeroWhatsapp || '',
+          demande: Array.isArray(p.demande) ? p.demande : [],
+          genre: p.genre || '',
+          metier: p.metier || '',
+          age: p.age || ''
+        })
+        setPhotoPreview(p.photoUrl || null)
+      }
+    } catch (err) {
+      if (err.response?.status === 404) return
+      setError(err.response?.data?.error || 'Erreur lors du chargement du profil')
     } finally {
       setLoading(false)
     }
@@ -89,10 +98,10 @@ function Profile() {
       if (user.role === 'Agriculteur') {
         setAgriculteurForm(prev => ({ ...prev, ...parsed }))
       } else {
-        setConsommateurCommercantForm(prev => ({ ...prev, ...parsed }))
+        setConsommateurForm(prev => ({ ...prev, ...parsed }))
       }
     } catch {
-
+      setError('Erreur lors du chargement de l\'ébauche')
       localStorage.removeItem(draftKey)
     }
   }, [draftKey, loading])
@@ -100,12 +109,12 @@ function Profile() {
 
   useEffect(() => {
     if (!draftKey || loading || !user) return
-    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurCommercantForm
+    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurForm
     const timeout = setTimeout(() => {
       localStorage.setItem(draftKey, JSON.stringify(formToSave))
     }, 500)
     return () => clearTimeout(timeout)
-  }, [agriculteurForm, consommateurCommercantForm, draftKey, loading, user])
+  }, [agriculteurForm, consommateurForm, draftKey, loading, user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -116,40 +125,49 @@ function Profile() {
     try {
       let data
       if (user.role === 'Agriculteur') {
-        data = {
-          ...agriculteurForm,
-          nom: agriculteurForm.nom,
-          prenom: agriculteurForm.prenom,
-          localisation: agriculteurForm.localisation,
-          available: agriculteurForm.available,
-          numeroAgriculmobile: agriculteurForm.numeroAgriculmobile,
-          numeroAgriculwhatsapp: agriculteurForm.numeroAgriculwhatsapp,
-          produit: agriculteurForm.produit,
-          genre: agriculteurForm.genre,
-          age: agriculteurForm.age
-        }
+        data = { ...agriculteurForm }
       } else {
         data = {
-          ...consommateurCommercantForm,
-           nomC: consommateurCommercantForm.nomC,
-           prenomC: consommateurCommercantForm.PrenomC,
-          demande: consommateurCommercantForm.demande,
-          localisationC: consommateurCommercantForm.localisationC,
-          numeroMobile: consommateurCommercantForm.numeroMobile,
-          numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp,
-          genre: consommateurCommercantForm.genre,
-          metier: consommateurCommercantForm.metier,
-          age: consommateurCommercantForm.age
+          nomC: consommateurForm.nomC,
+          prenomC: consommateurForm.PrenomC,
+          localisationC: consommateurForm.localisationC,
+          numeroMobile: consommateurForm.numeroMobile,
+          numeroWhatsapp: consommateurForm.numeroWhatsapp,
+          demande: consommateurForm.demande,
+          genre: consommateurForm.genre,
+          metier: consommateurForm.metier,
+          age: consommateurForm.age
         }
       }
-
+      
       await upsertProfile(data)
       setSuccess('Profil sauvegardé avec succès !')
-      if (draftKey) localStorage.removeItem(draftKey) 
+      if (draftKey) localStorage.removeItem(draftKey)
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors de la sauvegarde')
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handlePhotoUpload = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onloadend = () => setPhotoPreview(reader.result)
+    reader.readAsDataURL(file)
+    setUploadingPhoto(true)
+    setError('')
+    try {
+      const formData = new FormData()
+      formData.append('photo', file)
+      const response = await uploadPhoto(formData)
+      setPhotoPreview(response.data.photoUrl)
+      setSuccess('Photo uploadée avec succès !')
+    } catch (err) {
+      setError(err.response?.data?.error || "Erreur lors de l'upload")
+    } finally {
+      setUploadingPhoto(false)
     }
   }
 
@@ -159,27 +177,82 @@ function Profile() {
     navigate('/')
   }
 
- const handleDeleteProfile = async (e) => {
-  e.preventDefault()
-  const confirmed = window.confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')
-  if (!confirmed) return
-
-  setSaving(true)
-  setError('')
-  setSuppressionSuccess('Suppression en cours...')
-
-  try {
-    await deleteProfile()
-    setSuppressionSuccess('Profil supprimé avec succès !')
-    if (draftKey) localStorage.removeItem(draftKey)
-    setTimeout(() => navigate('/'), 2000) 
-  } catch (err) {
-    setError(err.response?.data?.error || 'Erreur lors de la suppression')
-    setSuppressionSuccess('')
-  } finally {
-    setSaving(false)
+  const handleDeleteProfile = async (e) => {
+    e.preventDefault()
+    if (!window.confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')) return
+    setSaving(true)
+    setError('')
+    setSuppressionSuccess('Suppression en cours...')
+    try {
+      await deleteProfile()
+      setSuppressionSuccess('Profil supprimé avec succès !')
+      if (draftKey) localStorage.removeItem(draftKey)
+      setTimeout(() => navigate('/'), 2000)
+    } catch (err) {
+      setError(err.response?.data?.error || 'Erreur lors de la suppression')
+      setSuppressionSuccess('')
+    } finally {
+      setSaving(false)
+    }
   }
-}
+
+  const toggleProduit = (produit, form, setForm, field) => {
+    const current = form[field]
+    setForm({
+      ...form,
+      [field]: current.includes(produit)
+        ? current.filter(p => p !== produit)
+        : [...current, produit]
+    })
+  }
+
+  const PhotoUpload = () => (
+    <div className="field">
+      <label className="label">Photo de profil</label>
+      <div className="photo-upload-container">
+        {photoPreview ? (
+          <img src={photoPreview} alt="Photo de profil" className="photo-preview" />
+        ) : (
+          <div className="photo-placeholder">
+            <span>📷</span>
+            <p>Aucune photo</p>
+          </div>
+        )}
+        <label className="photo-upload-label">
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handlePhotoUpload}
+            style={{ display: 'none' }}
+          />
+          {uploadingPhoto ? 'Upload en cours...' : 'Choisir une photo'}
+        </label>
+      </div>
+    </div>
+  )
+
+  const SelectVilles = ({ value, onChange }) => (
+    <select className="input" value={value} onChange={onChange}>
+      <option value="">-- Sélectionner --</option>
+      {VILLES.map(v => <option key={v} value={v}>{v}</option>)}
+    </select>
+  )
+
+  const CheckboxProduits = ({ selected, onToggle }) => (
+    <div className="checkbox-group">
+      {PRODUITS.map(produit => (
+        <label key={produit} className="checkbox-item">
+          <input
+            type="checkbox"
+            value={produit}
+            checked={selected.includes(produit)}
+            onChange={() => onToggle(produit)}
+          />
+          {produit}
+        </label>
+      ))}
+    </div>
+  )
 
   if (loading || !user) return <div className="loading">Chargement...</div>
 
@@ -192,13 +265,13 @@ function Profile() {
           <div>
             <h1 className="title">Mon Profil</h1>
             <p className="subtitle">
-              {user.role === 'Agriculteur' ? 'Agriculteur' : 'Consommateur/Commerçant'} — {user.email}
+              {user.role === 'Agriculteur' ? '🌾 Agriculteur' : '🛒 Consommateur/Commerçant'} — {user.email}
             </p>
           </div>
           <div className="header-buttons">
             {user.role === 'Agriculteur' && (
               <button onClick={() => navigate('/matching')} className="match-button">
-                Voir mes matchs
+                Voir mes matchs ⚡
               </button>
             )}
             <button onClick={handleLogout} className="logout-button">
@@ -211,67 +284,30 @@ function Profile() {
         {error && <div className="error">{error}</div>}
         {suppressionSuccess && <div className="success">{suppressionSuccess}</div>}
 
-        {/* Formulaire agriculteur */}
+        {/* Formulaire Agriculteur */}
         {user.role === 'Agriculteur' && (
           <form onSubmit={handleSubmit} className="form">
+
             <div className="grid">
               <div className="field">
                 <label className="label">Nom</label>
                 <input className="input" value={agriculteurForm.nom}
                   onChange={e => setAgriculteurForm({...agriculteurForm, nom: e.target.value})}
-                  placeholder="nom" required />
+                  placeholder="Nom" required />
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
                 <input className="input" value={agriculteurForm.prenom}
                   onChange={e => setAgriculteurForm({...agriculteurForm, prenom: e.target.value})}
-                  placeholder="prénom" required />
+                  placeholder="Prénom" required />
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
-                <select className="input" value={agriculteurForm.localisation}
-                   onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}>
-                   <option value="">-- Sélectionner --</option>
-                   <option value="Casablanca">Casablanca</option>
-                   <option value="Rabat">Rabat</option>
-                   <option value="Marrakech">Marrakech</option>
-                   <option value="Fès">Fès</option>
-                   <option value="Tanger">Tanger</option>
-                   <option value="Agadir">Agadir</option>
-                   <option value="Meknès">Meknès</option>
-                   <option value="Oujda">Oujda</option>
-                   <option value="Kénitra">Kénitra</option>
-                   <option value="Tétouan">Tétouan</option>
-                   <option value="Béni Mellal">Béni Mellal</option>
-                   <option value="El Jadida">El Jadida</option>
-                 </select>
+                <SelectVilles
+                  value={agriculteurForm.localisation}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}
+                />
               </div>
-              <div className="field">
-                 <label className="label">Produits vendus</label>
-                   <div className="checkbox-group">
-                     {['Tomates', 'Oranges', 'Blé', 'Pommes de terre', 'Oignons',
-                      'Carottes', 'Courgettes', 'Aubergines', 'Poivrons', 'Concombres',
-                       'Pastèques', 'Melons', 'Raisins', 'Figues', 'Olives',
-                       'Dattes', 'Amandes', 'Grenades', 'Citrons', 'Mandarines'
-                      ].map(produit => (
-                       <label key={produit} className="checkbox-item">
-                        <input
-                           type="checkbox"
-                           value={produit}
-                           checked={agriculteurForm.produit.includes(produit)}
-                           onChange={e => {
-                           if (e.target.checked) {
-                           setAgriculteurForm({...agriculteurForm, produit: [...agriculteurForm.produit, produit]})
-                           } else {
-                             setAgriculteurForm({...agriculteurForm, produit: agriculteurForm.produit.filter(p => p !== produit)})
-                           }
-                            }}                           
-                         />
-                           {produit}
-                       </label>
-                      ))}
-                    </div>
-                </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
                 <input type="tel" className="input" value={agriculteurForm.numeroAgriculmobile}
@@ -284,22 +320,32 @@ function Profile() {
                   onChange={e => setAgriculteurForm({...agriculteurForm, numeroAgriculwhatsapp: e.target.value})}
                   placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
+              <div className="field">
+                <label className="label">Genre</label>
+                <select className="input" value={agriculteurForm.genre}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, genre: e.target.value})}>
+                  <option value="">-- Sélectionner --</option>
+                  <option value="Feminin">Féminin</option>
+                  <option value="Masculin">Masculin</option>
+                </select>
+              </div>
+              <div className="field">
+                <label className="label">Âge</label>
+                <input className="input" type="number" min="5" max="200"
+                  value={agriculteurForm.age}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, age: e.target.value})}
+                  placeholder="25" required />
+              </div>
             </div>
+
             <div className="field">
-              <label className="label">Genre</label>
-              <select className="input" value={agriculteurForm.genre}
-                onChange={e => setAgriculteurForm({...agriculteurForm, genre: e.target.value})}>
-                <option value="">-- Sélectionner --</option>
-                <option value="Feminin">Féminin</option>
-                <option value="Masculin">Masculin</option>
-              </select>
+              <label className="label">Produits vendus</label>
+              <CheckboxProduits
+                selected={agriculteurForm.produit}
+                onToggle={(p) => toggleProduit(p, agriculteurForm, setAgriculteurForm, 'produit')}
+              />
             </div>
-            <div className="field">
-              <label className="label">Âge</label>
-              <input className="input" value={agriculteurForm.age}
-                onChange={e => setAgriculteurForm({...agriculteurForm, age: e.target.value})}
-                placeholder="25" type="number" min="5" max="200" required />
-            </div>
+
             <div className="field">
               <label className="checkbox-label">
                 <input type="checkbox" checked={agriculteurForm.available}
@@ -307,118 +353,101 @@ function Profile() {
                 {' '}Disponible ou vérifié
               </label>
             </div>
-            <button type="submit" className={saving ? "button-disabled" : "button"}>
+
+            <PhotoUpload />
+
+            <button type="submit" className={saving ? "button-disabled" : "button"} disabled={saving}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
-            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile}>
+            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile} disabled={saving}>
               {saving ? 'Suppression...' : 'Supprimer le profil'}
             </button>
+
           </form>
         )}
 
-        {/* Formulaire consommateur/Commerçant */}
-
+        {/* Formulaire ConsommateurCommercant */}
         {user.role === 'ConsommateurCommercant' && (
           <form onSubmit={handleSubmit} className="form">
-            <div className = 'grid'>
+
+            <div className="grid">
               <div className="field">
                 <label className="label">Nom</label>
-                <input className="input" value={consommateurCommercantForm.nomC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nomC: e.target.value})}
-                  placeholder="nom" required />
+                <input className="input" value={consommateurForm.nomC}
+                  onChange={e => setConsommateurForm({...consommateurForm, nomC: e.target.value})}
+                  placeholder="Nom" required />
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
-                <input className="input" value={consommateurCommercantForm.prenomC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, prenomC: e.target.value})}
-                  placeholder="prénom" required />
+                <input className="input" value={consommateurForm.PrenomC}
+                  onChange={e => setConsommateurForm({...consommateurForm, PrenomC: e.target.value})}
+                  placeholder="Prénom" required />
+              </div>
+              <div className="field">
+                <label className="label">Métier</label>
+                <input className="input" value={consommateurForm.metier}
+                  onChange={e => setConsommateurForm({...consommateurForm, metier: e.target.value})}
+                  placeholder="Restaurateur, Épicier..." required />
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
-                <select className="input" value={consommateurCommercantForm.localisationC}
-                   onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}>
-                   <option value="">-- Sélectionner --</option>
-                   <option value="Casablanca">Casablanca</option>
-                   <option value="Rabat">Rabat</option>
-                   <option value="Marrakech">Marrakech</option>
-                   <option value="Fès">Fès</option>
-                   <option value="Tanger">Tanger</option>
-                   <option value="Agadir">Agadir</option>
-                   <option value="Meknès">Meknès</option>
-                   <option value="Oujda">Oujda</option>
-                   <option value="Kénitra">Kénitra</option>
-                   <option value="Tétouan">Tétouan</option>
-                   <option value="Béni Mellal">Béni Mellal</option>
-                   <option value="El Jadida">El Jadida</option>
-                 </select>
+                <SelectVilles
+                  value={consommateurForm.localisationC}
+                  onChange={e => setConsommateurForm({...consommateurForm, localisationC: e.target.value})}
+                />
               </div>
               <div className="field">
-                 <label className="label">Produits recherchés</label>
-                   <div className="checkbox-group">
-                     {['Tomates', 'Oranges', 'Blé', 'Pommes de terre', 'Oignons',
-                      'Carottes', 'Courgettes', 'Aubergines', 'Poivrons', 'Concombres',
-                       'Pastèques', 'Melons', 'Raisins', 'Figues', 'Olives',
-                       'Dattes', 'Amandes', 'Grenades', 'Citrons', 'Mandarines'
-                      ].map(produit => (
-                       <label key={produit} className="checkbox-item">
-                        <input
-                           type="checkbox"
-                           value={produit}
-                           checked={consommateurCommercantForm.demande.includes(produit)}
-                           onChange={e => {
-                           if (e.target.checked) {
-                           setConsommateurCommercantForm({...consommateurCommercantForm, demande: [...consommateurCommercantForm.demande, produit]})
-                           } else {
-                             setConsommateurCommercantForm({...consommateurCommercantForm, demande: consommateurCommercantForm.demande.filter(p => p !== produit)})
-                           }
-                            }}
-                         />
-                           {produit}
-                       </label>
-                      ))}
-                    </div>
-                </div>
-              <div className="field">
                 <label className="label">Numéro mobile</label>
-                <input type="tel" className="input" value={consommateurCommercantForm.numeroMobile}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroMobile: e.target.value})}
+                <input type="tel" className="input" value={consommateurForm.numeroMobile}
+                  onChange={e => setConsommateurForm({...consommateurForm, numeroMobile: e.target.value})}
                   placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
-                <input type="tel" className="input" value={consommateurCommercantForm.numeroWatsapp}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, numeroWatsapp: e.target.value})}
+                <input type="tel" className="input" value={consommateurForm.numeroWhatsapp}
+                  onChange={e => setConsommateurForm({...consommateurForm, numeroWhatsapp: e.target.value})}
                   placeholder="+212-600000000" pattern="\+?[0-9 -]{9,17}" required />
               </div>
+              <div className="field">
+                <label className="label">Genre</label>
+                <select className="input" value={consommateurForm.genre}
+                  onChange={e => setConsommateurForm({...consommateurForm, genre: e.target.value})}>
+                  <option value="">-- Sélectionner --</option>
+                  <option value="Feminin">Féminin</option>
+                  <option value="Masculin">Masculin</option>
+                </select>
+              </div>
+              <div className="field">
+                <label className="label">Âge</label>
+                <input className="input" type="number" min="5" max="200"
+                  value={consommateurForm.age}
+                  onChange={e => setConsommateurForm({...consommateurForm, age: e.target.value})}
+                  placeholder="25" required />
+              </div>
             </div>
+
             <div className="field">
-              <label className="label">Genre</label>
-              <select className="input" value={consommateurCommercantForm.genre}
-                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
-                <option value="">-- Sélectionner --</option>
-                <option value="Feminin">Féminin</option>
-                <option value="Masculin">Masculin</option>
-              </select>
+              <label className="label">Produits recherchés</label>
+              <CheckboxProduits
+                selected={consommateurForm.demande}
+                onToggle={(p) => toggleProduit(p, consommateurForm, setConsommateurForm, 'demande')}
+              />
             </div>
-            <div className="field">
-              <label className="label">Âge</label>
-              <input className="input" value={consommateurCommercantForm.age}
-                onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
-                placeholder="25" type="number" min="5" max="200" required />
-            </div>
-            <button type="submit" className={saving ? "button-disabled" : "button"}>
+
+            <PhotoUpload />
+
+            <button type="submit" className={saving ? "button-disabled" : "button"} disabled={saving}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
             </button>
-            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile}>
+            <button type="button" className={saving ? "button-disabled" : "delete-button"} onClick={handleDeleteProfile} disabled={saving}>
               {saving ? 'Suppression...' : 'Supprimer le profil'}
             </button>
+
           </form>
         )}
 
-
-   </div>
-   </div>
-
+      </div>
+    </div>
   )
 }
 
