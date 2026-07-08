@@ -195,6 +195,12 @@ function Profile() {
     reader.readAsDataURL(file)
     setUploadingPhoto(true)
     setError('')
+    const tailleMax = 5 * 1024 * 1024; // 5 Mo
+
+    if (file.size > tailleMax) {
+    alert("L'image ne doit pas dépasser 5 Mo.");
+    return;
+     }
     try {
       const formData = new FormData()
       formData.append('photo', file)
@@ -243,30 +249,43 @@ function Profile() {
     })
   }
 
-  const PhotoUpload = () => (
+  const PhotoUpload = () => {
+  return (
     <div className="field">
       <label className="label">Photo de profil</label>
+
       <div className="photo-upload-container">
         {photoPreview ? (
-          <img src={photoPreview} alt="Photo de profil" className="photo-preview" />
+          <img
+            src={photoPreview}
+            alt="Photo de profil"
+            className="photo-preview"
+            loading="lazy"
+          />
         ) : (
           <div className="photo-placeholder">
             <span>Ajouter une photo</span>
-            <p>Aucune photo</p>
+            <p>Aucune photo sélectionnée</p>
           </div>
         )}
+
         <label className="photo-upload-label">
           <input
             type="file"
             accept="image/jpeg,image/png,image/webp"
             onChange={handlePhotoUpload}
-            style={{ display: 'none' }}
+            hidden
+            disabled={uploadingPhoto}
           />
-          {uploadingPhoto ? 'Upload en cours...' : 'Choisir une photo'}
+
+          {uploadingPhoto
+            ? "Upload en cours..."
+            : "Choisir une photo"}
         </label>
       </div>
     </div>
-  )
+  );
+};
 
   const SelectVilles = ({ value, onChange }) => (
     <select className="input" value={value} onChange={onChange}>
@@ -401,6 +420,7 @@ function Profile() {
             </div>
 
             <PhotoUpload />
+            <small>Formats acceptés : JPG, PNG, WEBP (5 Mo maximum)</small>
 
             <button type="submit" className={saving ? "button-disabled" : "button"} disabled={saving}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
@@ -481,6 +501,7 @@ function Profile() {
             </div>
 
             <PhotoUpload />
+            <small>Formats acceptés : JPG, PNG, WEBP (5 Mo maximum)</small>
 
             <button type="submit" className={saving ? "button-disabled" : "button"} disabled={saving}>
               {saving ? 'Sauvegarde...' : 'Sauvegarder le profil'}
