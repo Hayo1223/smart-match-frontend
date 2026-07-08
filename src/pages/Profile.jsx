@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile, deleteProfile, uploadPhoto } from '../services/api'
+import Swal from "sweetalert2"
 import './Profile.css'
 
 
@@ -220,23 +221,46 @@ function Profile() {
   }
 
   const handleDeleteProfile = async (e) => {
-    e.preventDefault()
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')) return
-    setSaving(true)
-    setError('')
-    setSuppressionSuccess('Suppression en cours...')
-    try {
-      await deleteProfile()
-      setSuppressionSuccess('Profil supprimé avec succès !')
-      if (draftKey) localStorage.removeItem(draftKey)
-      setTimeout(() => navigate('/'), 2000)
-    } catch (err) {
-      setError(err.response?.data?.error || 'Erreur lors de la suppression')
-      setSuppressionSuccess('')
-    } finally {
-      setSaving(false)
+  e.preventDefault();
+
+  const confirmed = await Swal.fire({
+    title: "Supprimer le profil ?",
+    text: "Cette action est irréversible.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Oui, supprimer",
+    cancelButtonText: "Annuler",
+  });
+
+  if (!confirmed.isConfirmed) return;
+
+  setSaving(true);
+  setError("");
+  setSuppressionSuccess("");
+
+  try {
+    await deleteProfile();
+
+    if (draftKey) {
+      localStorage.removeItem(draftKey);
     }
+
+    setSuppressionSuccess("Profil supprimé avec succès !");
+
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 1500);
+
+  } catch (err) {
+    setError(
+      err.response?.data?.error ||
+      err.message ||
+      "Une erreur est survenue lors de la suppression du profil."
+    );
+  } finally {
+    setSaving(false);
   }
+}
 
   const toggleProduit = (produit, form, setForm, field) => {
     const current = form[field]
