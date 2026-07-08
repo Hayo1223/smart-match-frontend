@@ -3,12 +3,49 @@ import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile, deleteProfile, uploadPhoto } from '../services/api'
 import './Profile.css'
 
-const PRODUITS = [
-  'Tomates', 'Oranges', 'Blé', 'Pommes de terre', 'Oignons',
-  'Carottes', 'Courgettes', 'Aubergines', 'Poivrons', 'Concombres',
-  'Pastèques', 'Melons', 'Raisins', 'Figues', 'Olives',
-  'Dattes', 'Amandes', 'Grenades', 'Citrons', 'Mandarines'
-]
+
+const PRODUITS = [{
+  label: 'Tomates', value: 'Tomates', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Oranges', value: 'Oranges', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Blé', value: 'Blé', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Pommes de terre', value: 'Pommes de terre', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Oignons', value: 'Oignons', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Carottes', value: 'Carottes', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Courgettes', value: 'Courgettes', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Aubergines', value: 'Aubergines', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Poivrons', value: 'Poivrons', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Concombres', value: 'Concombres', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Pastèques', value: 'Pastèques', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Melons', value: 'Melons', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Raisins', value: 'Raisins', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Figues', value: 'Figues', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Olives', value: 'Olives', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Dattes', value: 'Dattes', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Amandes', value: 'Amandes', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Grenades', value: 'Grenades', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Citrons', value: 'Citrons', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}, {
+  label: 'Mandarines', value: 'Mandarines', Image: 'https://cdn-icons-png.flaticon.com/512/135/135763.png'
+}]
+
 
 const VILLES = [
   'Casablanca', 'Rabat', 'Marrakech', 'Fès', 'Tanger',
@@ -339,8 +376,7 @@ function Profile() {
             </div>
 
             <div className="field">
-              <label className="label">Produits vendus</label>
-              <img src={agriculteurForm.photoUrl} alt="Photo de profil" className="photo-preview" />
+              <label className="label">Produits vendus</label>              
               <CheckboxProduits
                 selected={agriculteurForm.produit}
                 onToggle={(p) => toggleProduit(p, agriculteurForm, setAgriculteurForm, 'produit')}
@@ -428,10 +464,9 @@ function Profile() {
             </div>
 
             <div className="field">
-              <label className="label">Produits recherchés</label>
-              <img src={consommateurForm.photoUrl} alt="Photo de profil" className="photo-preview" />
+              <label className="label">Produits recherchés</label>        
               <CheckboxProduits
-                selected={consommateurForm.demande}
+                selected={consommateurForm.demande}                
                 onToggle={(p) => toggleProduit(p, consommateurForm, setConsommateurForm, 'demande')}
               />
             </div>
