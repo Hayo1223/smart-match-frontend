@@ -177,6 +177,7 @@ function Profile() {
           age: consommateurCommercantForm.age
         }
       }
+      console.log(data.demande);
 
       await upsertProfile(data)
       setSuccess('Profil sauvegardé avec succès !')
