@@ -530,7 +530,7 @@ function Profile() {
                                     placeholder="+212-600000000" 
                                     pattern="^\+212-[5-7][0-9]{8}$" 
                                     required />
-              </div>
+              </div>                 
               <div className="field">
                 <label className="label">Genre</label>
                 <select className="input" value={consommateurCommercantForm.genre}
