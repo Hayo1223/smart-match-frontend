@@ -180,8 +180,9 @@ function Profile() {
           age: consommateurCommercantForm.age
         }
       }
-      
+
       await upsertProfile(data)
+      console.log("AVANT API :", JSON.stringify(data, null, 2));
       setSuccess('Profil sauvegardé avec succès !')
       if (draftKey) localStorage.removeItem(draftKey)
     } catch (err) {
