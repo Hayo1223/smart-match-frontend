@@ -42,12 +42,19 @@
     color: #1f2937;
 }
 
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
 .info-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
+}
+
+.info-row strong {
+    display: inline-block;
+    min-width: 140px;
 }
 
 
