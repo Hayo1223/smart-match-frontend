@@ -57,7 +57,7 @@ const VILLES = [
 function Profile() {
   const navigate = useNavigate()
   const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true) 
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState('')
   const [suppressionSuccess, setSuppressionSuccess] = useState('')
