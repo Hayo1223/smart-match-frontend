@@ -72,7 +72,7 @@ function Profile() {
   })
 
   const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
-    nomC: '', PrenomC: '', localisationC: '', numeroMobile: '+212-',
+    nomC: '', prenomC: '', localisationC: '', numeroMobile: '+212-',
     numeroWhatsapp: '+212-', demande: [], genre: '', metier: '', age: ''
   })
 
@@ -106,7 +106,7 @@ function Profile() {
       } else {
         setConsommateurCommercantForm({
           nomC: p.nomC || '',
-          PrenomC: p.prenomC || '',
+          prenomC: p.prenomC || '',
           localisationC: p.localisationC || '',
           numeroMobile: p.numeroMobile || '+212-',
           numeroWhatsapp: p.numeroWhatsapp || '+212-',
@@ -167,7 +167,7 @@ function Profile() {
       } else {
         data = {
           nomC: consommateurCommercantForm.nomC,
-          prenomC: consommateurCommercantForm.PrenomC,
+          prenomC: consommateurCommercantForm.prenomC,
           localisationC: consommateurCommercantForm.localisationC,
           numeroMobile: consommateurCommercantForm.numeroMobile,
           numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp,
@@ -541,10 +541,9 @@ function Profile() {
               <label className="label">Produits recherchés</label>        
               <CheckboxProduits
                 selected={consommateurCommercantForm.demande}                
-                onToggle={(p) => toggleProduit(p, consommateurCommercantForm, setConsommateurCommercantForm, 'demande')}
-              />
+                onToggle={(p) => toggleProduit(p, consommateurCommercantForm, setConsommateurCommercantForm, 'demande')}/>
             </div>
-            
+
             <PhotoUpload />
             <small>Formats acceptés : JPG, PNG, WEBP (5 Mo maximum)</small>
 
