@@ -338,12 +338,20 @@ function Profile() {
           <div className="header-buttons">
             {user.role === 'Agriculteur' && (
               <button onClick={() => navigate('/matching')} className="match-button">
-                Voir mes matchs
-                              </button>
+                Voir mes match
+              </button>
             )}
+            
+            {user.role === 'ConsommateurCommercant' && (
+              <button onClick={() => navigate('/mes-agriculteurs')} className="match-button">
+                    Voir les agriculteurs 🌾
+              </button>
+            )}
+
             <button onClick={handleLogout} className="logout-button">
               Déconnexion
             </button>
+
           </div>
         </div>
 

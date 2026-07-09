@@ -195,7 +195,7 @@
 .photo-upload-container {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem;
 }
 
 .photo-preview {
@@ -216,7 +216,7 @@
   align-items: center;
   justify-content: center;
   color: #94a3b8;
-  font-size: 2rem;
+  font-size: 1rem;
   border: 2px dashed #e2e8f0;
 }
 
