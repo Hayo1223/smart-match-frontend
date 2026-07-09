@@ -344,7 +344,7 @@ function Profile() {
             
             {user.role === 'ConsommateurCommercant' && (
               <button onClick={() => navigate('/mes-agriculteurs')} className="match-button">
-                    Voir les agriculteurs 🌾
+                    Voir les agriculteurs
               </button>
             )}
 
