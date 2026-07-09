@@ -37,8 +37,8 @@ function MesAgriculteurs() {
     try {
       const response = await getMesAgriculteurs()
 
-      const disponibles = response.data.agriculteur.filter(
-        (agriculteur) => agriculteur.available === true
+      const disponibles = response.data.agriculteurs.filter(
+        (agriculteurs) => agriculteurs.available === true
       )
 
       setAgriculteurs(disponibles)
@@ -49,9 +49,9 @@ function MesAgriculteurs() {
     }
   }
 
-  const contacter = (agriculteur) => {
-    if (!contactes.includes(agriculteur.agriculteurId)) {
-      const nouveaux = [...contactes, agriculteur.agriculteurId]
+  const contacter = (agriculteurs) => {
+    if (!contactes.includes(agriculteurs.agriculteurId)) {
+      const nouveaux = [...contactes, agriculteurs.agriculteurId]
 
       setContactes(nouveaux)
 
@@ -96,17 +96,17 @@ function MesAgriculteurs() {
           </div>
         ) : (
           <div className="match-list">
-            {agriculteurs.map((agriculteur) => (
+            {agriculteurs.map((agriculteurs) => (
               <div
-                key={agriculteur.agriculteurId}
+                key={agriculteurs.agriculteurId}
                 className="match-card"
               >
 
                 <div className="card-header">
-                  {agriculteur.photoUrl ? (
+                  {agriculteurs.photoUrl ? (
                     <img
-                      src={agriculteur.photoUrl}
-                      alt={agriculteur.nom}
+                      src={agriculteurs.photoUrl}
+                      alt={agriculteurs.nom}
                       className="match-photo"
                     />
                   ) : (
@@ -115,62 +115,62 @@ function MesAgriculteurs() {
 
                   <div>
                     <h2 className="company-name">
-                      {agriculteur.nom} {agriculteur.prenom}
+                      {agriculteurs.nom} {agriculteurs.prenom}
                     </h2>
 
                     <div className="info-row">
                       <span className="info-tag">
-                        {agriculteur.localisation}
+                        {agriculteurs.localisation}
                       </span>
 
                       <span className="info-tag">
-                        {agriculteur.produit?.join(', ')}
+                        {agriculteurs.produit?.join(', ')}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <p className="email">{agriculteur.email}</p>
+                <p className="email">{agriculteurs.email}</p>
 
                 <p className="info-tag">
-                  {agriculteur.numeroMobile}
+                  {agriculteurs.numeroMobile}
                 </p>
 
                 <p className="info-tag">
-                  {agriculteur.numeroWhatsapp}
+                  {agriculteurs.numeroWhatsapp}
                 </p>
 
                 {/* Avis */}
-                <AffichageAvis userId={agriculteur.userId} />
+                <AffichageAvis userId={agriculteurs.userId} />
 
                 {/* Boutons */}
                 <div className='button-container'>
                   <button
                     className={
-                      contactes.includes(agriculteur.agriculteurId)
+                      contactes.includes(agriculteurs.agriculteurId)
                         ? 'button-disabled'
                         : 'button'
                     }
-                    disabled={contactes.includes(agriculteur.agriculteurId)}
-                    onClick={() => contacter(agriculteur)}
+                    disabled={contactes.includes(agriculteurs.agriculteurId)}
+                    onClick={() => contacter(agriculteurs)}
                   >
-                    {contactes.includes(agriculteur.agriculteurId)
+                    {contactes.includes(agriculteurs.agriculteurId)
                       ? 'Contacté'
                       : 'Contacter'}
                   </button>
 
-                  {contactes.includes(agriculteur.agriculteurId) && (
+                  {contactes.includes(agriculteurs.agriculteurId) && (
                     <button
                       className="avis-toggle-button"
                       onClick={() =>
                         setAvisOuvert(
-                          avisOuvert === agriculteur.agriculteurId
+                          avisOuvert === agriculteurs.agriculteurId
                             ? null
-                            : agriculteur.agriculteurId
+                            : agriculteurs.agriculteurId
                         )
                       }
                     >
-                      {avisOuvert === agriculteur.agriculteurId
+                      {avisOuvert === agriculteurs.agriculteurId
                         ? 'Fermer'
                         : 'Laisser un avis'}
                     </button>
@@ -178,10 +178,10 @@ function MesAgriculteurs() {
                 </div>
 
                 {/* Formulaire */}
-                {avisOuvert === agriculteur.agriculteurId && (
+                {avisOuvert === agriculteurs.agriculteurId && (
                   <FormulaireAvis
-                    cibleId={agriculteur.userId}
-                    cibleNom={`${agriculteur.nom} ${agriculteur.prenom}`}
+                    cibleId={agriculteurs.userId}
+                    cibleNom={`${agriculteurs.nom} ${agriculteurs.prenom}`}
                   />
                 )}
 
