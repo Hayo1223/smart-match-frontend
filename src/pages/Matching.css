@@ -72,6 +72,25 @@ button:hover {
     transform: translateY(-2px);
 }
 
+.avis-container {
+  margin-top: 0.75rem;
+}
+
+.avis-toggle-button {
+  background: none;
+  border: 1px solid #6366f1;
+  color: #6366f1;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.avis-toggle-button:hover {
+  background-color: #ede9fe;
+}
 
 @media (max-width: 768px) {
 
@@ -102,6 +121,7 @@ button:hover {
     button {
         width: 100%;
     }
+
 }
 
 @media (max-width: 480px) {
@@ -112,5 +132,15 @@ button:hover {
 
     .match-card {
         padding: 1rem;
+    }
+    .info-row strong {
+        min-width: 100px;
+    }
+    .avis-toggle-button {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+    .avis-container {
+        margin-top: 0.5rem;
     }
 }

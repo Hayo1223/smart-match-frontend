@@ -21,5 +21,9 @@ export const deleteProfile = () => api.delete('/profile')
 export const uploadPhoto = (formData) => api.post('/upload/photo', formData, {
   headers: { 'Content-Type': 'multipart/form-data' }
 })
+export const laisserAvis = (data) => api.post('/avis', data)
+export const getAvis = (userId) => api.get(`/avis/${userId}`)
+export const getMonAvis = (cibleId) => api.get(`/avis/mon-avis/${cibleId}`)
+
 
 export default api

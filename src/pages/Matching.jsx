@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getMatches } from '../services/api'
+import FormulaireAvis from '../components/FormulaireAvis'
+import AffichageAvis from '../components/AffichageAvis'
 import './Matching.css'
 
 function Matching() {
@@ -11,11 +13,12 @@ function Matching() {
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [avisOuvert, setAvisOuvert] = useState(null)
   const [contactes, setContactes] = useState(() => {
   const saved = localStorage.getItem(`contactes_${user?.id}`)
   return saved ? JSON.parse(saved) : []
 })
-
+  
 
 
   useEffect(() => {
@@ -131,6 +134,7 @@ function Matching() {
                   ))}
                 </ul>
               <div>
+
                 <button
                   className={
                      contactes.includes(match.consommateurCommercantId)
@@ -154,6 +158,28 @@ function Matching() {
                   )}
                 </div>
               </div>
+              
+              {/* Avis */}
+                <AffichageAvis userId={match.userId} />              
+                {contactes.includes(match.consommateurCommercantId) && (
+                    <div className="avis-container">
+                          <button  className="avis-toggle-button"
+                              onClick={() => setAvisOuvert(
+                                avisOuvert === match.consommateurCommercantId
+                                    ? null
+                                    : match.consommateurCommercantId
+                                    )}>
+                                {avisOuvert === match.consommateurCommercantId
+                                        ? 'Fermer'
+                                        : 'Laisser un avis'}
+                            </button>
+                 {avisOuvert === match.consommateurCommercantId && (
+                        <FormulaireAvis
+                            cibleId={match.userId}
+                            cibleNom={`${match.nomC} ${match.prenomC}`}/>
+                                )}
+                      </div>
+                    )}
 
             </div>
           ))}

@@ -1,0 +1,30 @@
+.etoiles {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.etoiles-small .etoile { font-size: 1rem; }
+.etoiles-medium .etoile { font-size: 1.5rem; }
+.etoiles-large .etoile { font-size: 2rem; }
+
+.etoile {
+  cursor: pointer;
+  transition: transform 0.1s;
+  line-height: 1;
+}
+
+.etoile-active { color: #f59e0b; }
+.etoile-inactive { color: #d1d5db; }
+
+.etoile-readonly { cursor: default; }
+
+.etoile:not(.etoile-readonly):hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .etoiles { gap: 0.1rem; }
+    .etoiles-small .etoile { font-size: 0.8rem; }
+    .etoiles-medium .etoile { font-size: 1.2rem;}
+    .etoiles-large .etoile { font-size: 1.6rem;}
+}

@@ -1,0 +1,123 @@
+.formulaire-avis {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-top: 1rem;
+}
+
+.avis-titre {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.avis-success {
+  background-color: #f0fdf4;
+  color: #16a34a;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.avis-error {
+  background-color: #fef2f2;
+  color: #ef4444;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.avis-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.avis-note-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.avis-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.avis-note-texte {
+  font-size: 0.9rem;
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.avis-commentaire {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.avis-textarea {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.avis-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.avis-button {
+  padding: 0.65rem 1.2rem;
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.avis-button-disabled {
+  padding: 0.65rem 1.2rem;
+  background-color: #a5b4fc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  align-self: flex-start;
+}
+
+@media  (max-width: 768px) { 
+
+    .formulaire-avis {
+        padding: 1rem;
+    }
+    .avis-titre {
+        font-size: 0.9rem;
+    }
+    .avis-note-container {
+        gap: 0.5rem;
+    }
+    .avis-label {
+        font-size: 0.8rem;
+    }
+    .avis-note-texte {
+        font-size: 0.8rem;
+    }
+    .avis-textarea {
+        font-size: 0.8rem;
+    }
+}
