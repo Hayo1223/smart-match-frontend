@@ -105,7 +105,7 @@ function MesAgriculteurs() {
                       className="match-photo"
                     />
                   ) : (
-                    <div className="match-photo-placeholder">🌾</div>
+                    <div className="match-photo-placeholder">📷</div>
                   )}
 
                   <div>
