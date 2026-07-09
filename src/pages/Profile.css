@@ -239,6 +239,11 @@
   background-color: #4f46e5;
 }
 
+.produit-emoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
 @media (max-width: 768px) {
   .card {
     padding: 1.5rem;
