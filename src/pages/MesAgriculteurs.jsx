@@ -17,6 +17,12 @@ function MesAgriculteurs() {
     return saved ? JSON.parse(saved) : []
   })
 
+  const [agriculteurForm, setAgriculteurForm] = useState({
+    nom: '', prenom: '', localisation: '', available: true,
+    numeroAgriculmobile: '+212-', numeroAgriculwhatsapp: '+212-',
+    produit: [], genre: '', age: ''
+  })
+
   useEffect(() => {
     if (!user) { navigate('/'); return }
     if (user.role !== 'ConsommateurCommercant') { navigate('/profile'); return }
@@ -64,14 +70,15 @@ function MesAgriculteurs() {
         </div>
 
         {error && <div className="error">{error}</div>}
-
+        
+        if (agriculteurForm.available === false) {}
         {agriculteurs.length === 0 && !error && (
           <div className="empty-state">
             <p className="empty-title">Aucun agriculteur disponible</p>
           </div>
         )}
-
-        <div className="match-list">
+        else {
+            <div className="match-list">
           {agriculteurs.map((agriculteur, index) => (
             <div key={agriculteur.agriculteurId} className="match-card">
 
@@ -141,6 +148,10 @@ function MesAgriculteurs() {
             </div>
           ))}
         </div>
+
+        }
+
+        
 
       </div>
     </div>
