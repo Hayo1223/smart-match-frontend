@@ -38,7 +38,7 @@ function MesAgriculteurs() {
       const response = await getMesAgriculteurs()
 
       const disponibles = response.data.agriculteurs.filter(
-        (agriculteurs) => agriculteurs.available === true
+        (agriculteurs) => agriculteurs.available 
       )
 
       setAgriculteurs(disponibles)
