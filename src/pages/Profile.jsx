@@ -6,26 +6,26 @@ import './Profile.css'
 
 
 const PRODUITS = [
-  { label: 'Tomates',         value: 'Tomates',         emoji: '🍅' },
-  { label: 'Oranges',         value: 'Oranges',         emoji: '🍊' },
-  { label: 'Blé',             value: 'Blé',             emoji: '🌾' },
-  { label: 'Pommes de terre', value: 'Pommes de terre', emoji: '🥔' },
-  { label: 'Oignons',         value: 'Oignons',         emoji: '🧅' },
-  { label: 'Carottes',        value: 'Carottes',        emoji: '🥕' },
-  { label: 'Courgettes',      value: 'Courgettes',      emoji: '🥒' },
-  { label: 'Aubergines',      value: 'Aubergines',      emoji: '🍆' },
-  { label: 'Poivrons',        value: 'Poivrons',        emoji: '🫑' },
-  { label: 'Concombres',      value: 'Concombres',      emoji: '🥒' },
-  { label: 'Pastèques',       value: 'Pastèques',       emoji: '🍉' },
-  { label: 'Melons',          value: 'Melons',          emoji: '🍈' },
-  { label: 'Raisins',         value: 'Raisins',         emoji: '🍇' },
-  { label: 'Figues',          value: 'Figues',          emoji: '🫐' },
-  { label: 'Olives',          value: 'Olives',          emoji: '🫒' },
-  { label: 'Dattes',          value: 'Dattes',          emoji: '🌴' },
-  { label: 'Amandes',         value: 'Amandes',         emoji: '🥜' },
-  { label: 'Grenades',        value: 'Grenades',        emoji: '🍎' },
-  { label: 'Citrons',         value: 'Citrons',         emoji: '🍋' },
-  { label: 'Mandarines',      value: 'Mandarines',      emoji: '🍊' },
+  { label: 'Tomates',         value: 'Tomates',         image: 'http://example.com/tomates.jpg' },
+  { label: 'Oranges',         value: 'Oranges',         image: 'http://example.com/oranges.jpg' },
+  { label: 'Blé',             value: 'Blé',             image: 'http://example.com/ble.jpg' },
+  { label: 'Pommes de terre', value: 'Pommes de terre', image: 'http://example.com/pommes-de-terre.jpg' },
+  { label: 'Oignons',         value: 'Oignons',         image: 'http://example.com/oignons.jpg' },
+  { label: 'Carottes',        value: 'Carottes',        image: 'http://example.com/carottes.jpg' },
+  { label: 'Courgettes',      value: 'Courgettes',      image: 'http://example.com/courgettes.jpg' },
+  { label: 'Aubergines',      value: 'Aubergines',      image: 'http://example.com/aubergines.jpg' },
+  { label: 'Poivrons',        value: 'Poivrons',        image: 'http://example.com/poivrons.jpg' },
+  { label: 'Concombres',      value: 'Concombres',      image: 'http://example.com/concombres.jpg' },
+  { label: 'Pastèques',       value: 'Pastèques',       image: 'http://example.com/pastèques.jpg' },
+  { label: 'Melons',          value: 'Melons',          image: 'http://example.com/melons.jpg' },
+  { label: 'Raisins',         value: 'Raisins',         image: 'http://example.com/raisins.jpg' },
+  { label: 'Figues',          value: 'Figues',          image: 'http://example.com/figues.jpg' },
+  { label: 'Olives',          value: 'Olives',          image: 'http://example.com/olives.jpg' },
+  { label: 'Dattes',          value: 'Dattes',          image: 'http://example.com/dattes.jpg' },
+  { label: 'Amandes',         value: 'Amandes',         image: 'http://example.com/amandes.jpg' },
+  { label: 'Grenades',        value: 'Grenades',        image: 'http://example.com/grenades.jpg' },
+  { label: 'Citrons',         value: 'Citrons',         image: 'http://example.com/citrons.jpg' },
+  { label: 'Mandarines',      value: 'Mandarines',      image: 'http://example.com/mandarines.jpg' },
 ]
 
 
@@ -273,7 +273,7 @@ function Profile() {
           />
         ) : (
           <div className="photo-placeholder">
-            <span>'https://cdn-icons-png.flaticon.com/512/2224/2224463.png'</span>
+            <span className="photo-placeholder-icon">📷</span>
             <p>Aucune photo sélectionnée</p>
           </div>
         )}
