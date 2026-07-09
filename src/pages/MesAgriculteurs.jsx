@@ -36,12 +36,7 @@ function MesAgriculteurs() {
   const fetchAgriculteurs = async () => {
     try {
       const response = await getMesAgriculteurs()
-
-      const disponibles = response.data.agriculteurs.filter(
-        (agriculteurs) => agriculteurs.available 
-      )
-
-      setAgriculteurs(disponibles)
+      setAgriculteurs(response.data.agriculteurs)
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors du chargement')
     } finally {
