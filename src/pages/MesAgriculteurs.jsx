@@ -31,8 +31,9 @@ function MesAgriculteurs() {
 
   const fetchAgriculteurs = async () => {
     try {
-      const response = await getMesAgriculteurs()
-      setAgriculteurs(response.data.agriculteurs)
+      const response = await getMesAgriculteurs();
+      const disponible = response.data.agriculteurs.filter(a => a.available)
+      setAgriculteurs(disponible)
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors du chargement')
     } finally {
@@ -70,14 +71,14 @@ function MesAgriculteurs() {
         </div>
 
         {error && <div className="error">{error}</div>}
-        
-        if (agriculteurForm.available === false) {}
+
+
         {agriculteurs.length === 0 && !error && (
           <div className="empty-state">
             <p className="empty-title">Aucun agriculteur disponible</p>
           </div>
         )}
-        else {
+        
             <div className="match-list">
           {agriculteurs.map((agriculteur, index) => (
             <div key={agriculteur.agriculteurId} className="match-card">
@@ -148,9 +149,6 @@ function MesAgriculteurs() {
             </div>
           ))}
         </div>
-
-        }
-
         
 
       </div>
