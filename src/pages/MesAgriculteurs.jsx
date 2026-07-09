@@ -8,32 +8,41 @@ import './MesAgriculteurs.css'
 function MesAgriculteurs() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'))
+
   const [agriculteurs, setAgriculteurs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [avisOuvert, setAvisOuvert] = useState(null)
+
   const [contactes, setContactes] = useState(() => {
     const saved = localStorage.getItem(`contactes_agriculteurs_${user?.id}`)
     return saved ? JSON.parse(saved) : []
   })
-
-  const [agriculteurForm, setAgriculteurForm] = useState({
-    nom: '', prenom: '', localisation: '', available: true,
-    numeroAgriculmobile: '+212-', numeroAgriculwhatsapp: '+212-',
-    produit: [], genre: '', age: ''
-  })
+  
 
   useEffect(() => {
-    if (!user) { navigate('/'); return }
-    if (user.role !== 'ConsommateurCommercant') { navigate('/profile'); return }
+    if (!user) {
+      navigate('/')
+      return
+    }
+
+    if (user.role !== 'ConsommateurCommercant') {
+      navigate('/profile')
+      return
+    }
+
     fetchAgriculteurs()
   }, [])
 
   const fetchAgriculteurs = async () => {
     try {
-      const response = await getMesAgriculteurs();
-      const disponible = response.data.agriculteurs.filter(a => a.available)
-      setAgriculteurs(disponible)
+      const response = await getMesAgriculteurs()
+
+      const disponibles = response.data.agriculteurs.filter(
+        (a) => a.available
+      )
+
+      setAgriculteurs(disponibles)
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors du chargement')
     } finally {
@@ -44,7 +53,9 @@ function MesAgriculteurs() {
   const contacter = (agriculteur) => {
     if (!contactes.includes(agriculteur.agriculteurId)) {
       const nouveaux = [...contactes, agriculteur.agriculteurId]
+
       setContactes(nouveaux)
+
       localStorage.setItem(
         `contactes_agriculteurs_${user?.id}`,
         JSON.stringify(nouveaux)
@@ -52,7 +63,9 @@ function MesAgriculteurs() {
     }
   }
 
-  if (loading) return <div className="loading">Chargement...</div>
+  if (loading) {
+    return <div className="loading">Chargement...</div>
+  }
 
   return (
     <div className="container">
@@ -65,91 +78,118 @@ function MesAgriculteurs() {
               {agriculteurs.length} agriculteur(s) trouvé(s)
             </p>
           </div>
-          <button onClick={() => navigate('/profile')} className="back-button">
+
+          <button
+            onClick={() => navigate('/profile')}
+            className="back-button"
+          >
             ← Mon profil
           </button>
         </div>
 
         {error && <div className="error">{error}</div>}
 
-
-        {agriculteurs.length === 0 && !error && (
+        {agriculteurs.length === 0 && !error ? (
           <div className="empty-state">
-            <p className="empty-title">Aucun agriculteur disponible</p>
+            <p className="empty-title">
+              Aucun agriculteur disponible
+            </p>
           </div>
-        )}
-        
-            <div className="match-list">
-          {agriculteurs.map((agriculteur, index) => (
-            <div key={agriculteur.agriculteurId} className="match-card">
+        ) : (
+          <div className="match-list">
+            {agriculteurs.map((agriculteur) => (
+              <div
+                key={agriculteur.agriculteurId}
+                className="match-card"
+              >
 
-              <div className="card-header">
-                {agriculteur.photoUrl ? (
-                  <img src={agriculteur.photoUrl} alt={agriculteur.nom}
-                    className="match-photo" />
-                ) : (
-                  <div className="match-photo-placeholder">🌾</div>
-                )}
-                <div>
-                  <h2 className="company-name">
-                    {agriculteur.nom} {agriculteur.prenom}
-                  </h2>
-                  <div className="info-row">
-                    <span className="info-tag">{agriculteur.localisation}</span>
-                    <span className="info-tag">
-                       {agriculteur.produit?.join(', ')}
-                    </span>
+                <div className="card-header">
+                  {agriculteur.photoUrl ? (
+                    <img
+                      src={agriculteur.photoUrl}
+                      alt={agriculteur.nom}
+                      className="match-photo"
+                    />
+                  ) : (
+                    <div className="match-photo-placeholder">🌾</div>
+                  )}
+
+                  <div>
+                    <h2 className="company-name">
+                      {agriculteur.nom} {agriculteur.prenom}
+                    </h2>
+
+                    <div className="info-row">
+                      <span className="info-tag">
+                        {agriculteur.localisation}
+                      </span>
+
+                      <span className="info-tag">
+                        {agriculteur.produit?.join(', ')}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <p className="email">{agriculteur.email}</p>
-              <p className="info-tag">{agriculteur.numeroMobile}</p>
-              <p className="info-tag">{agriculteur.numeroWhatsapp}</p>
+                <p className="email">{agriculteur.email}</p>
 
-              {/* Avis existants */}
-              <AffichageAvis userId={agriculteur.userId} />
+                <p className="info-tag">
+                  {agriculteur.numeroMobile}
+                </p>
 
-              {/* Bouton contacter */}
-              <div style={{ marginTop: '1rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <button
-                  className={contactes.includes(agriculteur.agriculteurId)
-                    ? "button-disabled" : "button"}
-                  disabled={contactes.includes(agriculteur.agriculteurId)}
-                  onClick={() => contacter(agriculteur)}
-                >
-                  {contactes.includes(agriculteur.agriculteurId)
-                    ? 'Contacté' : 'Contacter'}
-                </button>
+                <p className="info-tag">
+                  {agriculteur.numeroWhatsapp}
+                </p>
 
-                {/* Bouton laisser un avis */}
-                {contactes.includes(agriculteur.agriculteurId) && (
+                {/* Avis */}
+                <AffichageAvis userId={agriculteur.userId} />
+
+                {/* Boutons */}
+                <div className='button-container'>
                   <button
-                    className="avis-toggle-button"
-                    onClick={() => setAvisOuvert(
-                      avisOuvert === agriculteur.agriculteurId
-                        ? null
-                        : agriculteur.agriculteurId
-                    )}
+                    className={
+                      contactes.includes(agriculteur.agriculteurId)
+                        ? 'button-disabled'
+                        : 'button'
+                    }
+                    disabled={contactes.includes(agriculteur.agriculteurId)}
+                    onClick={() => contacter(agriculteur)}
                   >
-                    {avisOuvert === agriculteur.agriculteurId
-                      ? 'Fermer' : 'Laisser un avis'}
+                    {contactes.includes(agriculteur.agriculteurId)
+                      ? 'Contacté'
+                      : 'Contacter'}
                   </button>
+
+                  {contactes.includes(agriculteur.agriculteurId) && (
+                    <button
+                      className="avis-toggle-button"
+                      onClick={() =>
+                        setAvisOuvert(
+                          avisOuvert === agriculteur.agriculteurId
+                            ? null
+                            : agriculteur.agriculteurId
+                        )
+                      }
+                    >
+                      {avisOuvert === agriculteur.agriculteurId
+                        ? 'Fermer'
+                        : 'Laisser un avis'}
+                    </button>
+                  )}
+                </div>
+
+                {/* Formulaire */}
+                {avisOuvert === agriculteur.agriculteurId && (
+                  <FormulaireAvis
+                    cibleId={agriculteur.userId}
+                    cibleNom={`${agriculteur.nom} ${agriculteur.prenom}`}
+                  />
                 )}
+
               </div>
-
-              {/* Formulaire avis */}
-              {avisOuvert === agriculteur.agriculteurId && (
-                <FormulaireAvis
-                  cibleId={agriculteur.userId}
-                  cibleNom={`${agriculteur.nom} ${agriculteur.prenom}`}
-                />
-              )}
-
-            </div>
-          ))}
-        </div>
-        
+            ))}
+          </div>
+        )}
 
       </div>
     </div>
