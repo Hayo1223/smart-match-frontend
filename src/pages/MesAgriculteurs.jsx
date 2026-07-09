@@ -8,8 +8,9 @@ import './MesAgriculteurs.css'
 function MesAgriculteurs() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'))
-
-  const [agriculteurs, setAgriculteurs] = useState([])
+  const [agriculteurs, setAgriculteurs] = useState({nom: '', prenom: '', localisation: '', available: true,
+    numeroAgriculmobile: '+212-', numeroAgriculwhatsapp: '+212-',
+    produit: [], genre: '', age: ''})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [avisOuvert, setAvisOuvert] = useState(null)
@@ -18,7 +19,7 @@ function MesAgriculteurs() {
     const saved = localStorage.getItem(`contactes_agriculteurs_${user?.id}`)
     return saved ? JSON.parse(saved) : []
   })
-  
+
 
   useEffect(() => {
     if (!user) {
@@ -38,8 +39,8 @@ function MesAgriculteurs() {
     try {
       const response = await getMesAgriculteurs()
 
-      const disponibles = response.data.agriculteurs.filter(
-        (a) => a.available
+      const disponibles = response.data.agriculteur.filter(
+        (agriculteur) => agriculteur.available === true
       )
 
       setAgriculteurs(disponibles)
