@@ -6,26 +6,26 @@ import './Profile.css'
 
 
 const PRODUITS = [
-  { label: 'Tomates', value: 'Tomates', Image: 'https://cdn-icons-png.flaticon.com/512/1135/1135523.png' },
-  { label: 'Oranges', value: 'Oranges', Image: 'https://cdn-icons-png.flaticon.com/512/766/766971.png' },
-  { label: 'Blé', value: 'Blé', Image: 'https://cdn-icons-png.flaticon.com/512/2909/2909771.png' },
-  { label: 'Pommes de terre', value: 'Pommes de terre', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224461.png' },
-  { label: 'Oignons', value: 'Oignons', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224532.png' },
-  { label: 'Carottes', value: 'Carottes', Image: 'https://cdn-icons-png.flaticon.com/512/135/135680.png' },
-  { label: 'Courgettes', value: 'Courgettes', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224517.png' },
-  { label: 'Aubergines', value: 'Aubergines', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224508.png' },
-  { label: 'Poivrons', value: 'Poivrons', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224480.png' },
-  { label: 'Concombres', value: 'Concombres', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224501.png' },
-  { label: 'Pastèques', value: 'Pastèques', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224455.png' },
-  { label: 'Melons', value: 'Melons', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224492.png' },
-  { label: 'Raisins', value: 'Raisins', Image: 'https://cdn-icons-png.flaticon.com/512/765/765785.png' },
-  { label: 'Figues', value: 'Figues', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224524.png' },
-  { label: 'Olives', value: 'Olives', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224470.png' },
-  { label: 'Dattes', value: 'Dattes', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224543.png' },
-  { label: 'Amandes', value: 'Amandes', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224447.png' },
-  { label: 'Grenades', value: 'Grenades', Image: 'https://cdn-icons-png.flaticon.com/512/2224/2224463.png' },
-  { label: 'Citrons', value: 'Citrons', Image: 'https://cdn-icons-png.flaticon.com/512/766/766956.png' },
-  { label: 'Mandarines', value: 'Mandarines', Image: 'https://cdn-icons-png.flaticon.com/512/766/766971.png' },
+  { label: 'Tomates',         value: 'Tomates',         emoji: '🍅' },
+  { label: 'Oranges',         value: 'Oranges',         emoji: '🍊' },
+  { label: 'Blé',             value: 'Blé',             emoji: '🌾' },
+  { label: 'Pommes de terre', value: 'Pommes de terre', emoji: '🥔' },
+  { label: 'Oignons',         value: 'Oignons',         emoji: '🧅' },
+  { label: 'Carottes',        value: 'Carottes',        emoji: '🥕' },
+  { label: 'Courgettes',      value: 'Courgettes',      emoji: '🥒' },
+  { label: 'Aubergines',      value: 'Aubergines',      emoji: '🍆' },
+  { label: 'Poivrons',        value: 'Poivrons',        emoji: '🫑' },
+  { label: 'Concombres',      value: 'Concombres',      emoji: '🥒' },
+  { label: 'Pastèques',       value: 'Pastèques',       emoji: '🍉' },
+  { label: 'Melons',          value: 'Melons',          emoji: '🍈' },
+  { label: 'Raisins',         value: 'Raisins',         emoji: '🍇' },
+  { label: 'Figues',          value: 'Figues',          emoji: '🫐' },
+  { label: 'Olives',          value: 'Olives',          emoji: '🫒' },
+  { label: 'Dattes',          value: 'Dattes',          emoji: '🌴' },
+  { label: 'Amandes',         value: 'Amandes',         emoji: '🥜' },
+  { label: 'Grenades',        value: 'Grenades',        emoji: '🍎' },
+  { label: 'Citrons',         value: 'Citrons',         emoji: '🍋' },
+  { label: 'Mandarines',      value: 'Mandarines',      emoji: '🍊' },
 ]
 
 
@@ -273,6 +273,7 @@ function Profile() {
           />
         ) : (
           <div className="photo-placeholder">
+            <span>'https://cdn-icons-png.flaticon.com/512/2224/2224463.png'</span>
             <p>Aucune photo sélectionnée</p>
           </div>
         )}
