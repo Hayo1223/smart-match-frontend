@@ -83,7 +83,7 @@ function Matching() {
           <div className="empty-state">
             <p className="empty-title">Aucun match trouvé pour le moment</p>
             <p className="empty-text">
-              Complétez votre profil avec plus de compétences et de domaines
+              Complétez votre profil avec plus de produits et d'éléments
               pour augmenter vos chances de matching.
             </p>
             <button onClick={() => navigate('/profile')} className="button">
@@ -108,7 +108,7 @@ function Matching() {
                                       {match.photoUrl ? (
                                             <img src={match.photoUrl} alt={match.nomC} className="match-photo" />
                                             ) : (
-                                                  <div className="match-photo-placeholder">Photo</div>
+                                                  <div className="match-photo-placeholder">📷</div>
                                                     )}
               </div>
 
@@ -158,7 +158,7 @@ function Matching() {
                   )}
                 </div>
               </div>
-              
+
               {/* Avis */}
                 <AffichageAvis userId={match.userId} />              
                 {contactes.includes(match.consommateurCommercantId) && (
