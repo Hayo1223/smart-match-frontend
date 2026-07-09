@@ -8,9 +8,7 @@ import './MesAgriculteurs.css'
 function MesAgriculteurs() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'))
-  const [agriculteurs, setAgriculteurs] = useState({nom: '', prenom: '', localisation: '', available: true,
-    numeroAgriculmobile: '+212-', numeroAgriculwhatsapp: '+212-',
-    produit: [], genre: '', age: ''})
+  const [agriculteurs, setAgriculteurs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [avisOuvert, setAvisOuvert] = useState(null)
