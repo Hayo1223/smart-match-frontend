@@ -68,7 +68,7 @@ function Accueil() {
             >
               <span className="cta-emoji">🛒</span>
               <div>
-                <div className="cta-titre">Je suis Commerçant</div>
+                <div className="cta-titre">Je suis Commerçant / Consommateur</div>
                 <div className="cta-sous-titre">Trouvez des producteurs locaux</div>
               </div>
             </button>
@@ -99,19 +99,19 @@ function Accueil() {
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-nombre">{stats.agriculteurs}</div>
-            <div className="stat-label">🌾 Agriculteurs inscrits</div>
+            <div className="stat-label"> Agriculteurs inscrits</div>
           </div>
           <div className="stat-card">
             <div className="stat-nombre">{stats.consommateurs}</div>
-            <div className="stat-label">🛒 Commerçants inscrits</div>
+            <div className="stat-label"> Commerçants inscrits</div>
           </div>
           <div className="stat-card">
             <div className="stat-nombre">12</div>
-            <div className="stat-label">📍 Villes couvertes</div>
+            <div className="stat-label"> Villes couvertes</div>
           </div>
           <div className="stat-card">
             <div className="stat-nombre">20</div>
-            <div className="stat-label">🥕 Types de produits</div>
+            <div className="stat-label"> Types de produits</div>
           </div>
         </div>
       </section>
@@ -125,7 +125,7 @@ function Accueil() {
             <div className="etape-emoji">👤</div>
             <h3 className="etape-titre">Créez votre profil</h3>
             <p className="etape-desc">
-              Inscrivez-vous en tant qu'agriculteur ou commerçant et renseignez vos produits et localisation.
+              Inscrivez-vous en tant qu'agriculteur ou commerçant/consommateur et renseignez vos produits et localisation.
             </p>
           </div>
           <div className="etape-card">
@@ -149,7 +149,7 @@ function Accueil() {
 
       {/* Footer */}
       <footer className="footer">
-        <p>🌿 SOUK — Plateforme agricole marocaine</p>
+        <p> SOUK — Plateforme agricole marocaine</p>
         <p className="footer-sub">Connecter les producteurs aux acheteurs depuis 2026</p>
       </footer>
 
