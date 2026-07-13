@@ -23,6 +23,10 @@
     transition: transform .3s;
 }
 
+.logo:hover {
+    transform: scale(1.5);
+}
+
 .navbar-login {
   padding: 0.5rem 1.25rem;
   background-color: #6366f1;
