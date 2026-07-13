@@ -1,9 +1,16 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { register } from '../services/api'
 import './Register.css'
 
+
 function Register() {
+  const [searchParams] = useSearchParams()
+  const roleFromUrl = searchParams.get('role') || 'Agriculteur'
+  const [formData, setFormData] = useState({
+    email: '', password: '', role: roleFromUrl
+  })
+
   const navigate = useNavigate()
   const [formData, setFormData] = useState({ email: '', password: '', role: 'Agriculteur' })
   const [error, setError] = useState('')

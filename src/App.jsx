@@ -4,12 +4,16 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import Matching from './pages/Matching'
 import MesAgriculteurs from './pages/MesAgriculteurs'
+import Accueil from './pages/Accueil'
+import Login from './pages/Login'
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Accueil />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/matching" element={<Matching />} />

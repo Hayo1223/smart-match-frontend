@@ -25,6 +25,7 @@ export const laisserAvis = (data) => api.post('/avis', data)
 export const getAvis = (userId) => api.get(`/avis/${userId}`)
 export const getMonAvis = (cibleId) => api.get(`/avis/mon-avis/${cibleId}`)
 export const getMesAgriculteurs = () => api.get('/matching/mes-agriculteurs')
+export const getStats = () => api.get('/stats')
 
 
 export default api
