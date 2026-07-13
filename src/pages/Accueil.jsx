@@ -28,7 +28,7 @@ function Accueil() {
 
       {/* Navbar */}
       <nav className="navbar">
-        <div className="navbar-logo">C:\Users\Ouatt\smart-match-frontend\src\pages\soukLogo.png</div>
+        <div className="navbar-logo"><img src = "C:\Users\Ouatt\smart-match-frontend\src\pages\soukLogo.png" alt = "Logo" /></div>
         <div className="navbar-links">
           <button onClick={() => navigate('/login')} className="navbar-login">
             Se connecter
