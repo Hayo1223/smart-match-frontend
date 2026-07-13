@@ -43,7 +43,7 @@ function Matching() {
     setError("");
   try {
     const response = await getMatches(filters);
-
+  
     setMatches(response.data.matches);
     setAgriculteurnom(response.data.nom);
     setAgriculteurprenom(response.data.prenom);
