@@ -29,7 +29,11 @@ function Accueil() {
 
       {/* Navbar */}
       <nav className="navbar">
-        <div className="navbar-logo"> <img src={soukLogo} alt="SOUK" className='logo'/></div>
+        <div className="navbar-logo"> <img src={soukLogo} alt="SOUK" className='logo'/>
+         <button onClick={() => soukLogo} className="navbar-login">
+            SOUK Logo
+          </button>
+          </div>
         <div className="navbar-links">
           <button onClick={() => navigate('/login')} className="navbar-login">
             Se connecter
