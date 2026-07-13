@@ -28,7 +28,7 @@ function Accueil() {
 
       {/* Navbar */}
       <nav className="navbar">
-        <div className="navbar-logo">"C:\Users\Ouatt\Downloads\soukLogo.png"</div>
+        <div className="navbar-logo">C:\Users\Ouatt\Downloads\soukLogo.png</div>
         <div className="navbar-links">
           <button onClick={() => navigate('/login')} className="navbar-login">
             Se connecter
