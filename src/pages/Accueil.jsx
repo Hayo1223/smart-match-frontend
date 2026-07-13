@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getStats } from '../services/api'
+import './page'
 import './Accueil.css'
 
 function Accueil() {
