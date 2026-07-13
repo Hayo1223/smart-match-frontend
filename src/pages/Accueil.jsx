@@ -31,7 +31,6 @@ function Accueil() {
       <nav className="navbar">
        <div className="navbar-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           <img src={soukLogo} alt="SOUK" className="logo" />
-            <h2 className="logo-text">SOUK</h2>
         </div>
         <div className="navbar-links">
           <button onClick={() => navigate('/login')} className="navbar-login">
