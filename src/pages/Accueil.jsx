@@ -104,11 +104,11 @@ function Accueil() {
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-nombre">{stats.agriculteurs}</div>
-            <div className="stat-label"> <img src={image} alt='Agriculteur' className='logo'/>Agriculteurs inscrits</div>
+            <div className="stat-label"> 🌾Agriculteurs inscrits</div>
           </div>
           <div className="stat-card">
             <div className="stat-nombre">{stats.consommateurs}</div>
-            <div className="stat-label"> <img src={image2} alt='ConsommateurCommercant' className='logo'/>Commerçants inscrits</div>
+            <div className="stat-label"> 🛒 Commerçants inscrits</div>
           </div>
           <div className="stat-card">
             <div className="stat-nombre">12</div>
