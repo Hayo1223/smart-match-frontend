@@ -152,6 +152,7 @@ function Accueil() {
 
       {/* Footer */}
       <footer className="footer">
+        <img src = {soukLogo} alt='Logo'/>
         <p> SOUK — Plateforme agricole marocaine</p>
         <p className="footer-sub">Connecter les producteurs aux acheteurs depuis 2026</p>
       </footer>
