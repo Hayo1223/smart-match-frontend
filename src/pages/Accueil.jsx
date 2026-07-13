@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getStats } from '../services/api'
+import soukLogo from './soukLogo.png'
 import './Accueil.css'
 
 function Accueil() {
@@ -28,7 +29,7 @@ function Accueil() {
 
       {/* Navbar */}
       <nav className="navbar">
-        <div className="navbar-logo"><img src = "C:\Users\Ouatt\smart-match-frontend\public\soukLogo.png"/></div>
+        <div className="navbar-logo"> <img src={soukLogo} alt="SOUK" /></div>
         <div className="navbar-links">
           <button onClick={() => navigate('/login')} className="navbar-login">
             Se connecter
