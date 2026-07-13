@@ -9,6 +9,16 @@ function Matching() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'))
   const [matches, setMatches] = useState([])
+
+  const [filters, setFilters] = useState({
+  nom: "",
+  prenom: "",
+  localisation: "",
+  produit: "",
+  scoreMin: "",
+  scoreMax: ""
+});
+
   const [nom, setAgriculteurnom] = useState('')
   const [prenom, setAgriculteurprenom] = useState('')
   const [loading, setLoading] = useState(true)
@@ -22,23 +32,38 @@ function Matching() {
 
 
   useEffect(() => {
-    if (!user) { navigate('/'); return }
-    if (user.role !== 'Agriculteur') { navigate('/profile'); return }
-    fetchMatches()
+    if (!user) { navigate('/'); return; }
+
+    if (user.role !== 'Agriculteur') { navigate('/profile'); return;}
+      fetchMatches();
   }, [])
 
   const fetchMatches = async () => {
-    try {
-      const response = await getMatches()
-      setMatches(response.data.matches)
-      setAgriculteurnom(response.data.nom)
-      setAgriculteurprenom(response.data.prenom)
-    } catch (err) {
-      setError(err.response?.data?.error || 'Erreur lors du chargement des matchs')
-    } finally {
-      setLoading(false)
-    }
+    setLoading(true);
+    setError("");
+  try {
+    const response = await getMatches(filters);
+
+    setMatches(response.data.matches);
+    setAgriculteurnom(response.data.nom);
+    setAgriculteurprenom(response.data.prenom);
+
+  } catch (err) {
+    setError(
+      err.response?.data?.error ||
+      "Erreur lors du chargement des matchs"
+    );
+  } finally {
+    setLoading(false);
   }
+ };
+
+  const handleFilterChange = (e) => {
+  setFilters({
+    ...filters,
+    [e.target.name]: e.target.value
+  });
+ };
 
   const getScoreColor = (score) => {
     if (score >= 50) return '#16a34a'
@@ -54,7 +79,13 @@ function Matching() {
     )
   }
 
-}
+ }
+
+ const handleKeyUp = (e) => {
+    if (e.key === "Enter") {
+        fetchMatches();
+    }
+};
 
   if (loading) return <div className="loading">Calcul des matchs en cours...</div>
 
@@ -77,6 +108,23 @@ function Matching() {
         </div>
 
         {error && <div className="error">{error}</div>}
+
+        <div className="filters">
+            <input  name="nom" placeholder='Nom' value={filters.nom} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+                
+            <input  name="prenom" placeholder='Prenom' value={filters.prenom} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+          
+            <input  name="localisation" placeholder='Localisation' value={filters.localisation} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+              
+            <input  name="produit" placeholder='Produit' value={filters.produit} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+            
+            <input  type='number' name='scoreMin' placeholder='Score minimum' value={filters.scoreMin} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+            
+            <input  type='number' name="scoreMax" placeholder='Score maximum' value={filters.scoreMax} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+          
+            <button onClick={fetchMatches} disabled={loading}> {loading ? "Recherche en cours..." : "Filtrer"} </button>
+            
+          </div>
 
         {/* Aucun match */}
         {matches.length === 0 && !error && (

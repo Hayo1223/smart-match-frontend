@@ -16,7 +16,12 @@ export const register = (data) => api.post('/auth/register', data)
 export const login = (data) => api.post('/auth/login', data)
 export const getProfile = () => api.get('/profile')
 export const upsertProfile = (data) => api.post('/profile', data)
-export const getMatches = () => api.get('/matching')
+
+export const getMatches = (filters = {}) =>
+  api.get('/matching', {
+    params: filters
+  });
+  
 export const deleteProfile = () => api.delete('/profile')
 export const uploadPhoto = (formData) => api.post('/upload/photo', formData, {
   headers: { 'Content-Type': 'multipart/form-data' }
