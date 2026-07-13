@@ -8,11 +8,9 @@ function Register() {
   const [searchParams] = useSearchParams()
   const roleFromUrl = searchParams.get('role') || 'Agriculteur'
   const [formData, setFormData] = useState({
-    email: '', password: '', role: roleFromUrl
-  })
+    email: '', password: '', role: roleFromUrl })
 
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({ email: '', password: '', role: 'Agriculteur' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 

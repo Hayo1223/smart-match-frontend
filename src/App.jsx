@@ -7,7 +7,6 @@ import MesAgriculteurs from './pages/MesAgriculteurs'
 import Accueil from './pages/Accueil'
 
 
-
 function App() {
   return (
     <BrowserRouter>
