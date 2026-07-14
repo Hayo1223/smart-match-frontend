@@ -146,5 +146,17 @@
      color: #E67E22; 
 }
 
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #FED7AA;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.08);
+}
+
 @media(max-width: 768px){
 }
