@@ -8,7 +8,8 @@
 }
 
 .card {
-  background-color: white;
+  background: white;
+  border: 2px solid #F4A261;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -19,7 +20,7 @@
 .title {
   font-size: 2rem;
   font-weight: bold;
-  color: #6366f1;
+  color: #E67E22;;
   text-align: center;
   margin-bottom: 0.5rem;
 }
@@ -54,7 +55,7 @@
 .label {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #374151;
+  color: #5C4033;
 }
 
 .input {
@@ -78,14 +79,14 @@
 }
 
 .button {
-  background-color: #6366f1;
+  background-color: #E67E22;;
   cursor: pointer;
 
 }
 
 .button-disabled {
 
- background-color: #a5b4fc;
+ background-color: #F4A261;
  cursor: not-allowed;
 
 }
@@ -97,7 +98,7 @@
 }
 
 .link-text {
-  color: #6366f1;
+  color: #E67E22;
   font-weight: bold;
   text-decoration: none;
 }
@@ -109,8 +110,8 @@
 }
 
 .input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  border-color: #E67E22;
+  box-shadow: 0 0 0 3px rgba(230,126,34,.2);
 }
 
 .button {
@@ -118,7 +119,7 @@
 }
 
 .button:hover {
-  background-color: #4f46e5;
+  background-color: #D35400;
 }
 
 @media (max-width: 480px) {

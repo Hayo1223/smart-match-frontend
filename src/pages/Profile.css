@@ -1,14 +1,15 @@
 .container {
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: #FFF8F1;
   padding: 2rem 1rem;
 }
 
 .card {
-  background-color: white;
+  background: white;
+  border: 2px solid #F4A261;
+  box-shadow: 0 8px 18px rgba(230,126,34,.15);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
@@ -30,11 +31,11 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #E67E22;
 }
 
 .subtitle {
-  color: #64748b;
+  color: #7B5E57;
   margin-top: 0.5rem;
 }
 
@@ -46,14 +47,14 @@
 }
 
 .success {
-  background-color: #f0fdf4;
-  color: #16a34a;
+  background-color:  #F0FFF4;
+  color: #2E8B57;
 
 }
 
 .error {
-  background-color: #fef2f2;
-  color: #ef4444;
+  background-color: #FDECEC;
+  color:  #C0392B;
 
 }
 
@@ -96,6 +97,12 @@
   font-size: 1rem;
 }
 
+.input:focus {
+    border-color: #E67E22;
+    box-shadow: 0 0 0 3px rgba(230,126,34,.18);
+    outline: none;
+}
+
 .button,
 .button-disabled,
 .match-button,
@@ -110,30 +117,40 @@
 }
 
 .button {
-
-  background-color: #6366f1;
+  background-color: #E67E22;
   color: white;
+}
 
+.button:hover {
+    background-color: #D35400;
 }
 
 .button-disabled {
 
-  background-color: #a5b4fc;
+  background-color: #F4A261;
   color: white;
   cursor: not-allowed;  
 }
 
 .match-button {
 
-  background-color: #10b981;
+  background-color: #2E8B57;
   color: white;
 
 }
 
+.match-button:hover {
+    background-color: #246B45;
+}
+
 .logout-button {
-  background-color: #f1f5f9;
-  color: #64748b;
+  background-color:  #FFF3E0;
+  color: #5C4033;
   cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #FFE0B2;
 }
 
 .loading {
@@ -152,12 +169,12 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  background-color: #ef4444;
+  background-color: #C0392B;
   color: white;
 }
 
 .delete-button:hover {
-  background-color: #dc2626;
+  background-color: #A93226;
 }
 
 .checkbox-group {
@@ -186,8 +203,8 @@
 }
 
 .checkbox-item-selected {
-  background-color: #ede9fe;
-  border-color: #6366f1;
+  background-color: #FFF3E0;
+  border: 2px solid #E67E22;
   border-radius: 8px;
   padding: 0.25rem;
 }
@@ -203,7 +220,7 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #6366f1;
+  border: 3px solid #E67E22;
 }
 
 .photo-placeholder {
@@ -227,7 +244,7 @@
 
 .photo-upload-label {
   padding: 0.6rem 1.2rem;
-  background-color: #6366f1;
+  background-color: #E67E22;
   color: white;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -236,7 +253,7 @@
 }
 
 .photo-upload-label:hover {
-  background-color: #4f46e5;
+  background-color: #D35400;
 }
 
 .produit-emoji {
