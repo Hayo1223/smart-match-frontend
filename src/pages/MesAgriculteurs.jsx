@@ -9,6 +9,16 @@ function MesAgriculteurs() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('user'))
   const [agriculteurs, setAgriculteurs] = useState([])
+
+  const [filters, setFilters] = useState({
+  nom: "",
+  prenom: "",
+  localisation: "",
+  produit: "",
+  scoreMin: "",
+  scoreMax: ""
+});
+
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [avisOuvert, setAvisOuvert] = useState(null)
@@ -34,15 +44,28 @@ function MesAgriculteurs() {
   }, [])
 
   const fetchAgriculteurs = async () => {
+    setLoading(true);
+    setError("");
     try {
-      const response = await getMesAgriculteurs()
-      setAgriculteurs(response.data.agriculteurs)
+      const response = await getMesAgriculteurs(filters);
+  
+    setMatches(response.data.matches);
+    setAgriculteurnom(response.data.nom);
+    setAgriculteurprenom(response.data.prenom);
+
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors du chargement')
     } finally {
       setLoading(false)
     }
   }
+
+  const handleFilterChange = (e) => {
+  setFilters({
+    ...filters,
+    [e.target.name]: e.target.value
+  });
+ }; 
 
   const contacter = (agriculteurs) => {
     if (!contactes.includes(agriculteurs.agriculteurId)) {
@@ -56,6 +79,12 @@ function MesAgriculteurs() {
       )
     }
   }
+
+  const handleKeyUp = (e) => {
+    if (e.key === "Enter") {
+        fetchMatches();
+    }
+};
 
   if (loading) {
     return <div className="loading">Chargement...</div>
@@ -82,6 +111,23 @@ function MesAgriculteurs() {
         </div>
 
         {error && <div className="error">{error}</div>}
+
+        <div className="filters">
+            <input  name="nom" placeholder='Nom' value={filters.nom} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+                
+            <input  name="prenom" placeholder='Prenom' value={filters.prenom} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+          
+            <input  name="localisation" placeholder='Localisation' value={filters.localisation} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+              
+            <input  name="produit" placeholder='Produit' value={filters.produit} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+            
+            <input  type='number' name='scoreMin' placeholder='Score minimum' value={filters.scoreMin} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+            
+            <input  type='number' name="scoreMax" placeholder='Score maximum' value={filters.scoreMax} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
+          
+            <button onClick={fetchMatches} disabled={loading}> {loading ? "Recherche en cours..." : "Filtrer"} </button>
+            
+          </div>
 
         {agriculteurs.length === 0 && !error ? (
           <div className="empty-state">
