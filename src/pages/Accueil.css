@@ -31,8 +31,8 @@
     width:clamp(130px,13vw,190px);
     height:auto;
     object-fit:contain;
-
-    transition:.35s;
+    display: block;
+    transition: transform 0.35s ease, filter 0.35s ease;
 }
 
 .logo:hover{
@@ -328,11 +328,11 @@
 
 /* Footer */
 .footer {
-  background-color: #7c2d12;
+  background: #7c2d12;
   color: #fed7aa;
-  text-align: center;
-  padding: 2rem;
+  padding: 2.5rem 1rem;
   font-size: 0.9rem;
+  text-align: center;
 }
 
 .footer-sub { 
@@ -341,9 +341,23 @@
   opacity: 0.7; 
 }
 
+.footer .Logo {
+    margin-bottom: 1rem;
+}
+
 .Logo {
-    width: clamp(100px, 15vw, 180px);
+    width: clamp(90px, 10vw, 140px);
     height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.Logo:hover {
+    transform: scale(1.05);
+    opacity: 1;
 }
 
 /* Responsive */
