@@ -143,9 +143,11 @@
   color: #ea580c;
   font-weight: 600;
   text-decoration: none;
+  transition: .25s;
 }
 
 .link-text:hover {
+  color: #c2410c;
   text-decoration: underline;
 }
 
