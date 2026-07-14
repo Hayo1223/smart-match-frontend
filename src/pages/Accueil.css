@@ -1,6 +1,6 @@
 .accueil {
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: linear-gradient(180deg, #fff7ed 0%, #fffbeb 100%);
   font-family: 'Inter', system-ui, sans-serif;
 }
 
@@ -29,13 +29,18 @@
 
 .navbar-login {
   padding: 0.5rem 1.25rem;
-  background-color: #6366f1;
+  background-color:  #f97316;
   color: white;
   border: none;
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
+  transition: .25s;
+}
+
+.navbar-login:hover{
+    background:#ea580c;
 }
 
 /* Hero */
@@ -56,8 +61,8 @@
 
 .hero-badge {
   display: inline-block;
-  background-color: #dcfce7;
-  color: #16a34a;
+  background: #ffedd5;
+  color: #ea580c;
   padding: 0.4rem 1rem;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -74,7 +79,7 @@
 }
 
 .hero-accent {
-  color: #16a34a;
+  color: #f97316;
 }
 
 .hero-description {
@@ -113,7 +118,7 @@
 }
 
 .cta-commercant {
-  background-color: #6366f1;
+  background-color: #f97316;
   color: white;
 }
 
@@ -133,14 +138,18 @@
 }
 
 .hero-login-link {
-  color: #6366f1;
+  color: #ea580c;
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
 }
 
 /* Visuel emoji */
-.hero-visuel { flex: 1; display: flex; justify-content: center; }
+.hero-visuel { 
+   flex: 1;
+   display: flex; 
+   justify-content: center;
+   }
 
 .hero-emoji-grid {
   display: grid;
@@ -152,7 +161,8 @@
 .hero-emoji-item {
   width: 60px;
   height: 60px;
-  background-color: white;
+  background:#fff7ed;
+  border:2px solid #fed7aa;
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -188,14 +198,14 @@
 .stat-card {
   text-align: center;
   padding: 1.5rem;
-  background-color: #f8fafc;
+  background-color: #fff7ed;
   border-radius: 12px;
 }
 
 .stat-nombre {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #16a34a;
+  color: #ea580c;
 }
 
 .stat-label {
@@ -241,7 +251,7 @@
   transform: translateX(-50%);
   width: 2rem;
   height: 2rem;
-  background-color: #6366f1;
+  background-color: #f97316;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -251,20 +261,37 @@
   font-size: 0.9rem;
 }
 
-.etape-emoji { font-size: 2.5rem; margin-bottom: 1rem; margin-top: 0.5rem; }
-.etape-titre { font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 0.75rem; }
-.etape-desc { font-size: 0.9rem; color: #64748b; line-height: 1.6; }
+.etape-emoji { 
+   font-size: 2.5rem;
+   margin-bottom: 1rem; 
+   margin-top: 0.5rem; 
+  }
+.etape-titre { 
+   font-size: 1.1rem;
+   font-weight: 700;
+   color: #1e293b; 
+   margin-bottom: 0.75rem;
+   }
+.etape-desc { 
+  font-size: 0.9rem; 
+  color: #64748b; 
+  line-height: 1.6; 
+}
 
 /* Footer */
 .footer {
-  background-color: #1e293b;
-  color: #94a3b8;
+  background-color: #7c2d12;
+  color: #fed7aa;
   text-align: center;
   padding: 2rem;
   font-size: 0.9rem;
 }
 
-.footer-sub { font-size: 0.8rem; margin-top: 0.25rem; opacity: 0.7; }
+.footer-sub { 
+  font-size: 0.8rem; 
+  margin-top: 0.25rem; 
+  opacity: 0.7; 
+}
 
 .Logo {
     width: clamp(100px, 15vw, 180px);

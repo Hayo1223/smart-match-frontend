@@ -1,12 +1,13 @@
 .container { min-height: 100vh;
-     background-color: #f8fafc;
+     background-color:  #FFF8F1;
       padding: 2rem; }
 .wrapper { max-width: 800px;
      margin: 0 auto;
-     background-color: #fff;
+     background-color: #FFF8F1;
+     border: 2px solid #F4A261;
+     box-shadow: 0 8px 18px rgba(230,126,34,.15);
      padding: 2rem;
-     border-radius: 12px;
-     box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+     border-radius: 12px; 
     }
 .header { display: flex;
      justify-content: space-between;
@@ -15,28 +16,34 @@
 }
 .title { font-size: 1.8rem;
      font-weight: 700; 
-     color: #1e293b; }
-.subtitle { color: #64748b;
+     color:  #E67E22; }
+.subtitle { color:  #7B5E57;
      margin-top: 0.25rem;
      }
 .back-button { padding: 0.6rem 1.2rem;
-     background-color: #f1f5f9;
-      color: #64748b;
-       border: none;
-        border-radius: 8px;
-         font-size: 0.9rem;
-          font-weight: 600;
-           cursor: pointer;
-         }
-.error { background-color: #fef2f2; 
-    color: #ef4444; padding: 0.75rem;
+     background-color: #FFF3E0;
+     color: #5C4033;
+     border: none;
      border-radius: 8px;
-      margin-bottom: 1rem;
-     }
+     font-size: 0.9rem;
+     font-weight: 600;
+     cursor: pointer;
+         }
+
+.back-button:hover {
+    background-color: #FFE0B2;
+}
+.error { background-color: #FDECEC; 
+    color:  #C0392B;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+ }
 .empty-state { background-color: white;
      padding: 3rem;
-      border-radius: 12px; 
-      text-align: center; 
+     border: 2px dashed #F4A261;
+     border-radius: 12px; 
+     text-align: center; 
     }
 .empty-title { font-size: 1.2rem;
      font-weight: 600;
@@ -48,8 +55,9 @@
     }
 .match-card { background-color: white;
      padding: 1.5rem 2rem;
-      border-radius: 12px;
-       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+     border: 2px solid #F4A261;
+     border-radius: 12px;
+     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
      }
 .card-header { display: flex; 
     align-items: center; 
@@ -58,23 +66,23 @@
      }
 .match-photo { width: 70px;
      height: 70px;
-      border-radius: 50%;
-       object-fit: cover;
-        border: 2px solid #6366f1;
-         flex-shrink: 0;
+     border-radius: 50%;
+     object-fit: cover;
+     border: 3px solid #E67E22;
+     flex-shrink: 0;
          }
 .match-photo-placeholder { width: 70px;
      height: 70px;
-      border-radius: 50%;
-       background-color: #f1f5f9;
-        display: flex;
-         align-items: center;
-          justify-content: center;
-           font-size: 1.8rem;
-            flex-shrink: 0; }
-.company-name { font-size: 1.3rem;
+     border-radius: 50%;
+     background-color: #f1f5f9;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.8rem;
+     flex-shrink: 0; }
+.name { font-size: 1.3rem;
     font-weight: 700; 
-    color: #1e293b;
+    color: #5C4033;
      margin-bottom: 0.5rem;
      }
 .info-row { display: flex; 
@@ -82,48 +90,61 @@
     flex-wrap: wrap; 
     margin-bottom: 0.75rem;
  }
-.info-tag { background-color: #f1f5f9;
+.info-tag { background-color: #FFF3E0;
      padding: 0.3rem 0.75rem;
       border-radius: 20px;
        font-size: 0.85rem; 
-       color: #475569; 
+       color: #5C4033;
        display: inline-block;
         margin-bottom: 0.3rem;
      }
-.email { color: #6366f1;
+.email { color: #E67E22;
      font-size: 0.9rem;
       margin-bottom: 0.5rem;
      }
 .button { padding: 0.75rem 1rem;
-     background-color: #6366f1; 
+     background-color: #E67E22; 
      color: white;
-      border: none; 
-      border-radius: 8px;
-       font-size: 0.9rem;
-        font-weight: 600;
-         cursor: pointer;
+     border: none; 
+     border-radius: 8px;
+     font-size: 0.9rem;
+     font-weight: 600;
+     cursor: pointer;
          }
+
+.button:hover {
+    background-color: #D35400;
+}
 .button-disabled { padding: 0.75rem 1rem;
-     background-color: #a5b4fc;
-      color: white; 
-      border: none;
-       border-radius: 8px;
-        font-size: 0.9rem;
-         font-weight: 600;
-          cursor: not-allowed;
+     background-color: #F4A261;
+     color: white; 
+     border: none;
+     border-radius: 8px;
+     font-size: 0.9rem;
+     font-weight: 600;
+     cursor: not-allowed;
          }
 .avis-toggle-button { background: none;
-     border: 1px solid #6366f1;
-      color: #6366f1;
-       padding: 0.4rem 0.8rem;
-        border-radius: 6px;
-         font-size: 0.85rem; 
-         font-weight: 600;
-          cursor: pointer;
+     border: 2px solid #E67E22;
+     color: #E67E22;
+     padding: 0.4rem 0.8rem;
+     border-radius: 6px;
+     font-size: 0.85rem; 
+     font-weight: 600;
+     cursor: pointer;
          }
+
+.avis-toggle-button:hover {
+    background-color: #FFF3E0;
+}
+
 .loading { min-height: 100vh;
      display: flex;
-      align-items: center; 
-      justify-content: center; 
-      font-size: 1.2rem;
-      color: #64748b; }
+     align-items: center; 
+     justify-content: center; 
+     font-size: 1.2rem;
+     color: #E67E22; 
+}
+
+@media(max-width: 768px){
+}

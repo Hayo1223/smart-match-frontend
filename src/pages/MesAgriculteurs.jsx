@@ -147,7 +147,7 @@ function MesAgriculteurs() {
                   )}
 
                   <div>
-                    <h2 className="company-name">
+                    <h2 className="name">
                       {agriculteurs.nom} {agriculteurs.prenom}
                     </h2>
 

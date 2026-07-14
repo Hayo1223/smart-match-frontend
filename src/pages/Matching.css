@@ -1,6 +1,6 @@
 .container {
     padding: 2rem 1rem;
-    background: #f8fafc;
+    background:  linear-gradient(180deg,#FFF8F1 0%,#FFF3E6 100%);
     min-height: 100vh;
 }
 
@@ -13,16 +13,17 @@
 
 
 .match-card {
-    background: #fff;
+    background: #ffffff;
+    border: 1px solid #FED7AA;
+    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.12);
     padding: 2rem;
     border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .match-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    transform:translateY(-4px);
+    box-shadow:0 12px 28px rgba(234,88,12,.18);
 }
 
 
@@ -39,7 +40,7 @@
     margin: 0;
     font-size: 2rem;
     font-weight: 700;
-    color: #1f2937;
+    color: #EA580C;
 }
 
 .info {
@@ -77,9 +78,10 @@ button:hover {
 }
 
 .avis-toggle-button {
-  background: none;
-  border: 1px solid #6366f1;
-  color: #6366f1;
+  background:white;
+  border:1px solid #F97316;
+  color:#F97316;
+  transition:.25s;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -89,7 +91,14 @@ button:hover {
 }
 
 .avis-toggle-button:hover {
-  background-color: #ede9fe;
+  background:#F97316;
+  color:white;
+}
+
+.title,
+button,
+.match-card{
+    transition:.25s ease;
 }
 
 @media (max-width: 768px) {
