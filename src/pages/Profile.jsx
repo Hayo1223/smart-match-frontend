@@ -388,7 +388,7 @@ function Profile() {
                     <input  type="tel"    className="input"
                         value={agriculteurForm.numeroAgriculmobile}
                             onChange={(e) => { const digits = e.target.value
-                                      .replace("+212-", "")
+                                      .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
                                       setAgriculteurForm({
@@ -396,15 +396,15 @@ function Profile() {
                                       numeroAgriculmobile: `+212-${digits}`,
                                      });
                                         }}
-                                          placeholder="+212-600000000"
-                                          pattern="^\+212-[5-7][0-9]{8}$"
+                                          placeholder="+212-000000000"
+                                          pattern="^\+212-[0-9][0-9]{8}$"
                                           required/>
                 </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={agriculteurForm.numeroAgriculwhatsapp}
                   onChange={e => {const digits = e.target.value
-                                      .replace("+212-", "")
+                                      .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
                                       setAgriculteurForm({
@@ -412,8 +412,8 @@ function Profile() {
                                       numeroAgriculwhatsapp: `+212-${digits}`,
                                      });
                                         }}
-                                          placeholder="+212-600000000"
-                                          pattern="^\+212-[5-7][0-9]{8}$"
+                                          placeholder="+212-000000000"
+                                          pattern="^\+212-[0-9][0-9]{8}$"
                                           required />
               </div>
               <div className="field">
@@ -498,7 +498,7 @@ function Profile() {
                 <label className="label">Numéro mobile</label>
                 <input type="tel" className="input" value={consommateurCommercantForm.numeroMobile}
                   onChange={e => {const digits = e.target.value
-                                      .replace("+212-", "")
+                                      .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
                                       setConsommateurCommercantForm({
@@ -507,14 +507,14 @@ function Profile() {
                                       });
                                     }}
                                     placeholder="+212-600000000" 
-                                    pattern="^\+212-[5-7][0-9]{8}$" 
+                                    pattern="^\+212-[0-9][0-9]{8}$" 
                                     required />
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
                 <input type="tel" className="input" value={consommateurCommercantForm.numeroWhatsapp}
                  onChange={e => {const digits = e.target.value
-                                      .replace("+212-", "")
+                                      .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
                                       setConsommateurCommercantForm({
@@ -523,7 +523,7 @@ function Profile() {
                                       });
                                     }}
                                     placeholder="+212-600000000" 
-                                    pattern="^\+212-[5-7][0-9]{8}$" 
+                                    pattern="^\+212-[0-9][0-9]{8}$" 
                                     required />
               </div>                 
               <div className="field">
