@@ -14,9 +14,7 @@ function MesAgriculteurs() {
   nom: "",
   prenom: "",
   localisation: "",
-  produit: "",
-  scoreMin: "",
-  scoreMax: ""
+  produit: ""
 });
 
   const [loading, setLoading] = useState(true)
@@ -49,9 +47,7 @@ function MesAgriculteurs() {
     try {
       const response = await getMesAgriculteurs(filters);
   
-    setMatches(response.data.matches);
-    setAgriculteurnom(response.data.nom);
-    setAgriculteurprenom(response.data.prenom);
+    setAgriculteurs(response.data.agriculteurs);
 
     } catch (err) {
       setError(err.response?.data?.error || 'Erreur lors du chargement')
@@ -82,7 +78,7 @@ function MesAgriculteurs() {
 
   const handleKeyUp = (e) => {
     if (e.key === "Enter") {
-        fetchMatches();
+        fetchAgriculteurs();
     }
 };
 
@@ -121,11 +117,7 @@ function MesAgriculteurs() {
               
             <input  name="produit" placeholder='Produit' value={filters.produit} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
             
-            <input  type='number' name='scoreMin' placeholder='Score minimum' value={filters.scoreMin} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
-            
-            <input  type='number' name="scoreMax" placeholder='Score maximum' value={filters.scoreMax} onChange={handleFilterChange} onKeyUp={handleKeyUp}/>
-          
-            <button onClick={fetchMatches} disabled={loading}> {loading ? "Recherche en cours..." : "Filtrer"} </button>
+            <button onClick={fetchAgriculteurs} disabled={loading}> {loading ? "Recherche en cours..." : "Filtrer"} </button>
             
           </div>
 
