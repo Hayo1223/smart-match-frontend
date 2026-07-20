@@ -47,7 +47,8 @@ function Accueil() {
           <div className="hero-badge">🇲🇦 Plateforme agricole marocaine</div>
           <h1 className="hero-titre">
             Connectez les <span className="hero-accent">agriculteurs</span><br />
-            aux consommateurs/commerçants du Maroc
+            aux consommateurs ou 
+            commerçants du Maroc
           </h1>
           <p className="hero-description">
             Vendez vos produits directement, sans intermédiaire.<br />
