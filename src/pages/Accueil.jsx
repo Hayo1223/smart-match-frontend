@@ -47,7 +47,7 @@ function Accueil() {
           <div className="hero-badge">🇲🇦 Plateforme agricole marocaine</div>
           <h1 className="hero-titre">
             Connectez les <span className="hero-accent">agriculteurs</span><br />
-            aux commerçants du Maroc
+            aux consommateurs/commerçants du Maroc
           </h1>
           <p className="hero-description">
             Vendez vos produits directement, sans intermédiaire.<br />
@@ -157,6 +157,9 @@ function Accueil() {
         <img src = {soukLogo} alt='Logo' className='Logo'/>
         <p> SOUK — Plateforme agricole marocaine</p>
         <p className="footer-sub">Connecter les producteurs aux acheteurs depuis 2026</p>
+        <p className="footer-sub"> Vos données sont protégées par un chiffrement 
+          de pointe et traitées avec une transparence totale, car votre tranquillité
+           d'esprit est notre priorité absolue.</p>
       </footer>
 
     </div>
