@@ -331,6 +331,7 @@ function Profile() {
         <div className="header">
           <div>
             <h1 className="title">Mon Profil</h1>
+            <p className="subtitle">N'oubliez pas de compléter votre profil </p>
             <p className="subtitle">
               {user.role === 'Agriculteur' ? 'Agriculteur' : 'Consommateur/Commerçant'} — {user.email}
             </p>
