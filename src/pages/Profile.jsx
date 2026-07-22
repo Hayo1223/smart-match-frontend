@@ -52,7 +52,7 @@ function Profile() {
     produit: [], genre: '', age: ''
   })
 
-  const [consommateurCommercantForm, setConsommateurCommercantForm] = useState({
+  const [grossiseCommercantForm, setGrossiseCommercantForm] = useState({
     nomC: '', prenomC: '', localisationC: '', numeroMobile: '+212-',
     numeroWhatsapp: '+212-', demande: [], genre: '', metier: '', age: ''
   })
@@ -85,7 +85,7 @@ function Profile() {
         })
         setPhotoPreview(p.photoUrl || null)
       } else {
-        setConsommateurCommercantForm({
+        setGrossiseCommercantForm({
           nomC: p.nomC || '',
           prenomC: p.prenomC || '',
           localisationC: p.localisationC || '',
@@ -131,12 +131,12 @@ function Profile() {
 
   useEffect(() => {
     if (!draftKey || loading || !user) return
-    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : consommateurCommercantForm
+    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : grossiseCommercantForm
     const timeout = setTimeout(() => {
       localStorage.setItem(draftKey, JSON.stringify(formToSave))
     }, 500)
     return () => clearTimeout(timeout)
-  }, [agriculteurForm, consommateurCommercantForm, draftKey, loading, user])
+  }, [agriculteurForm, grossiseCommercantForm, draftKey, loading, user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -150,15 +150,15 @@ function Profile() {
         data = { ...agriculteurForm }
       } else {
         data = {
-          nomC: consommateurCommercantForm.nomC,
-          prenomC: consommateurCommercantForm.prenomC,
-          localisationC: consommateurCommercantForm.localisationC,
-          numeroMobile: consommateurCommercantForm.numeroMobile,
-          numeroWhatsapp: consommateurCommercantForm.numeroWhatsapp,
-          demande: consommateurCommercantForm.demande,
-          genre: consommateurCommercantForm.genre,
-          metier: consommateurCommercantForm.metier,
-          age: consommateurCommercantForm.age
+          nomC: grossiseCommercantForm.nomC,
+          prenomC: grossiseCommercantForm.prenomC,
+          localisationC: grossiseCommercantForm.localisationC,
+          numeroMobile: grossiseCommercantForm.numeroMobile,
+          numeroWhatsapp: grossiseCommercantForm.numeroWhatsapp,
+          demande: grossiseCommercantForm.demande,
+          genre: grossiseCommercantForm.genre,
+          metier: grossiseCommercantForm.metier,
+          age: grossiseCommercantForm.age
         }
       }
 
@@ -333,7 +333,7 @@ function Profile() {
             <h1 className="title">Mon Profil</h1>
             <p className="subtitle">N'oubliez pas de compléter votre profil </p>
             <p className="subtitle">
-              {user.role === 'Agriculteur' ? 'Agriculteur' : 'Consommateur/Commerçant'} — {user.email}
+              {user.role === 'Agriculteur' ? 'Agriculteur' : 'Grossise/Commerçant'} — {user.email}
             </p>
           </div>
           <div className="header-buttons">
@@ -343,7 +343,7 @@ function Profile() {
               </button>
             )}
             
-            {user.role === 'ConsommateurCommercant' && (
+            {user.role === 'GrossiseCommercant' && (
               <button onClick={() => navigate('/mes-agriculteurs')} className="match-button">
                     Voir les agriculteurs
               </button>
@@ -466,44 +466,44 @@ function Profile() {
         )}
 
         {/* Formulaire ConsommateurCommercant */}
-        {user.role === 'ConsommateurCommercant' && (
+        {user.role === 'GrossiseCommercant' && (
           <form onSubmit={handleSubmit} className="form">
 
             <div className="grid">
               <div className="field">
                 <label className="label">Nom</label>
-                <input className="input" value={consommateurCommercantForm.nomC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, nomC: e.target.value})}
+                <input className="input" value={grossiseCommercantForm.nomC}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, nomC: e.target.value})}
                   placeholder="Nom" required />
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
-                <input className="input" value={consommateurCommercantForm.prenomC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, prenomC: e.target.value})}
+                <input className="input" value={grossiseCommercantForm.prenomC}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, prenomC: e.target.value})}
                   placeholder="Prénom" required />
               </div>
               <div className="field">
                 <label className="label">Métier</label>
-                <input className="input" value={consommateurCommercantForm.metier}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, metier: e.target.value})}
+                <input className="input" value={grossiseCommercantForm.metier}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, metier: e.target.value})}
                   placeholder="Restaurateur, Épicier..." required />
               </div>
               <div className="field">
                 <label className="label">Localisation</label>
                 <SelectVilles
-                  value={consommateurCommercantForm.localisationC}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, localisationC: e.target.value})}
+                  value={grossiseCommercantForm.localisationC}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, localisationC: e.target.value})}
                 />
               </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
-                <input type="tel" className="input" value={consommateurCommercantForm.numeroMobile}
+                <input type="tel" className="input" value={grossiseCommercantForm.numeroMobile}
                   onChange={e => {const digits = e.target.value
                                       .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
-                                      setConsommateurCommercantForm({
-                                        ...consommateurCommercantForm,
+                                      setGrossiseCommercantForm({
+                                        ...grossiseCommercantForm,
                                         numeroMobile: `+212-${digits}`,
                                       });
                                     }}
@@ -513,13 +513,13 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
-                <input type="tel" className="input" value={consommateurCommercantForm.numeroWhatsapp}
+                <input type="tel" className="input" value={grossiseCommercantForm.numeroWhatsapp}
                  onChange={e => {const digits = e.target.value
                                       .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
-                                      setConsommateurCommercantForm({
-                                        ...consommateurCommercantForm,
+                                      setGrossiseCommercantForm({
+                                        ...grossiseCommercantForm,
                                         numeroWhatsapp: `+212-${digits}`,
                                       });
                                     }}
@@ -529,8 +529,8 @@ function Profile() {
               </div>                 
               <div className="field">
                 <label className="label">Genre</label>
-                <select className="input" value={consommateurCommercantForm.genre}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, genre: e.target.value})}>
+                <select className="input" value={grossiseCommercantForm.genre}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, genre: e.target.value})}>
                   <option value="">-- Sélectionner --</option>
                   <option value="Feminin">Féminin</option>
                   <option value="Masculin">Masculin</option>
@@ -539,8 +539,8 @@ function Profile() {
               <div className="field">
                 <label className="label">Âge</label>
                 <input className="input" type="number" min="5" max="200"
-                  value={consommateurCommercantForm.age}
-                  onChange={e => setConsommateurCommercantForm({...consommateurCommercantForm, age: e.target.value})}
+                  value={grossiseCommercantForm.age}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, age: e.target.value})}
                   placeholder="25" required />
               </div>
             </div>
@@ -548,8 +548,8 @@ function Profile() {
             <div className="field">
               <label className="label">Produits recherchés</label>        
               <CheckboxProduits
-                selected={consommateurCommercantForm.demande}                
-                onToggle={(p) => toggleProduit(p, consommateurCommercantForm, setConsommateurCommercantForm, 'demande')}/>
+                selected={grossiseCommercantForm.demande}                
+                onToggle={(p) => toggleProduit(p, grossiseCommercantForm, setGrossiseCommercantForm, 'demande')}/>
             </div>
  
             <PhotoUpload />

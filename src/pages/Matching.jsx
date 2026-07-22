@@ -72,8 +72,8 @@ function Matching() {
   }
 
   const contacter = (match) => {
-  if (!contactes.includes(match.consommateurCommercantId)) {
-    const nouveauxContactes = [...contactes, match.consommateurCommercantId]
+  if (!contactes.includes(match.grossiseCommercantId)) {
+    const nouveauxContactes = [...contactes, match.grossiseCommercantId]
     setContactes(nouveauxContactes)
     localStorage.setItem(`contactes_${user?.id}`, JSON.stringify(nouveauxContactes)
     )
@@ -143,7 +143,7 @@ function Matching() {
         {/* Liste des matchs */}
         <div className="match-list">
           {matches.map((match, index) => (
-            <div key={match.consommateurCommercantId} className="match-card">
+            <div key={match.grossiseCommercantId} className="match-card">
 
               {/* Rang et score */}
               <div className="card-header">
@@ -185,19 +185,19 @@ function Matching() {
 
                 <button
                   className={
-                     contactes.includes(match.consommateurCommercantId)
+                     contactes.includes(match.grossiseCommercantId)
                       ? "button-disabled"
                       : "button"
                      }
-                       disabled={contactes.includes(match.consommateurCommercantId)}
+                       disabled={contactes.includes(match.grossiseCommercantId)}
                        onClick={() => contacter(match)}
                   >
-                      {contactes.includes(match.consommateurCommercantId)
+                      {contactes.includes(match.grossiseCommercantId)
                       ? "Contacté"
                       : "Contacter le profil"}
                  </button>
 
-                 {contactes.includes(match.consommateurCommercantId) && (
+                 {contactes.includes(match.grossiseCommercantId) && (
                  <div className="contact-message">
                    <p className="contact-message">Vous avez contacté {match.nomC} {match.prenomC}.</p>
                    <p>Localisation : {match.localisationC}</p>
@@ -209,19 +209,19 @@ function Matching() {
 
               {/* Avis */}
                 <AffichageAvis userId={match.userId} />              
-                {contactes.includes(match.consommateurCommercantId) && (
+                {contactes.includes(match.grossiseCommercantId) && (
                     <div className="avis-container">
                           <button  className="avis-toggle-button"
                               onClick={() => setAvisOuvert(
-                                avisOuvert === match.consommateurCommercantId
+                                avisOuvert === match.grossiseCommercantId
                                     ? null
-                                    : match.consommateurCommercantId
+                                    : match.grossiseCommercantId
                                     )}>
-                                {avisOuvert === match.consommateurCommercantId
+                                {avisOuvert === match.grossiseCommercantId
                                         ? 'Fermer'
                                         : 'Laisser un avis'}
                             </button>
-                 {avisOuvert === match.consommateurCommercantId && (
+                 {avisOuvert === match.grossiseCommercantId && (
                         <FormulaireAvis
                             cibleId={match.userId}
                             cibleNom={`${match.nomC} ${match.prenomC}`}/>

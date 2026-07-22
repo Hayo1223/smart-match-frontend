@@ -33,7 +33,7 @@ function MesAgriculteurs() {
       return
     }
 
-    if (user.role !== 'ConsommateurCommercant') {
+    if (user.role !== 'GrossiseCommercant') {
       navigate('/profile')
       return
     }
