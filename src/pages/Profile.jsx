@@ -52,7 +52,7 @@ function Profile() {
     produit: [], genre: '', age: ''
   })
 
-  const [grossiseCommercantForm, setGrossiseCommercantForm] = useState({
+  const [grossisteCommercantForm, setGrossisteCommercantForm] = useState({
     nomC: '', prenomC: '', localisationC: '', numeroMobile: '+212-',
     numeroWhatsapp: '+212-', demande: [], genre: '', metier: '', age: ''
   })
@@ -85,7 +85,7 @@ function Profile() {
         })
         setPhotoPreview(p.photoUrl || null)
       } else {
-        setGrossiseCommercantForm({
+        setGrossisteCommercantForm({
           nomC: p.nomC || '',
           prenomC: p.prenomC || '',
           localisationC: p.localisationC || '',
@@ -120,7 +120,7 @@ function Profile() {
       if (user.role === 'Agriculteur') {
         setAgriculteurForm(prev => ({ ...prev, ...parsed }))
       } else {
-        setGrossiteCommercantForm(prev => ({ ...prev, ...parsed }))
+        setGrossisteCommercantForm(prev => ({ ...prev, ...parsed }))
       }
     } catch {
       setError('Erreur lors du chargement de l\'ébauche')
@@ -131,12 +131,12 @@ function Profile() {
 
   useEffect(() => {
     if (!draftKey || loading || !user) return
-    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : grossiseCommercantForm
+    const formToSave = user.role === 'Agriculteur' ? agriculteurForm : grossisteCommercantForm
     const timeout = setTimeout(() => {
       localStorage.setItem(draftKey, JSON.stringify(formToSave))
     }, 500)
     return () => clearTimeout(timeout)
-  }, [agriculteurForm, grossiseCommercantForm, draftKey, loading, user])
+  }, [agriculteurForm, grossisteCommercantForm, draftKey, loading, user])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -150,15 +150,15 @@ function Profile() {
         data = { ...agriculteurForm }
       } else {
         data = {
-          nomC: grossiseCommercantForm.nomC,
-          prenomC: grossiseCommercantForm.prenomC,
-          localisationC: grossiseCommercantForm.localisationC,
-          numeroMobile: grossiseCommercantForm.numeroMobile,
-          numeroWhatsapp: grossiseCommercantForm.numeroWhatsapp,
-          demande: grossiseCommercantForm.demande,
-          genre: grossiseCommercantForm.genre,
-          metier: grossiseCommercantForm.metier,
-          age: grossiseCommercantForm.age
+          nomC: grossisteCommercantForm.nomC,
+          prenomC: grossisteCommercantForm.prenomC,
+          localisationC: grossisteCommercantForm.localisationC,
+          numeroMobile: grossisteCommercantForm.numeroMobile,
+          numeroWhatsapp: grossisteCommercantForm.numeroWhatsapp,
+          demande: grossisteCommercantForm.demande,
+          genre: grossisteCommercantForm.genre,
+          metier: grossisteCommercantForm.metier,
+          age: grossisteCommercantForm.age
         }
       }
 
@@ -333,7 +333,7 @@ function Profile() {
             <h1 className="title">Mon Profil</h1>
             <p className="subtitle">N'oubliez pas de compléter votre profil </p>
             <p className="subtitle">
-              {user.role === 'Agriculteur' ? 'Agriculteur' : 'Grossise/Commerçant'} — {user.email}
+              {user.role === 'Agriculteur' ? 'Agriculteur' : 'Grossiste/Commerçant'} — {user.email}
             </p>
           </div>
           <div className="header-buttons">
@@ -343,7 +343,7 @@ function Profile() {
               </button>
             )}
             
-            {user.role === 'GrossiteCommercant' && (
+            {user.role === 'GrossisteCommercant' && (
               <button onClick={() => navigate('/mes-agriculteurs')} className="match-button">
                     Voir les agriculteurs
               </button>
@@ -471,33 +471,33 @@ function Profile() {
         )}
 
         {/* Formulaire ConsommateurCommercant */}
-        {user.role === 'GrossiteCommercant' && (
+        {user.role === 'GrossisteCommercant' && (
           <form onSubmit={handleSubmit} className="form">
 
             <div className="grid">
               <div className="field">
                 <label className="label">Nom</label>
-                <input className="input" value={grossiseCommercantForm.nomC}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, nomC: e.target.value})}
+                <input className="input" value={grossisteCommercantForm.nomC}
+                  onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, nomC: e.target.value})}
                   placeholder="Nom" required />
               </div>
               <div className="field">
                 <label className="label">Prénom</label>
-                <input className="input" value={grossiseCommercantForm.prenomC}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, prenomC: e.target.value})}
+                <input className="input" value={grossisteCommercantForm.prenomC}
+                  onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, prenomC: e.target.value})}
                   placeholder="Prénom" required />
               </div>
               <div className="field">
                 <label className="label">Métier</label>
-                <input className="input" value={grossiseCommercantForm.metier}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, metier: e.target.value})}
+                <input className="input" value={grossisteCommercantForm.metier}
+                  onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, metier: e.target.value})}
                   placeholder="Restaurateur, Épicier..." required />
               </div>
               <div className="field">
                 <label className="label">Ville</label>
                 <SelectVilles
-                  value={grossiseCommercantForm.villeC}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, villeC: e.target.value})}
+                  value={grossisteCommercantForm.villeC}
+                  onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, villeC: e.target.value})}
                 />
                 <LocationPicker
                   onLocationSelect={({ lat, lng, adresse }) => {
@@ -507,13 +507,13 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
-                <input type="tel" className="input" value={grossiseCommercantForm.numeroMobile}
+                <input type="tel" className="input" value={grossisteCommercantForm.numeroMobile}
                   onChange={e => {const digits = e.target.value
                                       .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
-                                      setGrossiseCommercantForm({
-                                        ...grossiseCommercantForm,
+                                      setGrossisteCommercantForm({
+                                        ...grossisteCommercantForm,
                                         numeroMobile: `+212-${digits}`,
                                       });
                                     }}
@@ -523,13 +523,13 @@ function Profile() {
               </div>
               <div className="field">
                 <label className="label">Numéro WhatsApp</label>
-                <input type="tel" className="input" value={grossiseCommercantForm.numeroWhatsapp}
+                <input type="tel" className="input" value={grossisteCommercantForm.numeroWhatsapp}
                  onChange={e => {const digits = e.target.value
                                       .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
                                       setGrossiseCommercantForm({
-                                        ...grossiseCommercantForm,
+                                        ...grossisteCommercantForm,
                                         numeroWhatsapp: `+212-${digits}`,
                                       });
                                     }}
@@ -539,8 +539,8 @@ function Profile() {
               </div>                 
               <div className="field">
                 <label className="label">Genre</label>
-                <select className="input" value={grossiseCommercantForm.genre}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, genre: e.target.value})}>
+                <select className="input" value={grossisteCommercantForm.genre}
+                  onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, genre: e.target.value})}>
                   <option value="">-- Sélectionner --</option>
                   <option value="Feminin">Féminin</option>
                   <option value="Masculin">Masculin</option>
@@ -549,8 +549,8 @@ function Profile() {
               <div className="field">
                 <label className="label">Âge</label>
                 <input className="input" type="number" min="5" max="200"
-                  value={grossiseCommercantForm.age}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, age: e.target.value})}
+                  value={grossisteCommercantForm.age}
+                  onChange={e => setGrossiseCommercantForm({...grossisteCommercantForm, age: e.target.value})}
                   placeholder="25" required />
               </div>
             </div>
@@ -558,8 +558,8 @@ function Profile() {
             <div className="field">
               <label className="label">Produits recherchés</label>        
               <CheckboxProduits
-                selected={grossiseCommercantForm.demande}                
-                onToggle={(p) => toggleProduit(p, grossiseCommercantForm, setGrossiseCommercantForm, 'demande')}/>
+                selected={grossisteCommercantForm.demande}                
+                onToggle={(p) => toggleProduit(p, grossisteCommercantForm, setGrossisteCommercantForm, 'demande')}/>
             </div>
  
             <PhotoUpload />
