@@ -177,30 +177,33 @@ function Profile() {
   }
 
   const handlePhotoUpload = async (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-    setUploadingPhoto(true)
-    const reader = new FileReader()
-    reader.onloadend = () => setPhotoPreview(reader.result)
-    reader.readAsDataURL(file)
-    setError('')
-    const tailleMax = 5 * 1024 * 1024; 
-    if (file.size > tailleMax) {
-    alert("L'image ne doit pas dépasser 5 Mo.");
-    return;
-     }
-    try {
-      const formData = new FormData()
-      formData.append('photo', file)
-      const response = await uploadPhoto(formData)
-      setPhotoPreview(response.data.photoUrl)
-      setSuccess('Photo uploadée avec succès !')
-    } catch (err) {
-      setError(err.response?.data?.error || "Erreur lors de l'upload")
-    } finally {
-      setUploadingPhoto(false)
-    }
+  const file = e.target.files[0]
+  if (!file) return
+
+  const tailleMax = 5 * 1024 * 1024
+  if (file.size > tailleMax) {
+    alert("L'image ne doit pas dépasser 5 Mo.")
+    return
   }
+
+  setUploadingPhoto(true)
+  const reader = new FileReader()
+  reader.onloadend = () => setPhotoPreview(reader.result)
+  reader.readAsDataURL(file)
+  setError('')
+
+  try {
+    const formData = new FormData()
+    formData.append('photo', file)
+    const response = await uploadPhoto(formData)
+    setPhotoPreview(response.data.photoUrl)
+    setSuccess('Photo uploadée avec succès !')
+  } catch (err) {
+    setError(err.response?.data?.error || "Erreur lors de l'upload")
+  } finally {
+    setUploadingPhoto(false)
+  }
+}
 
   const handleLogout = () => {
     localStorage.removeItem('token')
