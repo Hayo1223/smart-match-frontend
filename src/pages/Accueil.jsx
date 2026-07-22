@@ -47,7 +47,7 @@ function Accueil() {
           <div className="hero-badge">🇲🇦 Plateforme agricole marocaine</div>
           <h1 className="hero-titre">
             Connectez les <span className="hero-accent">agriculteurs</span><br />
-            aux consommateurs ou 
+            aux grossistes ou 
             commerçants du Maroc
           </h1>
           <p className="hero-description">
@@ -74,7 +74,7 @@ function Accueil() {
             >
               <span className="cta-emoji">🛒</span>
               <div>
-                <div className="cta-titre">Je suis Commerçant / Consommateur</div>
+                <div className="cta-titre">Je suis Commerçant / Grossistes</div>
                 <div className="cta-sous-titre">Trouvez des producteurs locaux</div>
               </div>
             </button>
@@ -109,7 +109,7 @@ function Accueil() {
           </div>
           <div className="stat-card">
             <div className="stat-nombre">{stats.consommateurCommercant}</div>
-            <div className="stat-label"> 🛒 Consommateurs/Commerçants inscrits</div>
+            <div className="stat-label"> 🛒 Commerçant / Grossistes inscrits</div>
           </div>
           <div className="stat-card">
             <div className="stat-nombre">12</div>
@@ -131,7 +131,7 @@ function Accueil() {
             <div className="etape-emoji">👤</div>
             <h3 className="etape-titre">Créez votre profil</h3>
             <p className="etape-desc">
-              Inscrivez-vous en tant qu'agriculteur ou commerçant/consommateur et renseignez vos produits et localisation.
+              Inscrivez-vous en tant qu'agriculteur ou Commerçant / Grossistes et renseignez vos produits et localisation.
             </p>
           </div>
           <div className="etape-card">

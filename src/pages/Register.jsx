@@ -83,7 +83,7 @@ function Register() {
               className="input"
             >
               <option value="Agriculteur">Agriculteur</option>
-              <option value="ConsommateurCommercant">Consommateur/Commerçant</option>
+              <option value="ConsommateurCommercant">Grossiste/Commerçant</option>
             </select>
           </div>
 

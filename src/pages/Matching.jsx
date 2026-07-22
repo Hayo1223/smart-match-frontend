@@ -99,7 +99,7 @@ function Matching() {
           <div>
             <h1 className="title">Mes Matchs</h1>
             <p className="subtitle">
-              {nom} — {matches.length} Consommateur(s) ou Commerçant(s) compatible(s) trouvée(s)
+              {nom} — {matches.length} Grossiste(s) ou Commerçant(s) compatible(s) trouvée(s)
             </p>
           </div>
           <button onClick={() => navigate('/profile')} className="back-button">
