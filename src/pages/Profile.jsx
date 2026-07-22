@@ -120,7 +120,7 @@ function Profile() {
       if (user.role === 'Agriculteur') {
         setAgriculteurForm(prev => ({ ...prev, ...parsed }))
       } else {
-        setConsommateurCommercantForm(prev => ({ ...prev, ...parsed }))
+        setGrossiteCommercantForm(prev => ({ ...prev, ...parsed }))
       }
     } catch {
       setError('Erreur lors du chargement de l\'ébauche')
@@ -343,7 +343,7 @@ function Profile() {
               </button>
             )}
             
-            {user.role === 'GrossiseCommercant' && (
+            {user.role === 'GrossiteCommercant' && (
               <button onClick={() => navigate('/mes-agriculteurs')} className="match-button">
                     Voir les agriculteurs
               </button>
@@ -380,9 +380,14 @@ function Profile() {
               <div className="field">
                 <label className="label">Localisation</label>
                 <SelectVilles
-                  value={agriculteurForm.localisation}
-                  onChange={e => setAgriculteurForm({...agriculteurForm, localisation: e.target.value})}
+                  value={agriculteurForm.ville}
+                  onChange={e => setAgriculteurForm({...agriculteurForm, ville: e.target.value})}
                 />
+                <LocationPicker
+                  onLocationSelect={({ lat, lng, adresse }) => {
+                        setFormData(prev => ({ ...prev, latitude: lat, longitude: lng, localisation: adresse || prev.localisation }));
+                          }}
+                          />
               </div>
               <div className="field">
                   <label className="label">Numéro mobile</label>
@@ -466,7 +471,7 @@ function Profile() {
         )}
 
         {/* Formulaire ConsommateurCommercant */}
-        {user.role === 'GrossiseCommercant' && (
+        {user.role === 'GrossiteCommercant' && (
           <form onSubmit={handleSubmit} className="form">
 
             <div className="grid">
@@ -489,11 +494,16 @@ function Profile() {
                   placeholder="Restaurateur, Épicier..." required />
               </div>
               <div className="field">
-                <label className="label">Localisation</label>
+                <label className="label">Ville</label>
                 <SelectVilles
-                  value={grossiseCommercantForm.localisationC}
-                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, localisationC: e.target.value})}
+                  value={grossiseCommercantForm.villeC}
+                  onChange={e => setGrossiseCommercantForm({...grossiseCommercantForm, villeC: e.target.value})}
                 />
+                <LocationPicker
+                  onLocationSelect={({ lat, lng, adresse }) => {
+                        setFormData(prev => ({ ...prev, latitude: lat, longitude: lng, localisation: adresse || prev.localisation }));
+                          }}
+                          />
               </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
