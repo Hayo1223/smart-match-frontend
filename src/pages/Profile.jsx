@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getProfile, upsertProfile, deleteProfile, uploadPhoto } from '../services/api'
 import Swal from "sweetalert2"
+import LocationPicker from '../components/LocationPicker'
 import './Profile.css'
 
 
@@ -386,11 +387,14 @@ function Profile() {
                   value={agriculteurForm.ville}
                   onChange={e => setAgriculteurForm({...agriculteurForm, ville: e.target.value})}
                 />
-                <LocationPicker
-                  onLocationSelect={({ lat, lng, adresse }) => {
-                        setFormData(prev => ({ ...prev, latitude: lat, longitude: lng, localisation: adresse || prev.localisation }));
-                          }}
-                          />
+                <LocationPicker onLocationSelect={({ lat, lng, adresse }) => {
+                      setAgriculteurForm(prev => ({
+                              ...prev, latitude: lat,
+                                 longitude: lng,
+                                 localisation: adresse || prev.localisation
+                                  }))
+                                 }}
+                                />
               </div>
               <div className="field">
                   <label className="label">Numéro mobile</label>
@@ -502,11 +506,14 @@ function Profile() {
                   value={grossisteCommercantForm.villeC}
                   onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, villeC: e.target.value})}
                 />
-                <LocationPicker
-                  onLocationSelect={({ lat, lng, adresse }) => {
-                        setFormData(prev => ({ ...prev, latitude: lat, longitude: lng, localisation: adresse || prev.localisation }));
-                          }}
-                          />
+                <LocationPicker  onLocationSelect={({ lat, lng, adresse }) => {
+                      setGrossisteCommercantForm(prev => ({
+                              ...prev, latitude: lat,
+                               longitude: lng, 
+                               localisationC: adresse || prev.localisationC
+                                }))
+                                 }}
+                              />
               </div>
               <div className="field">
                 <label className="label">Numéro mobile</label>
