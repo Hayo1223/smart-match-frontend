@@ -47,13 +47,13 @@ function Profile() {
   const [uploadingPhoto, setUploadingPhoto] = useState(false)
 
   const [agriculteurForm, setAgriculteurForm] = useState({
-    nom: '', prenom: '', localisation: '', available: true,
+    nom: '', prenom: '', ville: '', localisation: '', available: true,
     numeroAgriculmobile: '+212-', numeroAgriculwhatsapp: '+212-',
     produit: [], genre: '', age: ''
   })
 
   const [grossisteCommercantForm, setGrossisteCommercantForm] = useState({
-    nomC: '', prenomC: '', localisationC: '', numeroMobile: '+212-',
+    nomC: '', prenomC: '', villeC: '', localisationC: '', numeroMobile: '+212-',
     numeroWhatsapp: '+212-', demande: [], genre: '', metier: '', age: ''
   })
 
@@ -75,6 +75,7 @@ function Profile() {
         setAgriculteurForm({
           nom: p.nom || '',
           prenom: p.prenom || '',
+          ville: p.ville || '',
           localisation: p.localisation || '',
           available: p.available ?? true,
           numeroAgriculmobile: p.numeroAgriculmobile || '+212-',
@@ -88,6 +89,7 @@ function Profile() {
         setGrossisteCommercantForm({
           nomC: p.nomC || '',
           prenomC: p.prenomC || '',
+          villeC: p.villeC || '',
           localisationC: p.localisationC || '',
           numeroMobile: p.numeroMobile || '+212-',
           numeroWhatsapp: p.numeroWhatsapp || '+212-',
@@ -152,6 +154,7 @@ function Profile() {
         data = {
           nomC: grossisteCommercantForm.nomC,
           prenomC: grossisteCommercantForm.prenomC,
+          villeC: grossisteCommercantForm.villeC,
           localisationC: grossisteCommercantForm.localisationC,
           numeroMobile: grossisteCommercantForm.numeroMobile,
           numeroWhatsapp: grossisteCommercantForm.numeroWhatsapp,
