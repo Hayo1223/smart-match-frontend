@@ -528,7 +528,7 @@ function Profile() {
                                       .replace(/^\+212-?/, "")
                                       .replace(/\D/g, "")
                                       .slice(0, 9);
-                                      setGrossiseCommercantForm({
+                                      setGrossisteCommercantForm({
                                         ...grossisteCommercantForm,
                                         numeroWhatsapp: `+212-${digits}`,
                                       });
@@ -550,7 +550,7 @@ function Profile() {
                 <label className="label">Âge</label>
                 <input className="input" type="number" min="5" max="200"
                   value={grossisteCommercantForm.age}
-                  onChange={e => setGrossiseCommercantForm({...grossisteCommercantForm, age: e.target.value})}
+                  onChange={e => setGrossisteCommercantForm({...grossisteCommercantForm, age: e.target.value})}
                   placeholder="25" required />
               </div>
             </div>
