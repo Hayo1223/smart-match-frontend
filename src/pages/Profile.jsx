@@ -385,7 +385,7 @@ function Profile() {
                   placeholder="Prénom" required />
               </div>
               <div className="field">
-                <label className="label">Localisation</label>
+                <label className="label">Ville</label>
                 <SelectVilles
                   value={agriculteurForm.ville}
                   onChange={e => setAgriculteurForm({...agriculteurForm, ville: e.target.value})}
