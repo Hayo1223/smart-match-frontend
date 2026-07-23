@@ -108,7 +108,7 @@ function Accueil() {
             <div className="stat-label"> 🌾Agriculteurs inscrits</div>
           </div>
           <div className="stat-card">
-            <div className="stat-nombre">{stats.consommateurCommercant}</div>
+            <div className="stat-nombre">{stats.grossisteCommercant}</div>
             <div className="stat-label"> 🛒 Commerçant / Grossistes inscrits</div>
           </div>
           <div className="stat-card">
