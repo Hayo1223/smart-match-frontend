@@ -8,7 +8,7 @@ import './Accueil.css'
 
 function Accueil() {
   const navigate = useNavigate()
-  const [stats, setStats] = useState({ agriculteur: 0,  grossisteCommercant: 0 })
+  const [stats, setStats] = useState({ agriculteur: 0, grossisteCommercant: 0 })
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user') || 'null')
