@@ -70,7 +70,7 @@ function Accueil() {
 
             <button
               className="cta-commercant"
-              onClick={() => navigate('/register?role=ConsommateurCommercant')}
+              onClick={() => navigate('/register?role=GrossisteCommercant')}
             >
               <span className="cta-emoji">🛒</span>
               <div>
